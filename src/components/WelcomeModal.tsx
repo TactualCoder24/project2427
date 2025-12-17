@@ -6,14 +6,48 @@ interface WelcomeModalProps {
   onClose: () => void;
 }
 
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  // Launch date: January 1, 2026 00:00:00
+  const launchDate = new Date('2026-01-01T00:00:00').getTime();
 
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const difference = launchDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, [launchDate]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -41,11 +75,11 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
       />
 
       {/* Modal Content */}
-      <div className={`relative glass-premium border border-white/20 rounded-3xl max-w-2xl w-full p-8 md:p-12 shadow-glow-purple transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}>
+      <div className={`relative glass-premium border border-white/20 rounded-3xl max-w-2xl w-full p-4 sm:p-8 md:p-12 shadow-glow-purple transform transition-all duration-300 ${isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'}`}>
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors duration-200 text-2xl w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full hover:bg-white/10"
           aria-label="Close modal"
         >
           ×
@@ -54,50 +88,75 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="text-center">
           {/* Icon */}
-          <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple animate-float">
-            <span className="text-5xl">🚀</span>
+          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow-purple animate-float">
+            <span className="text-3xl sm:text-4xl md:text-5xl">🚀</span>
           </div>
 
           {/* Title */}
-          <h2 className="text-4xl md:text-5xl font-bold font-outfit mb-4 text-gradient-animate">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-outfit mb-3 sm:mb-4 text-gradient-animate px-2">
             Welcome to VIDVAS AI
           </h2>
 
           {/* Sanskrit Meaning */}
-          <p className="text-lg md:text-xl text-gray-400 font-jakarta italic mb-6">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 font-jakarta italic mb-4 sm:mb-6 px-2">
             <span className="text-gradient-cyber font-semibold">विद्वस्</span> - Sanskrit for <span className="text-gradient font-semibold">"Intelligence"</span>
           </p>
 
+          {/* Countdown Timer */}
+          <div className="mb-6 sm:mb-8 p-3 sm:p-4 md:p-6 glass-premium rounded-xl sm:rounded-2xl border border-electric-blue/20">
+            <div className="text-electric-blue text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-3 sm:mb-4 font-outfit flex items-center justify-center gap-2 px-2">
+              🚀 <span className="text-gradient-cyber">Launching Jan 1, 2026</span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
+              <div className="glass-premium p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl border border-electric-blue/20">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-cyber font-outfit">{String(timeLeft.days).padStart(2, '0')}</div>
+                <div className="text-[10px] sm:text-xs text-gray-400 mt-1 font-jakarta">DAYS</div>
+              </div>
+              <div className="glass-premium p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl border border-vivid-purple/20">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient font-outfit">{String(timeLeft.hours).padStart(2, '0')}</div>
+                <div className="text-[10px] sm:text-xs text-gray-400 mt-1 font-jakarta">HOURS</div>
+              </div>
+              <div className="glass-premium p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl border border-hot-pink/20">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-electric font-outfit">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                <div className="text-[10px] sm:text-xs text-gray-400 mt-1 font-jakarta">MINUTES</div>
+              </div>
+              <div className="glass-premium p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl border border-neon-green/20">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-neon-green font-outfit">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                <div className="text-[10px] sm:text-xs text-gray-400 mt-1 font-jakarta">SECONDS</div>
+              </div>
+            </div>
+
+            <div className="space-y-1.5 sm:space-y-2 text-left px-2">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300 font-jakarta">
+                <span className="text-electric-blue flex-shrink-0">⚡</span>
+                <span>Advanced AI Agents Ready for Deployment</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300 font-jakarta">
+                <span className="text-vivid-purple flex-shrink-0">🔄</span>
+                <span>Revolutionary Automation Capabilities</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-300 font-jakarta">
+                <span className="text-hot-pink flex-shrink-0">⚡</span>
+                <span>Lightning-Fast Performance Optimizations</span>
+              </div>
+            </div>
+          </div>
+
           {/* Description */}
-          <p className="text-lg md:text-xl text-gray-300 mb-8 font-jakarta leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 font-jakarta leading-relaxed px-2">
             Transform your business with <span className="text-gradient font-semibold">intelligent AI agents</span> that work{' '}
             <span className="text-neon-green font-bold">24/7</span> to automate tasks and drive{' '}
             <span className="text-gradient-electric font-semibold">unprecedented growth</span>.
           </p>
 
-          {/* Features List */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div className="p-4 glass-premium rounded-xl border border-electric-blue/20">
-              <div className="text-3xl mb-2">⚡</div>
-              <p className="text-sm font-jakarta text-gray-300">Lightning-Fast Performance</p>
-            </div>
-            <div className="p-4 glass-premium rounded-xl border border-vivid-purple/20">
-              <div className="text-3xl mb-2">🤖</div>
-              <p className="text-sm font-jakarta text-gray-300">Advanced AI Agents</p>
-            </div>
-            <div className="p-4 glass-premium rounded-xl border border-hot-pink/20">
-              <div className="text-3xl mb-2">🔄</div>
-              <p className="text-sm font-jakarta text-gray-300">Revolutionary Automation</p>
-            </div>
-          </div>
-
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
             <Button
               variant="gradient"
               size="lg"
               onClick={handleExplore}
-              className="shadow-glow-purple"
+              className="shadow-glow-purple w-full sm:w-auto text-sm sm:text-base"
             >
               Explore AI Agents 🚀
             </Button>
@@ -105,6 +164,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
               variant="outline"
               size="lg"
               onClick={handleClose}
+              className="w-full sm:w-auto text-sm sm:text-base"
             >
               Continue to Site
             </Button>
