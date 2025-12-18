@@ -172,9 +172,14 @@ const Dashboard: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-outfit text-gradient-animate">
               Your AI Agents
             </h2>
-            <Button variant="gradient" onClick={() => navigate('/agents')}>
-              Deploy New Agent
-            </Button>
+            <div className="flex gap-3">
+              <Button variant="gradient-purple" onClick={() => navigate('/playground')}>
+                🚀 AI Playground
+              </Button>
+              <Button variant="gradient" onClick={() => navigate('/agents')}>
+                Deploy New Agent
+              </Button>
+            </div>
           </div>
 
           {loadingData ? (
@@ -231,7 +236,36 @@ const Dashboard: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold font-outfit mb-6 text-gradient-animate">
             Quick Actions
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* AI Playground - Featured */}
+            <div onClick={() => navigate('/playground')} className="cursor-pointer">
+              <Card variant="gradient" className="p-8 hover-glow relative overflow-hidden">
+                <div className="absolute top-2 right-2">
+                  <span className="px-3 py-1 bg-neon-green/20 text-neon-green rounded-full text-xs font-bold">NEW</span>
+                </div>
+                <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-md animate-float">
+                  <span className="text-4xl">🤖</span>
+                </div>
+                <h3 className="text-xl font-bold font-outfit text-center mb-2 text-gradient-cyber">AI Playground</h3>
+                <p className="text-gray-300 text-sm text-center font-jakarta">Chat with AI agents using natural language</p>
+              </Card>
+            </div>
+
+            {/* Integration Hub - Featured */}
+            <div onClick={() => navigate('/integrations')} className="cursor-pointer">
+              <Card variant="gradient" className="p-8 hover-glow relative overflow-hidden">
+                <div className="absolute top-2 right-2">
+                  <span className="px-3 py-1 bg-neon-green/20 text-neon-green rounded-full text-xs font-bold">NEW</span>
+                </div>
+                <div className="w-16 h-16 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-purple animate-float" style={{ animationDelay: '1s' }}>
+                  <span className="text-4xl">🔌</span>
+                </div>
+                <h3 className="text-xl font-bold font-outfit text-center mb-2 text-gradient">Integration Hub</h3>
+                <p className="text-gray-300 text-sm text-center font-jakarta">Connect 12+ apps and services</p>
+              </Card>
+            </div>
+
+            {/* Deploy Agent */}
             <div onClick={() => navigate('/agents')} className="cursor-pointer">
               <Card variant="premium" className="p-6 hover-glow">
                 <div className="w-14 h-14 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-md">
@@ -242,6 +276,7 @@ const Dashboard: React.FC = () => {
               </Card>
             </div>
 
+            {/* Get Support */}
             <div onClick={() => navigate('/contact')} className="cursor-pointer">
               <Card variant="premium" className="p-6 hover-glow">
                 <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-purple">
@@ -252,6 +287,7 @@ const Dashboard: React.FC = () => {
               </Card>
             </div>
 
+            {/* Settings */}
             <Card variant="premium" className="p-6 hover-glow cursor-pointer">
               <div className="w-14 h-14 bg-gradient-to-br from-neon-green to-lime-green rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-sm">
                 <span className="text-3xl">⚙️</span>
@@ -260,6 +296,7 @@ const Dashboard: React.FC = () => {
               <p className="text-gray-400 text-sm text-center font-jakarta">Manage your account</p>
             </Card>
 
+            {/* Upgrade Plan */}
             <Card variant="premium" className="p-6 hover-glow cursor-pointer">
               <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mb-4 mx-auto">
                 <span className="text-3xl">📈</span>

@@ -16,6 +16,12 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Contact from './pages/Contact';
 import AuthCallback from './pages/AuthCallback';
+import AIPlayground from './pages/AIPlayground';
+import IntegrationHub from './pages/IntegrationHub';
+import PersonaManager from './pages/PersonaManager';
+import WorkflowBuilder from './pages/WorkflowBuilder';
+import ExecutionDashboard from './pages/ExecutionDashboard';
+import OAuthCallback from './pages/OAuthCallback';
 
 function AppContent() {
   const location = useLocation();
@@ -46,6 +52,14 @@ function AppContent() {
             <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
             <Route path="/about" element={<AnimatedPage><About /></AnimatedPage>} />
             <Route path="/agents" element={<AnimatedPage><Agents /></AnimatedPage>} />
+            <Route path="/playground" element={<AnimatedPage><AIPlayground /></AnimatedPage>} />
+            <Route path="/integrations" element={<AnimatedPage><IntegrationHub /></AnimatedPage>} />
+            <Route path="/personas" element={<AnimatedPage><PersonaManager /></AnimatedPage>} />
+            <Route path="/workflows" element={<AnimatedPage><WorkflowBuilder /></AnimatedPage>} />
+            <Route path="/executions" element={<AnimatedPage><ExecutionDashboard /></AnimatedPage>} />
+            <Route path="/auth/callback/gmail" element={<OAuthCallback />} />
+            <Route path="/auth/callback/slack" element={<OAuthCallback />} />
+            <Route path="/auth/callback/github" element={<OAuthCallback />} />
             <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
             <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/dashboard" element={<AnimatedPage><Dashboard /></AnimatedPage>} />
