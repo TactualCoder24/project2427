@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-300 font-jakarta">Loading...</p>
+          <p className="text-gray-300 font-inter">Loading...</p>
         </div>
       </div>
     );
@@ -103,10 +103,10 @@ const Dashboard: React.FC = () => {
                   className="w-24 h-24 rounded-2xl border-4 border-electric-blue/30 shadow-glow-md"
                 />
                 <div className="text-center md:text-left">
-                  <h1 className="text-4xl md:text-5xl font-bold font-outfit mb-3">
+                  <h1 className="text-4xl md:text-5xl font-bold font-inter mb-3">
                     Welcome back, <span className="text-gradient-cyber">{user.name.split(' ')[0]}</span>
                   </h1>
-                  <p className="text-gray-300 text-lg font-jakarta mb-3">{user.email}</p>
+                  <p className="text-gray-300 text-lg font-inter mb-3">{user.email}</p>
                   <div className="flex items-center justify-center md:justify-start gap-3">
                     <span className={`px-4 py-2 rounded-full text-sm font-semibold text-white ${getSubscriptionBadge(user.subscription).color} shadow-glow-sm`}>
                       {getSubscriptionBadge(user.subscription).text} Plan
@@ -126,8 +126,8 @@ const Dashboard: React.FC = () => {
           <Card variant="gradient" className="p-6 hover-glow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm font-jakarta mb-2">Active Agents</p>
-                <p className="text-4xl font-bold font-outfit text-gradient-animate">
+                <p className="text-gray-300 text-sm font-inter mb-2">Active Agents</p>
+                <p className="text-4xl font-bold font-inter text-gradient-animate">
                   {deployments.filter(d => d.status === 'active').length}
                 </p>
               </div>
@@ -140,8 +140,8 @@ const Dashboard: React.FC = () => {
           <Card variant="gradient" className="p-6 hover-glow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm font-jakarta mb-2">Total Deployments</p>
-                <p className="text-4xl font-bold font-outfit text-gradient-cyber">
+                <p className="text-gray-300 text-sm font-inter mb-2">Total Deployments</p>
+                <p className="text-4xl font-bold font-inter text-gradient-cyber">
                   {deployments.length}
                 </p>
               </div>
@@ -154,8 +154,8 @@ const Dashboard: React.FC = () => {
           <Card variant="gradient" className="p-6 hover-glow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm font-jakarta mb-2">Subscription</p>
-                <p className="text-2xl font-bold font-outfit text-gradient-electric capitalize">
+                <p className="text-gray-300 text-sm font-inter mb-2">Subscription</p>
+                <p className="text-2xl font-bold font-inter text-gradient-electric capitalize">
                   {user.subscription}
                 </p>
               </div>
@@ -169,7 +169,7 @@ const Dashboard: React.FC = () => {
         {/* Agent Deployments */}
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl md:text-4xl font-bold font-outfit text-gradient-animate">
+            <h2 className="text-3xl md:text-4xl font-bold font-inter text-gradient-animate">
               Your AI Agents
             </h2>
             <div className="flex gap-3">
@@ -185,17 +185,17 @@ const Dashboard: React.FC = () => {
           {loadingData ? (
             <Card variant="premium" className="p-8 text-center">
               <div className="w-12 h-12 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-gray-300 font-jakarta">Loading your agents...</p>
+              <p className="text-gray-300 font-inter">Loading your agents...</p>
             </Card>
           ) : deployments.length === 0 ? (
             <Card variant="premium" className="p-12 text-center hover-glow">
               <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                 <span className="text-5xl">🚀</span>
               </div>
-              <h3 className="text-2xl font-bold font-outfit mb-4 text-gradient-cyber">
+              <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
                 No Agents Deployed Yet
               </h3>
-              <p className="text-gray-300 mb-6 font-jakarta max-w-md mx-auto">
+              <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
                 Get started by deploying your first AI agent to automate your workflows.
               </p>
               <Button variant="gradient" size="lg" onClick={() => navigate('/agents')}>
@@ -214,10 +214,10 @@ const Dashboard: React.FC = () => {
                       {getStatusBadge(deployment.status).text}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold font-outfit mb-2 text-gradient-cyber">
+                  <h3 className="text-xl font-bold font-inter mb-2 text-gradient-cyber">
                     {deployment.agent_name}
                   </h3>
-                  <p className="text-gray-400 text-sm font-jakarta mb-4">
+                  <p className="text-gray-400 text-sm font-inter mb-4">
                     Deployed {new Date(deployment.created_at).toLocaleDateString()}
                   </p>
                   <div className="flex gap-2">
@@ -233,7 +233,7 @@ const Dashboard: React.FC = () => {
 
         {/* Quick Actions */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold font-outfit mb-6 text-gradient-animate">
+          <h2 className="text-3xl md:text-4xl font-bold font-inter mb-6 text-gradient-animate">
             Quick Actions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -246,8 +246,8 @@ const Dashboard: React.FC = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-md animate-float">
                   <span className="text-4xl">🤖</span>
                 </div>
-                <h3 className="text-xl font-bold font-outfit text-center mb-2 text-gradient-cyber">AI Playground</h3>
-                <p className="text-gray-300 text-sm text-center font-jakarta">Chat with AI agents using natural language</p>
+                <h3 className="text-xl font-bold font-inter text-center mb-2 text-gradient-cyber">AI Playground</h3>
+                <p className="text-gray-300 text-sm text-center font-inter">Chat with AI agents using natural language</p>
               </Card>
             </div>
 
@@ -260,8 +260,8 @@ const Dashboard: React.FC = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-purple animate-float" style={{ animationDelay: '1s' }}>
                   <span className="text-4xl">🔌</span>
                 </div>
-                <h3 className="text-xl font-bold font-outfit text-center mb-2 text-gradient">Integration Hub</h3>
-                <p className="text-gray-300 text-sm text-center font-jakarta">Connect 12+ apps and services</p>
+                <h3 className="text-xl font-bold font-inter text-center mb-2 text-gradient">Integration Hub</h3>
+                <p className="text-gray-300 text-sm text-center font-inter">Connect 12+ apps and services</p>
               </Card>
             </div>
 
@@ -271,8 +271,8 @@ const Dashboard: React.FC = () => {
                 <div className="w-14 h-14 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-md">
                   <span className="text-3xl">🚀</span>
                 </div>
-                <h3 className="text-lg font-bold font-outfit text-center mb-2">Deploy Agent</h3>
-                <p className="text-gray-400 text-sm text-center font-jakarta">Launch a new AI agent</p>
+                <h3 className="text-lg font-bold font-inter text-center mb-2">Deploy Agent</h3>
+                <p className="text-gray-400 text-sm text-center font-inter">Launch a new AI agent</p>
               </Card>
             </div>
 
@@ -282,8 +282,8 @@ const Dashboard: React.FC = () => {
                 <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-purple">
                   <span className="text-3xl">💬</span>
                 </div>
-                <h3 className="text-lg font-bold font-outfit text-center mb-2">Get Support</h3>
-                <p className="text-gray-400 text-sm text-center font-jakarta">Contact our team</p>
+                <h3 className="text-lg font-bold font-inter text-center mb-2">Get Support</h3>
+                <p className="text-gray-400 text-sm text-center font-inter">Contact our team</p>
               </Card>
             </div>
 
@@ -292,8 +292,8 @@ const Dashboard: React.FC = () => {
               <div className="w-14 h-14 bg-gradient-to-br from-neon-green to-lime-green rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-sm">
                 <span className="text-3xl">⚙️</span>
               </div>
-              <h3 className="text-lg font-bold font-outfit text-center mb-2">Settings</h3>
-              <p className="text-gray-400 text-sm text-center font-jakarta">Manage your account</p>
+              <h3 className="text-lg font-bold font-inter text-center mb-2">Settings</h3>
+              <p className="text-gray-400 text-sm text-center font-inter">Manage your account</p>
             </Card>
 
             {/* Upgrade Plan */}
@@ -301,8 +301,8 @@ const Dashboard: React.FC = () => {
               <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mb-4 mx-auto">
                 <span className="text-3xl">📈</span>
               </div>
-              <h3 className="text-lg font-bold font-outfit text-center mb-2">Upgrade Plan</h3>
-              <p className="text-gray-400 text-sm text-center font-jakarta">Unlock more features</p>
+              <h3 className="text-lg font-bold font-inter text-center mb-2">Upgrade Plan</h3>
+              <p className="text-gray-400 text-sm text-center font-inter">Unlock more features</p>
             </Card>
           </div>
         </div>
@@ -312,3 +312,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+

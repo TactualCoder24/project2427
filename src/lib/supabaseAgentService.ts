@@ -85,7 +85,7 @@ export interface AgentIntegration {
     token_expires_at?: string;
     scopes: string[];
     metadata: Record<string, any>;
-    status: 'connected' | 'disconnected' | 'expired' | 'error';
+    status: 'connected' | 'disconnected' | 'expired' | 'error' | 'pending';
     connected_at: string;
     last_used_at?: string;
     created_at: string;
@@ -413,3 +413,4 @@ export const subscribeToWorkflows = (userId: string, callback: (workflow: AgentW
         )
         .subscribe();
 };
+

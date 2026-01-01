@@ -91,7 +91,7 @@ const OAuthCallback: React.FC = () => {
                 )}
 
                 {/* Message */}
-                <h2 className={`text-2xl font-bold font-outfit mb-3 ${status === 'success' ? 'text-gradient' :
+                <h2 className={`text-2xl font-bold font-inter mb-3 ${status === 'success' ? 'text-gradient' :
                         status === 'error' ? 'text-red-400' :
                             'text-white'
                     }`}>
@@ -100,7 +100,7 @@ const OAuthCallback: React.FC = () => {
                     {status === 'error' && 'Connection Failed'}
                 </h2>
 
-                <p className={`text-lg font-jakarta ${status === 'success' ? 'text-neon-green' :
+                <p className={`text-lg font-inter ${status === 'success' ? 'text-neon-green' :
                         status === 'error' ? 'text-red-400' :
                             'text-gray-300'
                     }`}>
@@ -109,13 +109,13 @@ const OAuthCallback: React.FC = () => {
 
                 {/* Additional info */}
                 {status === 'success' && (
-                    <p className="text-sm text-gray-400 mt-4 font-jakarta">
+                    <p className="text-sm text-gray-400 mt-4 font-inter">
                         Redirecting to Integration Hub...
                     </p>
                 )}
 
                 {status === 'error' && (
-                    <p className="text-sm text-gray-400 mt-4 font-jakarta">
+                    <p className="text-sm text-gray-400 mt-4 font-inter">
                         Redirecting back to Integration Hub...
                     </p>
                 )}
@@ -125,3 +125,4 @@ const OAuthCallback: React.FC = () => {
 };
 
 export default OAuthCallback;
+

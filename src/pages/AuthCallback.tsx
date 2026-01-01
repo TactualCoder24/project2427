@@ -26,10 +26,11 @@ export const AuthCallback = () => {
         <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
                 <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-gray-300 font-jakarta">Completing sign in...</p>
+                <p className="text-gray-300 font-inter">Completing sign in...</p>
             </div>
         </div>
     );
 };
 
 export default AuthCallback;
+

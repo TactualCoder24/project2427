@@ -158,7 +158,7 @@ const AIPlayground: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-300 font-jakarta">Loading...</p>
+                    <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
         );
@@ -169,10 +169,10 @@ const AIPlayground: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-6">
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
                         AI <span className="text-gradient-animate">Playground</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-jakarta leading-relaxed">
+                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
                         Your conversational AI command center. Execute tasks across platforms with natural language.
                     </p>
                 </div>
@@ -209,10 +209,10 @@ const AIPlayground: React.FC = () => {
                                                     )}
                                                 </div>
                                                 <div className="flex-1">
-                                                    <p className="text-sm text-gray-400 mb-1 font-jakarta">
+                                                    <p className="text-sm text-gray-400 mb-1 font-inter">
                                                         {message.role === 'user' ? 'You' : 'Vidvas AI'}
                                                     </p>
-                                                    <div className="text-white whitespace-pre-wrap font-jakarta leading-relaxed">
+                                                    <div className="text-white whitespace-pre-wrap font-inter leading-relaxed">
                                                         {message.content}
                                                     </div>
                                                     {message.status === 'processing' && (
@@ -250,7 +250,7 @@ const AIPlayground: React.FC = () => {
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyPress={handleKeyPress}
                                         placeholder="Type your command... (e.g., 'Send an email to team@example.com')"
-                                        className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-jakarta"
+                                        className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-inter"
                                         rows={2}
                                         disabled={isProcessing}
                                     />
@@ -271,7 +271,7 @@ const AIPlayground: React.FC = () => {
                     <div className="space-y-6">
                         {/* Quick Commands */}
                         <Card variant="gradient" className="p-6">
-                            <h3 className="text-2xl font-bold font-outfit mb-4 text-gradient-cyber">
+                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
                                 ⚡ Quick Commands
                             </h3>
                             <div className="space-y-3">
@@ -283,7 +283,7 @@ const AIPlayground: React.FC = () => {
                                     >
                                         <div className="flex items-center gap-3">
                                             <span className="text-2xl">{cmd.icon}</span>
-                                            <span className="text-gray-300 font-jakarta group-hover:text-white transition-colors">
+                                            <span className="text-gray-300 font-inter group-hover:text-white transition-colors">
                                                 {cmd.text}
                                             </span>
                                         </div>
@@ -294,7 +294,7 @@ const AIPlayground: React.FC = () => {
 
                         {/* Agent Status */}
                         <Card variant="premium" className="p-6">
-                            <h3 className="text-2xl font-bold font-outfit mb-4 text-gradient">
+                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient">
                                 🤖 Active Agents
                             </h3>
                             <div className="space-y-3">
@@ -306,7 +306,7 @@ const AIPlayground: React.FC = () => {
                                     { name: 'Notion Agent', status: 'inactive' }
                                 ].map((agent, idx) => (
                                     <div key={idx} className="flex items-center justify-between p-3 glass-premium rounded-xl">
-                                        <span className="text-gray-300 font-jakarta">{agent.name}</span>
+                                        <span className="text-gray-300 font-inter">{agent.name}</span>
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${agent.status === 'active'
                                             ? 'bg-neon-green/20 text-neon-green'
                                             : 'bg-gray-500/20 text-gray-400'
@@ -348,13 +348,13 @@ const AIPlayground: React.FC = () => {
 
                         {/* Stats */}
                         <Card variant="premium" className="p-6">
-                            <h3 className="text-2xl font-bold font-outfit mb-4 text-gradient-electric">
+                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-electric">
                                 📊 Usage Stats
                             </h3>
                             <div className="space-y-4">
                                 <div>
                                     <div className="flex justify-between mb-2">
-                                        <span className="text-gray-400 font-jakarta">Tasks Executed</span>
+                                        <span className="text-gray-400 font-inter">Tasks Executed</span>
                                         <span className="text-white font-bold">0</span>
                                     </div>
                                     <div className="w-full bg-white/10 rounded-full h-2">
@@ -363,7 +363,7 @@ const AIPlayground: React.FC = () => {
                                 </div>
                                 <div>
                                     <div className="flex justify-between mb-2">
-                                        <span className="text-gray-400 font-jakarta">Success Rate</span>
+                                        <span className="text-gray-400 font-inter">Success Rate</span>
                                         <span className="text-white font-bold">--</span>
                                     </div>
                                     <div className="w-full bg-white/10 rounded-full h-2">
@@ -380,3 +380,4 @@ const AIPlayground: React.FC = () => {
 };
 
 export default AIPlayground;
+

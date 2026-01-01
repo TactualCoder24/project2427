@@ -69,10 +69,10 @@ const Contact: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-8">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-8">
             Get in <span className="text-gradient-animate">Touch</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-jakarta leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
             Ready to transform your business with AI? Let's discuss how our agentic AI solutions can help you achieve your goals.
           </p>
         </div>
@@ -80,11 +80,11 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <Card variant="premium" className="p-10 hover-glow">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 font-outfit text-gradient-cyber">Send us a message</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 font-inter text-gradient-cyber">Send us a message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                     Full Name *
                   </label>
                   <input
@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                     Email Address *
                   </label>
                   <input
@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+                <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                   Company
                 </label>
                 <input
@@ -131,7 +131,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                   Subject *
                 </label>
                 <select
@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                   Message *
                 </label>
                 <textarea
@@ -181,7 +181,7 @@ const Contact: React.FC = () => {
               {/* Success Message */}
               {submitStatus === 'success' && (
                 <div className="p-4 glass-premium border border-neon-green/30 rounded-xl animate-fadeInUp">
-                  <p className="text-neon-green font-semibold font-jakarta flex items-center">
+                  <p className="text-neon-green font-semibold font-inter flex items-center">
                     <span className="mr-2">✓</span>
                     Message sent successfully! We'll get back to you soon.
                   </p>
@@ -191,7 +191,7 @@ const Contact: React.FC = () => {
               {/* Error Message */}
               {submitStatus === 'error' && (
                 <div className="p-4 glass-premium border border-red-500/30 rounded-xl animate-fadeInUp">
-                  <p className="text-red-400 font-semibold font-jakarta flex items-center">
+                  <p className="text-red-400 font-semibold font-inter flex items-center">
                     <span className="mr-2">✗</span>
                     {errorMessage}
                   </p>
@@ -203,16 +203,16 @@ const Contact: React.FC = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <Card variant="gradient" className="p-10 hover-glow">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-outfit text-gradient">Contact Information</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-inter text-gradient">Contact Information</h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-14 h-14 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-md">
                     <span className="text-2xl">📧</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2 font-outfit">Email</h3>
-                    <p className="text-gray-300 font-jakarta">hello@vidvasai.com</p>
-                    <p className="text-gray-300 font-jakarta">support@vidvasai.com</p>
+                    <h3 className="text-xl font-semibold mb-2 font-inter">Email</h3>
+                    <p className="text-gray-300 font-inter">hello@vidvasai.com</p>
+                    <p className="text-gray-300 font-inter">support@vidvasai.com</p>
                   </div>
                 </div>
 
@@ -221,8 +221,8 @@ const Contact: React.FC = () => {
                     <span className="text-2xl">📍</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2 font-outfit">Address</h3>
-                    <p className="text-gray-300 font-jakarta">Delhi, India 🇮🇳</p>
+                    <h3 className="text-xl font-semibold mb-2 font-inter">Address</h3>
+                    <p className="text-gray-300 font-inter">Delhi, India 🇮🇳</p>
                   </div>
                 </div>
 
@@ -231,9 +231,9 @@ const Contact: React.FC = () => {
                     <span className="text-2xl">📞</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2 font-outfit">Phone</h3>
-                    <p className="text-gray-300 font-jakarta">+1 (555) 123-4567</p>
-                    <p className="text-gray-400 text-sm font-jakarta">Mon-Fri, 9AM-6PM PST</p>
+                    <h3 className="text-xl font-semibold mb-2 font-inter">Phone</h3>
+                    <p className="text-gray-300 font-inter">+1 (555) 123-4567</p>
+                    <p className="text-gray-400 text-sm font-inter">Mon-Fri, 9AM-6PM PST</p>
                   </div>
                 </div>
               </div>
@@ -286,3 +286,4 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+

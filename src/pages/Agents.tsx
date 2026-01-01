@@ -220,10 +220,10 @@ const Agents: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-8">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-8">
             Our AI <span className="text-gradient-animate">Agents</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-jakarta leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
             Discover our suite of intelligent AI agents, each designed to excel in specific domains and transform your business operations.
           </p>
         </div>
@@ -241,7 +241,7 @@ const Agents: React.FC = () => {
               placeholder="Search agents by name, description, or features..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 glass-premium border border-white/10 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-jakarta text-base"
+              className="w-full pl-12 pr-4 py-4 glass-premium border border-white/10 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter text-base"
             />
             {searchQuery && (
               <button
@@ -255,7 +255,7 @@ const Agents: React.FC = () => {
             )}
           </div>
           {searchQuery && (
-            <p className="mt-3 text-sm text-gray-400 font-jakarta">
+            <p className="mt-3 text-sm text-gray-400 font-inter">
               Found {filteredAgents.length} agent{filteredAgents.length !== 1 ? 's' : ''} matching "{searchQuery}"
             </p>
           )}
@@ -285,13 +285,13 @@ const Agents: React.FC = () => {
                 <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-glow-purple animate-float">
                   <span className="text-4xl">{agent.icon}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 font-outfit text-gradient-cyber">{agent.name}</h3>
+                <h3 className="text-2xl font-bold mb-3 font-inter text-gradient-cyber">{agent.name}</h3>
                 <span className="text-sm font-semibold text-white px-4 py-2 bg-gradient-to-r from-electric-blue/30 to-vivid-purple/30 rounded-full border border-electric-blue/40">
                   {agent.category}
                 </span>
               </div>
 
-              <p className="text-gray-300 mb-6 text-center font-jakarta leading-relaxed">
+              <p className="text-gray-300 mb-6 text-center font-inter leading-relaxed">
                 {agent.description}
               </p>
 
@@ -299,7 +299,7 @@ const Agents: React.FC = () => {
                 {agent.features.slice(0, 3).map((feature, index) => (
                   <div key={index} className="flex items-center text-gray-300">
                     <span className="text-neon-green mr-3 text-lg">✓</span>
-                    <span className="font-jakarta">{feature}</span>
+                    <span className="font-inter">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -317,10 +317,10 @@ const Agents: React.FC = () => {
 
         {/* CTA Section */}
         <Card variant="gradient" className="text-center p-12 hover-glow">
-          <h2 className="text-4xl md:text-5xl font-bold font-outfit mb-6 text-gradient-electric">
+          <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-electric">
             Ready to Deploy AI Agents?
           </h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto font-jakarta leading-relaxed">
+          <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto font-inter leading-relaxed">
             Start transforming your business today with our intelligent AI agents.
             Choose from our pre-built solutions or let us create custom agents for your specific needs.
           </p>
@@ -361,21 +361,21 @@ const Agents: React.FC = () => {
                     {selectedAgent.category}
                   </span>
                 </div>
-                <h3 className="text-4xl md:text-5xl font-bold font-outfit mb-4 text-gradient-cyber">
+                <h3 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-cyber">
                   {selectedAgent.name}
                 </h3>
               </div>
 
               {/* Description */}
               <div className="mb-10">
-                <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-jakarta text-center">
+                <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-inter text-center">
                   {selectedAgent.description}
                 </p>
               </div>
 
               {/* Key Features */}
               <div className="mb-10">
-                <h4 className="text-2xl md:text-3xl font-bold mb-6 font-outfit text-gradient">
+                <h4 className="text-2xl md:text-3xl font-bold mb-6 font-inter text-gradient">
                   ✨ Key Features
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -387,7 +387,7 @@ const Agents: React.FC = () => {
                       <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-neon-green to-lime-green flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-300">
                         <span className="text-black text-sm font-bold">✓</span>
                       </div>
-                      <span className="text-gray-300 font-jakarta leading-relaxed">{feature}</span>
+                      <span className="text-gray-300 font-inter leading-relaxed">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -411,3 +411,4 @@ const Agents: React.FC = () => {
 };
 
 export default Agents;
+

@@ -41,3 +41,4 @@ export interface AgentDeployment {
     status: 'pending' | 'active' | 'inactive';
     created_at: string;
 }
+

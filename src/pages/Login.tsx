@@ -74,13 +74,13 @@ const Login: React.FC = () => {
       <div className="max-w-md w-full mx-auto px-4">
         <Card variant="premium" className="p-10 hover-glow">
           <div className="text-center mb-10">
-            <div className="w-20 h-20 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple animate-float">
-              <span className="text-white font-bold text-3xl font-outfit">V</span>
+            <div className="w-20 h-20 bg-gradient-to-br from-electric-blue via-vercel-blue to-emerald-green rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-glow-orange animate-float">
+              <span className="text-white font-bold text-3xl font-inter">V</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold font-outfit mb-4 text-gradient-animate">
+            <h1 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-animate">
               {isLogin ? 'Welcome Back' : 'Join VIDVAS AI'}
             </h1>
-            <p className="text-gray-300 text-lg font-jakarta">
+            <p className="text-gray-300 text-lg font-inter">
               {isLogin ? 'Sign in to your account' : 'Create your account to get started'}
             </p>
           </div>
@@ -89,7 +89,7 @@ const Login: React.FC = () => {
           <div className="flex gap-2 mb-8 p-1 glass-premium rounded-xl">
             <button
               onClick={() => setIsLogin(true)}
-              className={`flex-1 py-3 px-4 rounded-lg font-semibold font-outfit transition-all duration-200 ${isLogin
+              className={`flex-1 py-3 px-4 rounded-lg font-semibold font-inter transition-all duration-200 ${isLogin
                 ? 'bg-gradient-to-r from-electric-blue to-cyber-cyan text-white shadow-glow-md'
                 : 'text-gray-400 hover:text-white'
                 }`}
@@ -98,7 +98,7 @@ const Login: React.FC = () => {
             </button>
             <button
               onClick={() => setIsLogin(false)}
-              className={`flex-1 py-3 px-4 rounded-lg font-semibold font-outfit transition-all duration-200 ${!isLogin
+              className={`flex-1 py-3 px-4 rounded-lg font-semibold font-inter transition-all duration-200 ${!isLogin
                 ? 'bg-gradient-to-r from-electric-blue to-cyber-cyan text-white shadow-glow-md'
                 : 'text-gray-400 hover:text-white'
                 }`}
@@ -130,7 +130,7 @@ const Login: React.FC = () => {
               <div className="w-full border-t border-medium-gray"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 glass-premium text-gray-400 font-jakarta">Or continue with email</span>
+              <span className="px-2 glass-premium text-gray-400 font-inter">Or continue with email</span>
             </div>
           </div>
 
@@ -138,7 +138,7 @@ const Login: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {!isLogin && (
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                   Full Name
                 </label>
                 <input
@@ -148,14 +148,14 @@ const Login: React.FC = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required={!isLogin}
-                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-jakarta"
+                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter"
                   placeholder="Enter your full name"
                 />
               </div>
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                 Email Address
               </label>
               <input
@@ -165,13 +165,13 @@ const Login: React.FC = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-jakarta"
+                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter"
                 placeholder="your@email.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2 font-jakarta">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
                 Password
               </label>
               <input
@@ -181,14 +181,14 @@ const Login: React.FC = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-jakarta"
+                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter"
                 placeholder="Enter your password"
               />
             </div>
 
             {error && (
               <div className="p-4 glass-premium border border-red-500/30 rounded-xl">
-                <p className="text-red-400 text-sm font-jakarta">{error}</p>
+                <p className="text-red-400 text-sm font-inter">{error}</p>
               </div>
             )}
 
@@ -196,7 +196,7 @@ const Login: React.FC = () => {
               type="submit"
               variant="gradient"
               size="lg"
-              className="w-full shadow-glow-purple"
+              className="w-full shadow-glow-orange"
             >
               {isLogin ? 'Sign In 🚀' : 'Create Account 🚀'}
             </Button>
@@ -204,7 +204,7 @@ const Login: React.FC = () => {
 
           {!isLogin && (
             <div className="mt-6 text-center">
-              <p className="text-xs text-gray-400 font-jakarta">
+              <p className="text-xs text-gray-400 font-inter">
                 By creating an account, you agree to our{' '}
                 <a href="/terms" className="text-electric-blue hover:text-cyber-cyan transition-colors">
                   Terms & Conditions
@@ -223,3 +223,4 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+

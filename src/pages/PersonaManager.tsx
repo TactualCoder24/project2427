@@ -112,7 +112,7 @@ const PersonaManager: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-300 font-jakarta">Loading...</p>
+                    <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
         );
@@ -123,10 +123,10 @@ const PersonaManager: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-6">
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
                         AI <span className="text-gradient-animate">Personas</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-jakarta leading-relaxed">
+                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
                         Create custom AI personalities with specific behaviors, instructions, and connected apps.
                     </p>
                 </div>
@@ -136,8 +136,8 @@ const PersonaManager: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Total Personas</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient-cyber">{personas.length}</p>
+                                <p className="text-gray-300 text-sm font-inter mb-2">Total Personas</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-cyber">{personas.length}</p>
                             </div>
                             <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
                                 <span className="text-3xl">🎭</span>
@@ -148,8 +148,8 @@ const PersonaManager: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Active Personas</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Active Personas</p>
+                                <p className="text-4xl font-bold font-inter text-gradient">
                                     {personas.filter(p => p.behaviorPatterns.proactive).length}
                                 </p>
                             </div>
@@ -162,8 +162,8 @@ const PersonaManager: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Connected Apps</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient-electric">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Connected Apps</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-electric">
                                     {new Set(personas.flatMap(p => p.connectedApps)).size}
                                 </p>
                             </div>
@@ -197,16 +197,16 @@ const PersonaManager: React.FC = () => {
                                 </span>
                             </div>
 
-                            <h3 className="text-2xl font-bold font-outfit mb-2 text-gradient-cyber">
+                            <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-cyber">
                                 {persona.name}
                             </h3>
 
-                            <p className="text-gray-300 mb-4 font-jakarta leading-relaxed">
+                            <p className="text-gray-300 mb-4 font-inter leading-relaxed">
                                 {persona.description}
                             </p>
 
                             <div className="mb-4">
-                                <p className="text-sm text-gray-400 mb-2 font-jakarta">Connected Apps:</p>
+                                <p className="text-sm text-gray-400 mb-2 font-inter">Connected Apps:</p>
                                 <div className="flex flex-wrap gap-2">
                                     {persona.connectedApps.map((app, idx) => (
                                         <span key={idx} className="px-2 py-1 bg-white/5 rounded-lg text-xs text-gray-300">
@@ -217,7 +217,7 @@ const PersonaManager: React.FC = () => {
                             </div>
 
                             {persona.lastUsed && (
-                                <p className="text-xs text-gray-400 mb-4 font-jakarta">
+                                <p className="text-xs text-gray-400 mb-4 font-inter">
                                     Last used: {persona.lastUsed.toLocaleDateString()}
                                 </p>
                             )}
@@ -250,10 +250,10 @@ const PersonaManager: React.FC = () => {
                         <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                             <span className="text-5xl">🎭</span>
                         </div>
-                        <h3 className="text-2xl font-bold font-outfit mb-4 text-gradient-cyber">
+                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
                             No Personas Yet
                         </h3>
-                        <p className="text-gray-300 mb-6 font-jakarta max-w-md mx-auto">
+                        <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
                             Create your first AI persona to get started with customized automation.
                         </p>
                         <Button variant="gradient" size="lg" onClick={() => setShowCreateModal(true)}>
@@ -274,14 +274,14 @@ const PersonaManager: React.FC = () => {
                             ×
                         </button>
 
-                        <h2 className="text-3xl font-bold font-outfit mb-6 text-gradient-cyber">
+                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-cyber">
                             Create New Persona
                         </h2>
 
                         <div className="space-y-6">
                             {/* Icon Selection */}
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-jakarta">Icon</label>
+                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-inter">Icon</label>
                                 <div className="flex flex-wrap gap-3">
                                     {availableIcons.map((icon) => (
                                         <button
@@ -300,43 +300,43 @@ const PersonaManager: React.FC = () => {
 
                             {/* Name */}
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-jakarta">Name</label>
+                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-inter">Name</label>
                                 <input
                                     type="text"
                                     value={newPersona.name}
                                     onChange={(e) => setNewPersona({ ...newPersona, name: e.target.value })}
                                     placeholder="e.g., Marketing Assistant"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-jakarta"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-inter"
                                 />
                             </div>
 
                             {/* Description */}
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-jakarta">Description</label>
+                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-inter">Description</label>
                                 <input
                                     type="text"
                                     value={newPersona.description}
                                     onChange={(e) => setNewPersona({ ...newPersona, description: e.target.value })}
                                     placeholder="Brief description of what this persona does"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-jakarta"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-inter"
                                 />
                             </div>
 
                             {/* Instructions */}
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-jakarta">Instructions</label>
+                                <label className="block text-sm font-semibold text-gray-300 mb-2 font-inter">Instructions</label>
                                 <textarea
                                     value={newPersona.instructions}
                                     onChange={(e) => setNewPersona({ ...newPersona, instructions: e.target.value })}
                                     placeholder="Detailed instructions for how this persona should behave..."
                                     rows={4}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-jakarta"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-inter"
                                 />
                             </div>
 
                             {/* Behavior Patterns */}
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-3 font-jakarta">Behavior Patterns</label>
+                                <label className="block text-sm font-semibold text-gray-300 mb-3 font-inter">Behavior Patterns</label>
                                 <div className="space-y-3">
                                     <label className="flex items-center gap-3 cursor-pointer">
                                         <input
@@ -348,7 +348,7 @@ const PersonaManager: React.FC = () => {
                                             })}
                                             className="w-5 h-5 rounded bg-white/5 border-white/10 text-electric-blue focus:ring-electric-blue"
                                         />
-                                        <span className="text-gray-300 font-jakarta">Proactive (sends notifications)</span>
+                                        <span className="text-gray-300 font-inter">Proactive (sends notifications)</span>
                                     </label>
 
                                     <label className="flex items-center gap-3 cursor-pointer">
@@ -361,7 +361,7 @@ const PersonaManager: React.FC = () => {
                                             })}
                                             className="w-5 h-5 rounded bg-white/5 border-white/10 text-electric-blue focus:ring-electric-blue"
                                         />
-                                        <span className="text-gray-300 font-jakarta">Auto-execute tasks</span>
+                                        <span className="text-gray-300 font-inter">Auto-execute tasks</span>
                                     </label>
                                 </div>
                             </div>
@@ -393,3 +393,4 @@ const PersonaManager: React.FC = () => {
 };
 
 export default PersonaManager;
+

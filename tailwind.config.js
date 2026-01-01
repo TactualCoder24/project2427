@@ -6,41 +6,44 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Original colors
+        // Original neon colors (kept for compatibility)
         'neon-blue': '#00D4FF',
         'neon-green': '#00FF88',
         'dark-gray': '#1A1A1A',
         'medium-gray': '#2D2D2D',
         'light-gray': '#404040',
-        
-        // Enhanced vibrant palette
+
+        // Professional AI platform palette (Vercel/Linear/Stripe inspired)
+        'vercel-blue': '#0070F3',
         'electric-blue': '#0EA5E9',
         'cyber-cyan': '#06B6D4',
-        'vivid-purple': '#A855F7',
-        'hot-pink': '#EC4899',
+        'deep-ocean': '#0284C7',
+        'sky-blue': '#38BDF8',
+        'emerald-green': '#10B981',
+        'mint-green': '#34D399',
         'lime-green': '#84CC16',
-        'amber-glow': '#F59E0B',
-        
-        // Gradient stops
-        'gradient-start': '#667EEA',
-        'gradient-middle': '#764BA2',
-        'gradient-end': '#F093FB',
+
+        // Warm accent colors
+        'vibrant-orange': '#FF6B35',
+        'coral-orange': '#FF8B5A',
+        'sunset-orange': '#FF9E7A',
+        'peach': '#FFB088',
+
+        // Gradient stops (blue/teal/emerald theme)
+        'gradient-start': '#0070F3',
+        'gradient-middle': '#06B6D4',
+        'gradient-end': '#10B981',
       },
       fontFamily: {
+        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
-        'space-grotesk': ['Space Grotesk', 'sans-serif'],
-        'manrope': ['Manrope', 'sans-serif'],
-        'outfit': ['Outfit', 'sans-serif'],
-        'sora': ['Sora', 'sans-serif'],
-        'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-electric': 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)',
-        'gradient-cyber': 'linear-gradient(135deg, #0EA5E9 0%, #06B6D4 50%, #A855F7 100%)',
-        'gradient-sunset': 'linear-gradient(135deg, #F093FB 0%, #F5576C 100%)',
-        'gradient-aurora': 'linear-gradient(135deg, #00D4FF 0%, #A855F7 50%, #EC4899 100%)',
+        'gradient-cyber': 'linear-gradient(135deg, #0070F3, #06B6D4, #10B981)',
+        'gradient-electric': 'linear-gradient(135deg, #0070F3, #38BDF8, #10B981)',
+        'gradient-ocean': 'linear-gradient(135deg, #0284C7, #38BDF8, #06B6D4)',
+        'gradient-emerald': 'linear-gradient(135deg, #06B6D4, #10B981, #34D399)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -87,11 +90,13 @@ module.exports = {
         },
       },
       boxShadow: {
-        'glow-sm': '0 0 10px rgba(0, 212, 255, 0.5)',
-        'glow-md': '0 0 20px rgba(0, 212, 255, 0.6)',
-        'glow-lg': '0 0 30px rgba(0, 212, 255, 0.7)',
-        'glow-purple': '0 0 30px rgba(168, 85, 247, 0.6)',
-        'glow-pink': '0 0 30px rgba(236, 72, 153, 0.6)',
+        'glow-sm': '0 0 10px rgba(0, 112, 243, 0.5)',
+        'glow-md': '0 0 20px rgba(0, 112, 243, 0.6)',
+        'glow-lg': '0 0 30px rgba(0, 112, 243, 0.7)',
+        'glow-blue': '0 0 30px rgba(0, 112, 243, 0.6)',
+        'glow-cyan': '0 0 30px rgba(6, 182, 212, 0.6)',
+        'glow-emerald': '0 0 30px rgba(16, 185, 129, 0.6)',
+        'glow-orange': '0 0 30px rgba(255, 107, 53, 0.6)',
       },
     },
   },

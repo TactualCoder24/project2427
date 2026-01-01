@@ -100,7 +100,7 @@ const ExecutionDashboard: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-300 font-jakarta">Loading...</p>
+                    <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
         );
@@ -111,10 +111,10 @@ const ExecutionDashboard: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-6">
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
                         Execution <span className="text-gradient-animate">Dashboard</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-jakarta leading-relaxed">
+                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
                         Monitor and analyze all your workflow executions in real-time.
                     </p>
                 </div>
@@ -124,8 +124,8 @@ const ExecutionDashboard: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Total Executions</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient-cyber">{totalExecutions}</p>
+                                <p className="text-gray-300 text-sm font-inter mb-2">Total Executions</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-cyber">{totalExecutions}</p>
                             </div>
                             <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
                                 <span className="text-3xl">📊</span>
@@ -136,8 +136,8 @@ const ExecutionDashboard: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Completed</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Completed</p>
+                                <p className="text-4xl font-bold font-inter text-gradient">
                                     {completedExecutions}
                                 </p>
                             </div>
@@ -150,8 +150,8 @@ const ExecutionDashboard: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Failed</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient-electric">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Failed</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-electric">
                                     {failedExecutions}
                                 </p>
                             </div>
@@ -164,8 +164,8 @@ const ExecutionDashboard: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Avg Duration</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Avg Duration</p>
+                                <p className="text-4xl font-bold font-inter text-gradient">
                                     {avgDuration}s
                                 </p>
                             </div>
@@ -199,7 +199,7 @@ const ExecutionDashboard: React.FC = () => {
                             <div className="flex items-start justify-between mb-4">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <h3 className="text-2xl font-bold font-outfit text-gradient-cyber">
+                                        <h3 className="text-2xl font-bold font-inter text-gradient-cyber">
                                             {execution.workflowName}
                                         </h3>
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${execution.status === 'completed'
@@ -211,7 +211,7 @@ const ExecutionDashboard: React.FC = () => {
                                             {execution.status}
                                         </span>
                                     </div>
-                                    <div className="flex items-center gap-4 text-sm text-gray-400 font-jakarta">
+                                    <div className="flex items-center gap-4 text-sm text-gray-400 font-inter">
                                         <span>🎯 {execution.trigger}</span>
                                         <span>⏱️ {execution.duration}s</span>
                                         <span>📅 {execution.startedAt.toLocaleString()}</span>
@@ -229,7 +229,7 @@ const ExecutionDashboard: React.FC = () => {
                             {/* Progress Bar */}
                             <div className="mb-4">
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm text-gray-400 font-jakarta">Progress</span>
+                                    <span className="text-sm text-gray-400 font-inter">Progress</span>
                                     <span className="text-sm font-bold text-white">{execution.successRate}%</span>
                                 </div>
                                 <div className="w-full bg-white/10 rounded-full h-2">
@@ -259,10 +259,10 @@ const ExecutionDashboard: React.FC = () => {
                                                     step.status === 'failed' ? '✗' :
                                                         step.status === 'running' ? '⏳' : '○'}
                                             </span>
-                                            <span className="text-sm font-semibold text-white font-jakarta">{step.agent}</span>
+                                            <span className="text-sm font-semibold text-white font-inter">{step.agent}</span>
                                         </div>
-                                        <p className="text-xs text-gray-400 font-jakarta">{step.action}</p>
-                                        <p className="text-xs text-gray-500 font-jakarta mt-1">{step.duration}s</p>
+                                        <p className="text-xs text-gray-400 font-inter">{step.action}</p>
+                                        <p className="text-xs text-gray-500 font-inter mt-1">{step.duration}s</p>
                                     </div>
                                 ))}
                             </div>
@@ -276,10 +276,10 @@ const ExecutionDashboard: React.FC = () => {
                         <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                             <span className="text-5xl">📊</span>
                         </div>
-                        <h3 className="text-2xl font-bold font-outfit mb-4 text-gradient-cyber">
+                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
                             No Executions Found
                         </h3>
-                        <p className="text-gray-300 mb-6 font-jakarta max-w-md mx-auto">
+                        <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
                             {filterStatus === 'all'
                                 ? 'No workflow executions yet. Create and run a workflow to see execution history.'
                                 : `No ${filterStatus} executions found.`}
@@ -302,36 +302,36 @@ const ExecutionDashboard: React.FC = () => {
                             ×
                         </button>
 
-                        <h2 className="text-3xl font-bold font-outfit mb-6 text-gradient-cyber">
+                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-cyber">
                             Execution Details
                         </h2>
 
                         {/* Overview */}
                         <div className="grid grid-cols-2 gap-4 mb-6">
                             <div className="p-4 glass-premium rounded-xl">
-                                <p className="text-sm text-gray-400 mb-1 font-jakarta">Workflow</p>
-                                <p className="text-lg font-bold text-white font-outfit">{selectedExecution.workflowName}</p>
+                                <p className="text-sm text-gray-400 mb-1 font-inter">Workflow</p>
+                                <p className="text-lg font-bold text-white font-inter">{selectedExecution.workflowName}</p>
                             </div>
                             <div className="p-4 glass-premium rounded-xl">
-                                <p className="text-sm text-gray-400 mb-1 font-jakarta">Status</p>
+                                <p className="text-sm text-gray-400 mb-1 font-inter">Status</p>
                                 <p className={`text-lg font-bold capitalize ${selectedExecution.status === 'completed' ? 'text-neon-green' :
                                         selectedExecution.status === 'failed' ? 'text-red-500' :
                                             'text-yellow-500'
                                     }`}>{selectedExecution.status}</p>
                             </div>
                             <div className="p-4 glass-premium rounded-xl">
-                                <p className="text-sm text-gray-400 mb-1 font-jakarta">Duration</p>
+                                <p className="text-sm text-gray-400 mb-1 font-inter">Duration</p>
                                 <p className="text-lg font-bold text-white">{selectedExecution.duration}s</p>
                             </div>
                             <div className="p-4 glass-premium rounded-xl">
-                                <p className="text-sm text-gray-400 mb-1 font-jakarta">Success Rate</p>
+                                <p className="text-sm text-gray-400 mb-1 font-inter">Success Rate</p>
                                 <p className="text-lg font-bold text-white">{selectedExecution.successRate}%</p>
                             </div>
                         </div>
 
                         {/* Timeline */}
                         <div className="mb-6">
-                            <h3 className="text-xl font-bold font-outfit mb-4 text-gradient">Execution Timeline</h3>
+                            <h3 className="text-xl font-bold font-inter mb-4 text-gradient">Execution Timeline</h3>
                             <div className="space-y-4">
                                 {selectedExecution.steps.map((step, idx) => (
                                     <div key={idx} className="flex gap-4">
@@ -350,13 +350,13 @@ const ExecutionDashboard: React.FC = () => {
                                         <div className="flex-1 pb-4">
                                             <div className="p-4 glass-premium rounded-xl">
                                                 <div className="flex items-center justify-between mb-2">
-                                                    <h4 className="font-bold text-white font-outfit">{step.agent}</h4>
-                                                    <span className="text-sm text-gray-400 font-jakarta">{step.duration}s</span>
+                                                    <h4 className="font-bold text-white font-inter">{step.agent}</h4>
+                                                    <span className="text-sm text-gray-400 font-inter">{step.duration}s</span>
                                                 </div>
-                                                <p className="text-gray-300 mb-2 font-jakarta">{step.action}</p>
+                                                <p className="text-gray-300 mb-2 font-inter">{step.action}</p>
                                                 {step.error && (
                                                     <div className="p-2 bg-red-500/10 border border-red-500/20 rounded-lg">
-                                                        <p className="text-sm text-red-400 font-jakarta">Error: {step.error}</p>
+                                                        <p className="text-sm text-red-400 font-inter">Error: {step.error}</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -383,3 +383,4 @@ const ExecutionDashboard: React.FC = () => {
 };
 
 export default ExecutionDashboard;
+

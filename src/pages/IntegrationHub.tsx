@@ -216,7 +216,7 @@ const IntegrationHub: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-300 font-jakarta">Loading...</p>
+                    <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
         );
@@ -229,10 +229,10 @@ const IntegrationHub: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-6">
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
                         Integration <span className="text-gradient-animate">Hub</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-jakarta leading-relaxed">
+                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
                         Connect your favorite apps and services to unlock the full power of agentic AI automation.
                     </p>
                 </div>
@@ -242,8 +242,8 @@ const IntegrationHub: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Connected Apps</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient-cyber">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Connected Apps</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-cyber">
                                     {connectedCount}
                                 </p>
                             </div>
@@ -256,8 +256,8 @@ const IntegrationHub: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Available Integrations</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Available Integrations</p>
+                                <p className="text-4xl font-bold font-inter text-gradient">
                                     {integrations.length}
                                 </p>
                             </div>
@@ -270,8 +270,8 @@ const IntegrationHub: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-jakarta mb-2">Categories</p>
-                                <p className="text-4xl font-bold font-outfit text-gradient-electric">
+                                <p className="text-gray-300 text-sm font-inter mb-2">Categories</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-electric">
                                     {categories.length - 1}
                                 </p>
                             </div>
@@ -316,21 +316,21 @@ const IntegrationHub: React.FC = () => {
                                 </span>
                             </div>
 
-                            <h3 className="text-2xl font-bold font-outfit mb-2 text-gradient-cyber">
+                            <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-cyber">
                                 {integration.name}
                             </h3>
 
-                            <p className="text-sm text-gray-400 mb-1 font-jakarta">
+                            <p className="text-sm text-gray-400 mb-1 font-inter">
                                 {integration.category}
                             </p>
 
-                            <p className="text-gray-300 mb-4 font-jakarta leading-relaxed">
+                            <p className="text-gray-300 mb-4 font-inter leading-relaxed">
                                 {integration.description}
                             </p>
 
                             {integration.status === 'connected' ? (
                                 <div className="space-y-2">
-                                    <p className="text-xs text-gray-400 font-jakarta">
+                                    <p className="text-xs text-gray-400 font-inter">
                                         Connected {integration.connectedAt?.toLocaleDateString() || 'recently'}
                                     </p>
                                     <div className="flex gap-2">
@@ -362,10 +362,10 @@ const IntegrationHub: React.FC = () => {
 
                 {/* CTA */}
                 <Card variant="gradient" className="mt-16 p-12 text-center hover-glow">
-                    <h2 className="text-4xl md:text-5xl font-bold font-outfit mb-6 text-gradient-electric">
+                    <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-electric">
                         Need a Custom Integration?
                     </h2>
-                    <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto font-jakarta leading-relaxed">
+                    <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto font-inter leading-relaxed">
                         We can build custom integrations for your specific needs. Contact our team to discuss your requirements.
                     </p>
                     <Button variant="gradient-purple" size="xl" onClick={() => navigate('/contact')}>
@@ -378,3 +378,4 @@ const IntegrationHub: React.FC = () => {
 };
 
 export default IntegrationHub;
+

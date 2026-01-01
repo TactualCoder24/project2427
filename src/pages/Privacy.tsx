@@ -79,10 +79,10 @@ const Privacy: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-outfit mb-6">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
             Privacy <span className="text-gradient-animate">Policy</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-6 font-jakarta">
+          <p className="text-xl md:text-2xl text-gray-300 mb-6 font-inter">
             Last updated: December 2025
           </p>
           <div className="w-32 h-1 bg-gradient-to-r from-electric-blue via-vivid-purple to-hot-pink mx-auto rounded-full"></div>
@@ -94,12 +94,12 @@ const Privacy: React.FC = () => {
             <Card key={index} variant="premium" className="p-8 hover-glow">
               <div className="flex items-start space-x-4 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-purple">
-                  <span className="text-white font-bold text-xl font-outfit">{index + 1}</span>
+                  <span className="text-white font-bold text-xl font-inter">{index + 1}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gradient font-outfit">{section.title}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gradient font-inter">{section.title}</h2>
               </div>
 
-              <p className="text-gray-300 text-lg leading-relaxed mb-4 font-jakarta">
+              <p className="text-gray-300 text-lg leading-relaxed mb-4 font-inter">
                 {section.content}
               </p>
 
@@ -107,12 +107,12 @@ const Privacy: React.FC = () => {
                 <div className="space-y-4">
                   {section.subsections.map((subsection, subIndex) => (
                     <div key={subIndex}>
-                      <h3 className="text-xl font-semibold text-gradient-cyber mb-3 font-outfit">{subsection.subtitle}</h3>
+                      <h3 className="text-xl font-semibold text-gradient-cyber mb-3 font-inter">{subsection.subtitle}</h3>
                       <ul className="space-y-2">
                         {subsection.items.map((item, itemIndex) => (
                           <li key={itemIndex} className="flex items-start text-gray-300">
                             <span className="text-neon-green text-lg mr-2 mt-1">•</span>
-                            <span className="font-jakarta">{item}</span>
+                            <span className="font-inter">{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -126,7 +126,7 @@ const Privacy: React.FC = () => {
                   {section.list.map((item, itemIndex) => (
                     <li key={itemIndex} className="flex items-start text-gray-300">
                       <span className="text-neon-green text-xl mr-3 mt-1">•</span>
-                      <span className="font-jakarta text-base">{item}</span>
+                      <span className="font-inter text-base">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -138,8 +138,8 @@ const Privacy: React.FC = () => {
         {/* Additional Sections */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <Card variant="gradient" className="p-8 hover-glow">
-            <h2 className="text-3xl font-bold mb-6 text-gradient-cyber font-outfit">Data Retention</h2>
-            <p className="text-gray-300 text-lg leading-relaxed font-jakarta">
+            <h2 className="text-3xl font-bold mb-6 text-gradient-cyber font-inter">Data Retention</h2>
+            <p className="text-gray-300 text-lg leading-relaxed font-inter">
               We retain your information for as long as necessary to provide services and fulfill legal obligations.
               When you delete your account, we will delete your personal information within 30 days,
               except where retention is required by law.
@@ -147,8 +147,8 @@ const Privacy: React.FC = () => {
           </Card>
 
           <Card variant="gradient" className="p-8 hover-glow">
-            <h2 className="text-3xl font-bold mb-6 text-gradient-electric font-outfit">Children's Privacy</h2>
-            <p className="text-gray-300 text-lg leading-relaxed font-jakarta">
+            <h2 className="text-3xl font-bold mb-6 text-gradient-electric font-inter">Children's Privacy</h2>
+            <p className="text-gray-300 text-lg leading-relaxed font-inter">
               Our services are not intended for children under 13. We do not knowingly collect personal information
               from children under 13. If we become aware of such collection, we will delete the information immediately.
             </p>
@@ -160,22 +160,22 @@ const Privacy: React.FC = () => {
           <div className="w-20 h-20 bg-gradient-to-br from-neon-green to-lime-green rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(0,255,136,0.6)] animate-float">
             <span className="text-4xl">🔒</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-outfit text-gradient-electric">Privacy Questions?</h2>
-          <p className="text-gray-300 text-lg mb-8 font-jakarta">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-inter text-gradient-electric">Privacy Questions?</h2>
+          <p className="text-gray-300 text-lg mb-8 font-inter">
             If you have any questions about this Privacy Policy, please contact us:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="p-6 glass-premium rounded-2xl border border-electric-blue/20">
-              <p className="text-gradient-cyber font-semibold text-lg mb-2 font-outfit">Email</p>
-              <p className="text-gray-300 font-jakarta">privacy@vidvasai.com</p>
+              <p className="text-gradient-cyber font-semibold text-lg mb-2 font-inter">Email</p>
+              <p className="text-gray-300 font-inter">privacy@vidvasai.com</p>
             </div>
             <div className="p-6 glass-premium rounded-2xl border border-vivid-purple/20">
-              <p className="text-gradient font-semibold text-lg mb-2 font-outfit">Data Protection Officer</p>
-              <p className="text-gray-300 font-jakarta">dpo@vidvasai.com</p>
+              <p className="text-gradient font-semibold text-lg mb-2 font-inter">Data Protection Officer</p>
+              <p className="text-gray-300 font-inter">dpo@vidvasai.com</p>
             </div>
             <div className="p-6 glass-premium rounded-2xl border border-hot-pink/20">
-              <p className="text-gradient-electric font-semibold text-lg mb-2 font-outfit">Address</p>
-              <p className="text-gray-300 font-jakarta">Delhi, India 🇮🇳</p>
+              <p className="text-gradient-electric font-semibold text-lg mb-2 font-inter">Address</p>
+              <p className="text-gray-300 font-inter">Delhi, India 🇮🇳</p>
             </div>
           </div>
         </Card>
@@ -185,3 +185,4 @@ const Privacy: React.FC = () => {
 };
 
 export default Privacy;
+
