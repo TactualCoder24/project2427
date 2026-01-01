@@ -68,3 +68,4 @@ export const useStaggeredAnimation = (itemCount: number, delay: number = 100) =>
   return { targetRef, visibleItems };
 };
 
+

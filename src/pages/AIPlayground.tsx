@@ -157,7 +157,7 @@ const AIPlayground: React.FC = () => {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
@@ -190,9 +190,9 @@ const AIPlayground: React.FC = () => {
                                     >
                                         <div
                                             className={`max-w-[80%] rounded-2xl p-4 ${message.role === 'user'
-                                                ? 'bg-gradient-to-r from-electric-blue to-vivid-purple text-white'
+                                                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white'
                                                 : message.role === 'system'
-                                                    ? 'glass-premium border border-electric-blue/30'
+                                                    ? 'glass-premium border border-cyber-aqua/30'
                                                     : 'glass-premium border border-white/10'
                                                 }`}
                                         >
@@ -217,7 +217,7 @@ const AIPlayground: React.FC = () => {
                                                     </div>
                                                     {message.status === 'processing' && (
                                                         <div className="flex items-center gap-2 mt-2">
-                                                            <div className="w-2 h-2 bg-electric-blue rounded-full animate-pulse"></div>
+                                                            <div className="w-2 h-2 bg-cyber-aqua rounded-full animate-pulse"></div>
                                                             <div className="w-2 h-2 bg-vivid-purple rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                                                             <div className="w-2 h-2 bg-hot-pink rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                                                         </div>
@@ -250,7 +250,7 @@ const AIPlayground: React.FC = () => {
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyPress={handleKeyPress}
                                         placeholder="Type your command... (e.g., 'Send an email to team@example.com')"
-                                        className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-inter"
+                                        className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent resize-none font-inter"
                                         rows={2}
                                         disabled={isProcessing}
                                     />
@@ -271,7 +271,7 @@ const AIPlayground: React.FC = () => {
                     <div className="space-y-6">
                         {/* Quick Commands */}
                         <Card variant="gradient" className="p-6">
-                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
+                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-intelligence">
                                 ⚡ Quick Commands
                             </h3>
                             <div className="space-y-3">
@@ -279,7 +279,7 @@ const AIPlayground: React.FC = () => {
                                     <button
                                         key={idx}
                                         onClick={() => setInput(cmd.command)}
-                                        className="w-full text-left p-3 glass-premium rounded-xl border border-white/10 hover:border-electric-blue/50 transition-all duration-200 group"
+                                        className="w-full text-left p-3 glass-premium rounded-xl border border-white/10 hover:border-cyber-aqua/50 transition-all duration-200 group"
                                     >
                                         <div className="flex items-center gap-3">
                                             <span className="text-2xl">{cmd.icon}</span>
@@ -348,7 +348,7 @@ const AIPlayground: React.FC = () => {
 
                         {/* Stats */}
                         <Card variant="premium" className="p-6">
-                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-electric">
+                            <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-quantum">
                                 📊 Usage Stats
                             </h3>
                             <div className="space-y-4">
@@ -358,7 +358,7 @@ const AIPlayground: React.FC = () => {
                                         <span className="text-white font-bold">0</span>
                                     </div>
                                     <div className="w-full bg-white/10 rounded-full h-2">
-                                        <div className="bg-gradient-to-r from-electric-blue to-vivid-purple h-2 rounded-full" style={{ width: '0%' }}></div>
+                                        <div className="bg-gradient-to-r from-cyber-aqua to-vivid-purple h-2 rounded-full" style={{ width: '0%' }}></div>
                                     </div>
                                 </div>
                                 <div>
@@ -380,4 +380,5 @@ const AIPlayground: React.FC = () => {
 };
 
 export default AIPlayground;
+
 

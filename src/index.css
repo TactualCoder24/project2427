@@ -253,14 +253,14 @@ html {
   background-size: 200% 200%;
 }
 
-.text-gradient-electric {
+.text-gradient-quantum {
   background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.text-gradient-cyber {
+.text-gradient-intelligence {
   background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 50%, #A855F7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -297,7 +297,7 @@ html {
 }
 
 .glass-gradient {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 212, 170, 0.1) 100%);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -316,7 +316,7 @@ html {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 30px rgba(0, 102, 255, 0.6), 0 0 60px rgba(0, 212, 170, 0.4);
   transform: translateY(-2px);
 }
 
@@ -332,15 +332,46 @@ html {
 .border-gradient {
   position: relative;
   background: linear-gradient(#000, #000) padding-box,
-    linear-gradient(135deg, #00D4FF, #A855F7, #EC4899) border-box;
+    linear-gradient(135deg, #0066FF, #00B8D4, #00D4AA) border-box;
   border: 2px solid transparent;
 }
 
 .border-gradient-animate {
   position: relative;
   background: linear-gradient(#000, #000) padding-box,
-    linear-gradient(135deg, #00D4FF, #A855F7, #EC4899) border-box;
+    linear-gradient(135deg, #0066FF, #00B8D4, #00D4AA) border-box;
   border: 2px solid transparent;
   background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Professional Text Gradients */
+.text-gradient-intelligence {
+  background: linear-gradient(135deg, #475569 0%, #0066FF 50%, #00D4AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-quantum {
+  background: linear-gradient(135deg, #00D4AA 0%, #8B5CF6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #475569 0%, #0066FF 50%, #00D4AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-animate {
+  background: linear-gradient(270deg, #475569, #0066FF, #00D4AA, #8B5CF6, #475569);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   animation: gradientShift 8s ease infinite;
 }

@@ -77,7 +77,7 @@ const Login: React.FC = () => {
             <img
               src="/logo1111.jpg"
               alt="Vidvas AI"
-              className="w-20 h-20 rounded-2xl mx-auto mb-6 shadow-glow-orange animate-float object-cover"
+              className="w-20 h-20 rounded-2xl mx-auto mb-6 shadow-glow-teal animate-float object-cover"
             />
             <h1 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-animate">
               {isLogin ? 'Welcome Back' : 'Join VIDVAS AI'}
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
             <button
               onClick={() => setIsLogin(true)}
               className={`flex-1 py-3 px-4 rounded-lg font-semibold font-inter transition-all duration-200 ${isLogin
-                ? 'bg-gradient-to-r from-electric-blue to-cyber-cyan text-white shadow-glow-md'
+                ? 'bg-gradient-to-r from-cyber-aqua to-cyber-aqua text-white shadow-glow-md'
                 : 'text-gray-400 hover:text-white'
                 }`}
             >
@@ -101,7 +101,7 @@ const Login: React.FC = () => {
             <button
               onClick={() => setIsLogin(false)}
               className={`flex-1 py-3 px-4 rounded-lg font-semibold font-inter transition-all duration-200 ${!isLogin
-                ? 'bg-gradient-to-r from-electric-blue to-cyber-cyan text-white shadow-glow-md'
+                ? 'bg-gradient-to-r from-cyber-aqua to-cyber-aqua text-white shadow-glow-md'
                 : 'text-gray-400 hover:text-white'
                 }`}
             >
@@ -150,7 +150,7 @@ const Login: React.FC = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required={!isLogin}
-                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter"
+                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -167,7 +167,7 @@ const Login: React.FC = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter"
+                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter"
                 placeholder="your@email.com"
               />
             </div>
@@ -183,7 +183,7 @@ const Login: React.FC = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter"
+                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter"
                 placeholder="Enter your password"
               />
             </div>
@@ -198,7 +198,7 @@ const Login: React.FC = () => {
               type="submit"
               variant="gradient"
               size="lg"
-              className="w-full shadow-glow-orange"
+              className="w-full shadow-glow-teal"
             >
               {isLogin ? 'Sign In 🚀' : 'Create Account 🚀'}
             </Button>
@@ -208,11 +208,11 @@ const Login: React.FC = () => {
             <div className="mt-6 text-center">
               <p className="text-xs text-gray-400 font-inter">
                 By creating an account, you agree to our{' '}
-                <a href="/terms" className="text-electric-blue hover:text-cyber-cyan transition-colors">
+                <a href="/terms" className="text-cyber-aqua hover:text-cyber-aqua transition-colors">
                   Terms & Conditions
                 </a>{' '}
                 and{' '}
-                <a href="/privacy" className="text-electric-blue hover:text-cyber-cyan transition-colors">
+                <a href="/privacy" className="text-cyber-aqua hover:text-cyber-aqua transition-colors">
                   Privacy Policy
                 </a>
               </p>
@@ -225,4 +225,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
 

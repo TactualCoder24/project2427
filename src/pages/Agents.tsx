@@ -232,7 +232,7 @@ const Agents: React.FC = () => {
         <div className="max-w-2xl mx-auto mb-12">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-gradient-cyber" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-5 w-5 text-gradient-intelligence" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
@@ -241,7 +241,7 @@ const Agents: React.FC = () => {
               placeholder="Search agents by name, description, or features..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 glass-premium border border-white/10 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 font-inter text-base"
+              className="w-full pl-12 pr-4 py-4 glass-premium border border-white/10 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter text-base"
             />
             {searchQuery && (
               <button
@@ -268,8 +268,8 @@ const Agents: React.FC = () => {
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`px-8 py-3 rounded-full transition-all duration-300 font-sora font-semibold text-base ${selectedCategory === category
-                ? 'bg-gradient-to-r from-electric-blue to-vivid-purple text-white shadow-glow-md scale-105'
-                : 'glass-premium text-gray-300 hover:text-white hover:border-electric-blue/50'
+                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white shadow-glow-md scale-105'
+                : 'glass-premium text-gray-300 hover:text-white hover:border-cyber-aqua/50'
                 }`}
             >
               {category}
@@ -282,11 +282,11 @@ const Agents: React.FC = () => {
           {filteredAgents.map((agent) => (
             <Card key={agent.id} variant="premium" className="p-8 cursor-pointer group hover-glow">
               <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-glow-purple animate-float">
+                <div className="w-24 h-24 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-glow-purple animate-float">
                   <span className="text-4xl">{agent.icon}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 font-inter text-gradient-cyber">{agent.name}</h3>
-                <span className="text-sm font-semibold text-white px-4 py-2 bg-gradient-to-r from-electric-blue/30 to-vivid-purple/30 rounded-full border border-electric-blue/40">
+                <h3 className="text-2xl font-bold mb-3 font-inter text-gradient-intelligence">{agent.name}</h3>
+                <span className="text-sm font-semibold text-white px-4 py-2 bg-gradient-to-r from-cyber-aqua/30 to-vivid-purple/30 rounded-full border border-cyber-aqua/40">
                   {agent.category}
                 </span>
               </div>
@@ -317,7 +317,7 @@ const Agents: React.FC = () => {
 
         {/* CTA Section */}
         <Card variant="gradient" className="text-center p-12 hover-glow">
-          <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-electric">
+          <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-quantum">
             Ready to Deploy AI Agents?
           </h2>
           <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto font-inter leading-relaxed">
@@ -340,7 +340,7 @@ const Agents: React.FC = () => {
         <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fadeIn">
           <div className="relative glass-premium border border-white/20 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-8 md:p-12 shadow-glow-purple animate-scaleIn">
             {/* Animated background glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-electric-blue/5 via-vivid-purple/5 to-hot-pink/5 rounded-3xl animate-pulse-glow pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-cyber-aqua/5 via-vivid-purple/5 to-hot-pink/5 rounded-3xl animate-pulse-glow pointer-events-none" />
 
             {/* Close button */}
             <button
@@ -353,15 +353,15 @@ const Agents: React.FC = () => {
             <div className="relative z-10">
               {/* Header */}
               <div className="flex flex-col items-center text-center mb-8">
-                <div className="w-28 h-28 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mb-6 shadow-glow-purple animate-float">
+                <div className="w-28 h-28 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mb-6 shadow-glow-purple animate-float">
                   <span className="text-6xl">{selectedAgent.icon}</span>
                 </div>
                 <div className="mb-4">
-                  <span className="inline-block px-5 py-2 bg-gradient-to-r from-electric-blue/30 to-vivid-purple/30 rounded-full border border-electric-blue/40 text-white font-semibold text-sm mb-4">
+                  <span className="inline-block px-5 py-2 bg-gradient-to-r from-cyber-aqua/30 to-vivid-purple/30 rounded-full border border-cyber-aqua/40 text-white font-semibold text-sm mb-4">
                     {selectedAgent.category}
                   </span>
                 </div>
-                <h3 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-cyber">
+                <h3 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-intelligence">
                   {selectedAgent.name}
                 </h3>
               </div>
@@ -382,7 +382,7 @@ const Agents: React.FC = () => {
                   {selectedAgent.features.map((feature, index) => (
                     <div
                       key={index}
-                      className="flex items-start glass-premium p-4 rounded-xl border border-white/5 hover:border-electric-blue/30 transition-all duration-300 group"
+                      className="flex items-start glass-premium p-4 rounded-xl border border-white/5 hover:border-cyber-aqua/30 transition-all duration-300 group"
                     >
                       <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-neon-green to-lime-green flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-300">
                         <span className="text-black text-sm font-bold">✓</span>
@@ -411,4 +411,5 @@ const Agents: React.FC = () => {
 };
 
 export default Agents;
+
 

@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
                         </Link>
                         <Link
                             to="/login"
-                            className="px-6 py-2 bg-gradient-to-r from-vercel-blue to-cyber-cyan text-white text-sm font-semibold rounded-lg hover:shadow-glow-md transition-all font-inter"
+                            className="px-6 py-2 bg-gradient-to-r from-intelligence-blue to-cyber-aqua text-white text-sm font-semibold rounded-lg hover:shadow-glow-md transition-all font-inter"
                         >
                             Get Started
                         </Link>
@@ -114,7 +114,7 @@ const Navbar: React.FC = () => {
                             <Link
                                 to="/login"
                                 onClick={() => setIsOpen(false)}
-                                className="block px-6 py-2 bg-gradient-to-r from-vercel-blue to-cyber-cyan text-white text-base font-semibold rounded-lg hover:shadow-glow-md transition-all text-center font-inter"
+                                className="block px-6 py-2 bg-gradient-to-r from-intelligence-blue to-cyber-aqua text-white text-base font-semibold rounded-lg hover:shadow-glow-md transition-all text-center font-inter"
                             >
                                 Get Started
                             </Link>
@@ -127,4 +127,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
 

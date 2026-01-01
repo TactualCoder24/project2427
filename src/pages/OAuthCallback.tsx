@@ -68,7 +68,7 @@ const OAuthCallback: React.FC = () => {
                 {/* Loading Spinner */}
                 {status === 'processing' && (
                     <div className="mb-6">
-                        <div className="w-20 h-20 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <div className="w-20 h-20 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto"></div>
                     </div>
                 )}
 
@@ -125,4 +125,5 @@ const OAuthCallback: React.FC = () => {
 };
 
 export default OAuthCallback;
+
 

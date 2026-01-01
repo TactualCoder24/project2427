@@ -151,7 +151,7 @@ const WorkflowBuilder: React.FC = () => {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
@@ -177,9 +177,9 @@ const WorkflowBuilder: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Total Workflows</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-cyber">{workflows.length}</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-intelligence">{workflows.length}</p>
                             </div>
-                            <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
+                            <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
                                 <span className="text-3xl">⚙️</span>
                             </div>
                         </div>
@@ -203,7 +203,7 @@ const WorkflowBuilder: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Total Runs</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-electric">
+                                <p className="text-4xl font-bold font-inter text-gradient-quantum">
                                     {workflows.reduce((sum, w) => sum + w.runCount, 0)}
                                 </p>
                             </div>
@@ -241,7 +241,7 @@ const WorkflowBuilder: React.FC = () => {
                         <Card key={workflow.id} variant="premium" className="p-6 hover-glow">
                             <div className="flex items-start justify-between mb-4">
                                 <div>
-                                    <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-cyber">
+                                    <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-intelligence">
                                         {workflow.name}
                                     </h3>
                                     <p className="text-gray-300 font-inter">{workflow.description}</p>
@@ -273,7 +273,7 @@ const WorkflowBuilder: React.FC = () => {
                                 <div className="space-y-2">
                                     {workflow.steps.slice(0, 3).map((step, idx) => (
                                         <div key={step.id} className="flex items-center gap-2 text-sm">
-                                            <span className="text-electric-blue font-bold">{idx + 1}.</span>
+                                            <span className="text-cyber-aqua font-bold">{idx + 1}.</span>
                                             <span className="text-gray-300 font-inter">{step.agent}</span>
                                             <span className="text-gray-500">→</span>
                                             <span className="text-gray-400 font-inter">{step.action}</span>
@@ -331,10 +331,10 @@ const WorkflowBuilder: React.FC = () => {
                 {/* Empty State */}
                 {workflows.length === 0 && (
                     <Card variant="premium" className="p-12 text-center hover-glow">
-                        <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
+                        <div className="w-24 h-24 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                             <span className="text-5xl">⚙️</span>
                         </div>
-                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
+                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-intelligence">
                             No Workflows Yet
                         </h3>
                         <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
@@ -358,7 +358,7 @@ const WorkflowBuilder: React.FC = () => {
                             ×
                         </button>
 
-                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-cyber">
+                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-intelligence">
                             Create New Workflow
                         </h2>
 
@@ -371,7 +371,7 @@ const WorkflowBuilder: React.FC = () => {
                                     value={newWorkflow.name}
                                     onChange={(e) => setNewWorkflow({ ...newWorkflow, name: e.target.value })}
                                     placeholder="e.g., Daily Report Generator"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-inter"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent font-inter"
                                 />
                             </div>
 
@@ -383,7 +383,7 @@ const WorkflowBuilder: React.FC = () => {
                                     onChange={(e) => setNewWorkflow({ ...newWorkflow, description: e.target.value })}
                                     placeholder="What does this workflow do?"
                                     rows={2}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-inter"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent resize-none font-inter"
                                 />
                             </div>
 
@@ -396,7 +396,7 @@ const WorkflowBuilder: React.FC = () => {
                                         ...newWorkflow,
                                         trigger: { type: e.target.value as any, config: {} }
                                     })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-inter"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent font-inter"
                                 >
                                     <option value="manual">Manual</option>
                                     <option value="scheduled">Scheduled</option>
@@ -417,7 +417,7 @@ const WorkflowBuilder: React.FC = () => {
                                     {newWorkflow.steps.map((step, idx) => (
                                         <div key={step.id} className="p-4 glass-premium rounded-xl">
                                             <div className="flex items-center gap-3 mb-3">
-                                                <span className="text-electric-blue font-bold">{idx + 1}.</span>
+                                                <span className="text-cyber-aqua font-bold">{idx + 1}.</span>
                                                 <select
                                                     value={step.agent}
                                                     onChange={(e) => {
@@ -431,7 +431,7 @@ const WorkflowBuilder: React.FC = () => {
                                                             )
                                                         });
                                                     }}
-                                                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-electric-blue font-inter"
+                                                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
                                                 >
                                                     {availableAgents.map(agent => (
                                                         <option key={agent.name} value={agent.name}>{agent.name}</option>
@@ -452,7 +452,7 @@ const WorkflowBuilder: React.FC = () => {
                                                         s.id === step.id ? { ...s, action: e.target.value } : s
                                                     )
                                                 })}
-                                                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-electric-blue font-inter"
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
                                             >
                                                 {availableAgents.find(a => a.name === step.agent)?.actions.map(action => (
                                                     <option key={action} value={action}>{action}</option>
@@ -493,4 +493,5 @@ const WorkflowBuilder: React.FC = () => {
 };
 
 export default WorkflowBuilder;
+
 

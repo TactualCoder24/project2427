@@ -61,12 +61,12 @@ const Terms: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-20">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
-            Terms and <span className="text-gradient-cyber">Conditions</span>
+            Terms and <span className="text-gradient-intelligence">Conditions</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-6 font-inter">
             Last updated: December 2025
           </p>
-          <div className="w-32 h-1 bg-gradient-to-r from-electric-blue via-vivid-purple to-hot-pink mx-auto rounded-full"></div>
+          <div className="w-32 h-1 bg-gradient-to-r from-cyber-aqua via-vivid-purple to-hot-pink mx-auto rounded-full"></div>
         </div>
 
         {/* Terms Grid */}
@@ -74,10 +74,10 @@ const Terms: React.FC = () => {
           {sections.map((section, index) => (
             <Card key={index} variant="premium" className="p-8 hover-glow">
               <div className="flex items-start space-x-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-md">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-md">
                   <span className="text-white font-bold text-xl font-inter">{index + 1}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gradient-cyber font-inter">{section.title}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gradient-intelligence font-inter">{section.title}</h2>
               </div>
 
               <p className="text-gray-300 text-lg leading-relaxed mb-4 font-inter">
@@ -100,7 +100,7 @@ const Terms: React.FC = () => {
 
         {/* Contact Section */}
         <Card variant="gradient" className="p-10 text-center hover-glow">
-          <div className="w-20 h-20 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-glow-md animate-float">
+          <div className="w-20 h-20 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-glow-md animate-float">
             <span className="text-4xl">📧</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-inter text-gradient">Questions About These Terms?</h2>
@@ -108,8 +108,8 @@ const Terms: React.FC = () => {
             For questions about these Terms and Conditions, please contact us:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="p-6 glass-premium rounded-2xl border border-electric-blue/20">
-              <p className="text-gradient-cyber font-semibold text-lg mb-2 font-inter">Email</p>
+            <div className="p-6 glass-premium rounded-2xl border border-cyber-aqua/20">
+              <p className="text-gradient-intelligence font-semibold text-lg mb-2 font-inter">Email</p>
               <p className="text-gray-300 font-inter">legal@vidvasai.com</p>
             </div>
             <div className="p-6 glass-premium rounded-2xl border border-vivid-purple/20">
@@ -124,4 +124,5 @@ const Terms: React.FC = () => {
 };
 
 export default Terms;
+
 

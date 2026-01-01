@@ -42,10 +42,10 @@ const CountdownTimer: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-vercel-blue/10 to-cyber-cyan/10 border border-vercel-blue/30 rounded-2xl p-8 text-center animate-fadeInUp backdrop-blur-sm">
+    <div className="bg-gradient-to-r from-intelligence-blue/10 to-cyber-aqua/10 border border-intelligence-blue/30 rounded-2xl p-8 text-center animate-fadeInUp backdrop-blur-sm">
       <div className="mb-4">
         <h3 className="text-2xl md:text-3xl font-bold font-inter mb-2">
-          🚀 <span className="text-vercel-blue">Launching January 13, 2026</span>
+          🚀 <span className="text-intelligence-blue">Launching January 13, 2026</span>
         </h3>
         <p className="text-gray-300 text-lg font-inter">
           Our revolutionary AI platform is coming soon
@@ -54,28 +54,28 @@ const CountdownTimer: React.FC = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-black/40 rounded-xl p-4 border border-white/10">
-          <div className="text-3xl md:text-4xl font-bold text-vercel-blue mb-1 font-inter">
+          <div className="text-3xl md:text-4xl font-bold text-intelligence-blue mb-1 font-inter">
             {timeLeft.days.toString().padStart(2, '0')}
           </div>
           <div className="text-sm text-gray-400 uppercase tracking-wider font-inter">Days</div>
         </div>
 
         <div className="bg-black/40 rounded-xl p-4 border border-white/10">
-          <div className="text-3xl md:text-4xl font-bold text-cyber-cyan mb-1 font-inter">
+          <div className="text-3xl md:text-4xl font-bold text-cyber-aqua mb-1 font-inter">
             {timeLeft.hours.toString().padStart(2, '0')}
           </div>
           <div className="text-sm text-gray-400 uppercase tracking-wider font-inter">Hours</div>
         </div>
 
         <div className="bg-black/40 rounded-xl p-4 border border-white/10">
-          <div className="text-3xl md:text-4xl font-bold text-vercel-blue mb-1 font-inter">
+          <div className="text-3xl md:text-4xl font-bold text-intelligence-blue mb-1 font-inter">
             {timeLeft.minutes.toString().padStart(2, '0')}
           </div>
           <div className="text-sm text-gray-400 uppercase tracking-wider font-inter">Minutes</div>
         </div>
 
         <div className="bg-black/40 rounded-xl p-4 border border-white/10">
-          <div className="text-3xl md:text-4xl font-bold text-cyber-cyan mb-1 animate-pulse font-inter">
+          <div className="text-3xl md:text-4xl font-bold text-cyber-aqua mb-1 animate-pulse font-inter">
             {timeLeft.seconds.toString().padStart(2, '0')}
           </div>
           <div className="text-sm text-gray-400 uppercase tracking-wider font-inter">Seconds</div>
@@ -89,8 +89,8 @@ const CountdownTimer: React.FC = () => {
       </div>
 
       <div className="mt-6">
-        <div className="inline-flex items-center space-x-2 bg-vercel-blue/20 text-vercel-blue px-4 py-2 rounded-full text-sm font-medium font-inter">
-          <div className="w-2 h-2 bg-vercel-blue rounded-full animate-pulse"></div>
+        <div className="inline-flex items-center space-x-2 bg-intelligence-blue/20 text-intelligence-blue px-4 py-2 rounded-full text-sm font-medium font-inter">
+          <div className="w-2 h-2 bg-intelligence-blue rounded-full animate-pulse"></div>
           <span>Launch Sequence Initiated</span>
         </div>
       </div>
@@ -99,4 +99,5 @@ const CountdownTimer: React.FC = () => {
 };
 
 export default CountdownTimer;
+
 

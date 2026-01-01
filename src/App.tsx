@@ -22,6 +22,11 @@ import PersonaManager from './pages/PersonaManager';
 import WorkflowBuilder from './pages/WorkflowBuilder';
 import ExecutionDashboard from './pages/ExecutionDashboard';
 import OAuthCallback from './pages/OAuthCallback';
+import Pricing from './pages/Pricing';
+import ScheduleDemo from './pages/ScheduleDemo';
+import FAQ from './pages/FAQ';
+import Documentation from './pages/Documentation';
+import LiveSupport from './pages/LiveSupport';
 
 function AppContent() {
   const location = useLocation();
@@ -66,6 +71,11 @@ function AppContent() {
             <Route path="/terms" element={<AnimatedPage><Terms /></AnimatedPage>} />
             <Route path="/privacy" element={<AnimatedPage><Privacy /></AnimatedPage>} />
             <Route path="/contact" element={<AnimatedPage><Contact /></AnimatedPage>} />
+            <Route path="/pricing" element={<AnimatedPage><Pricing /></AnimatedPage>} />
+            <Route path="/demo" element={<AnimatedPage><ScheduleDemo /></AnimatedPage>} />
+            <Route path="/faq" element={<AnimatedPage><FAQ /></AnimatedPage>} />
+            <Route path="/docs" element={<AnimatedPage><Documentation /></AnimatedPage>} />
+            <Route path="/support" element={<AnimatedPage><LiveSupport /></AnimatedPage>} />
           </Routes>
         </AnimatePresence>
       </main>
@@ -94,4 +104,5 @@ const App: React.FC = () => {
 };
 
 export default App;
+
 

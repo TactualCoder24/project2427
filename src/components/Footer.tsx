@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-12 h-12 glass-premium rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-br hover:from-electric-blue/20 hover:to-vercel-blue/20 transition-all duration-300 hover:scale-110 transform border border-white/5 hover:border-electric-blue/30"
+                  className="w-12 h-12 glass-premium rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-br hover:from-cyber-aqua/20 hover:to-intelligence-blue/20 transition-all duration-300 hover:scale-110 transform border border-white/5 hover:border-cyber-aqua/30"
                   aria-label={social.name}
                 >
                   <span className="text-2xl">{social.icon}</span>
@@ -44,31 +44,26 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold text-xl mb-6 font-inter text-gradient-cyber">Quick Links</h3>
+            <h3 className="text-white font-bold text-xl mb-6 font-inter text-gradient-intelligence">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-gradient-cyber transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
-                  → About Us
+                <Link to="/demo" className="text-gray-400 hover:text-gradient-intelligence transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
+                  📅 Schedule a Demo
                 </Link>
               </li>
               <li>
-                <Link to="/agents" className="text-gray-400 hover:text-gradient-cyber transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
-                  → Our Agents
+                <Link to="/support" className="text-gray-400 hover:text-gradient-intelligence transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
+                  💬 Live Chat Support
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-gradient-cyber transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
-                  → Contact
+                <Link to="/docs" className="text-gray-400 hover:text-gradient-intelligence transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
+                  📚 Documentation
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-gray-400 hover:text-gradient-cyber transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
-                  → Terms & Conditions
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="text-gray-400 hover:text-gradient-cyber transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
-                  → Privacy Policy
+                <Link to="/faq" className="text-gray-400 hover:text-gradient-intelligence transition-colors text-base font-inter hover:translate-x-1 inline-block transform duration-200">
+                  ❓ FAQ
                 </Link>
               </li>
             </ul>
@@ -89,6 +84,11 @@ const Footer: React.FC = () => {
                   🇮🇳
                 </p>
               </div>
+              <div className="glass-premium p-4 rounded-xl border border-white/5">
+                <p className="text-sm text-gray-400 mb-1 font-inter">Phone</p>
+                <p className="text-white font-semibold font-inter">+91 98765 43210</p>
+                <p className="text-xs text-gray-500 font-inter mt-1">Mon-Fri, 9AM-6PM IST</p>
+              </div>
             </div>
           </div>
         </div>
@@ -108,4 +108,5 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
 

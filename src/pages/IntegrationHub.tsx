@@ -215,7 +215,7 @@ const IntegrationHub: React.FC = () => {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
@@ -243,7 +243,7 @@ const IntegrationHub: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Connected Apps</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-cyber">
+                                <p className="text-4xl font-bold font-inter text-gradient-intelligence">
                                     {connectedCount}
                                 </p>
                             </div>
@@ -261,7 +261,7 @@ const IntegrationHub: React.FC = () => {
                                     {integrations.length}
                                 </p>
                             </div>
-                            <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
+                            <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
                                 <span className="text-3xl">🔌</span>
                             </div>
                         </div>
@@ -271,7 +271,7 @@ const IntegrationHub: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Categories</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-electric">
+                                <p className="text-4xl font-bold font-inter text-gradient-quantum">
                                     {categories.length - 1}
                                 </p>
                             </div>
@@ -289,8 +289,8 @@ const IntegrationHub: React.FC = () => {
                             key={category}
                             onClick={() => setSelectedCategory(category)}
                             className={`px-6 py-3 rounded-full transition-all duration-300 font-sora font-semibold text-base ${selectedCategory === category
-                                ? 'bg-gradient-to-r from-electric-blue to-vivid-purple text-white shadow-glow-md scale-105'
-                                : 'glass-premium text-gray-300 hover:text-white hover:border-electric-blue/50'
+                                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white shadow-glow-md scale-105'
+                                : 'glass-premium text-gray-300 hover:text-white hover:border-cyber-aqua/50'
                                 }`}
                         >
                             {category}
@@ -303,7 +303,7 @@ const IntegrationHub: React.FC = () => {
                     {filteredIntegrations.map((integration) => (
                         <Card key={integration.id} variant="premium" className="p-6 hover-glow">
                             <div className="flex items-start justify-between mb-4">
-                                <div className="w-14 h-14 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-xl flex items-center justify-center shadow-glow-purple">
+                                <div className="w-14 h-14 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-xl flex items-center justify-center shadow-glow-purple">
                                     <span className="text-3xl">{integration.icon}</span>
                                 </div>
                                 <span
@@ -316,7 +316,7 @@ const IntegrationHub: React.FC = () => {
                                 </span>
                             </div>
 
-                            <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-cyber">
+                            <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-intelligence">
                                 {integration.name}
                             </h3>
 
@@ -362,7 +362,7 @@ const IntegrationHub: React.FC = () => {
 
                 {/* CTA */}
                 <Card variant="gradient" className="mt-16 p-12 text-center hover-glow">
-                    <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-electric">
+                    <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-quantum">
                         Need a Custom Integration?
                     </h2>
                     <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto font-inter leading-relaxed">
@@ -378,4 +378,5 @@ const IntegrationHub: React.FC = () => {
 };
 
 export default IntegrationHub;
+
 

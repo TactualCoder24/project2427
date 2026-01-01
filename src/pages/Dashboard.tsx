@@ -53,7 +53,7 @@ const Dashboard: React.FC = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-300 font-inter">Loading...</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
   const getSubscriptionBadge = (subscription: string) => {
     const badges = {
       free: { color: 'bg-gradient-to-r from-gray-500 to-gray-600', text: 'Free' },
-      pro: { color: 'bg-gradient-to-r from-electric-blue to-cyber-cyan', text: 'Pro' },
+      pro: { color: 'bg-gradient-to-r from-cyber-aqua to-cyber-aqua', text: 'Pro' },
       enterprise: { color: 'bg-gradient-to-r from-neon-green to-lime-green', text: 'Enterprise' }
     };
     return badges[subscription as keyof typeof badges] || badges.free;
@@ -100,11 +100,11 @@ const Dashboard: React.FC = () => {
                 <img
                   src={user.picture}
                   alt={user.name}
-                  className="w-24 h-24 rounded-2xl border-4 border-electric-blue/30 shadow-glow-md"
+                  className="w-24 h-24 rounded-2xl border-4 border-cyber-aqua/30 shadow-glow-md"
                 />
                 <div className="text-center md:text-left">
                   <h1 className="text-4xl md:text-5xl font-bold font-inter mb-3">
-                    Welcome back, <span className="text-gradient-cyber">{user.name.split(' ')[0]}</span>
+                    Welcome back, <span className="text-gradient-intelligence">{user.name.split(' ')[0]}</span>
                   </h1>
                   <p className="text-gray-300 text-lg font-inter mb-3">{user.email}</p>
                   <div className="flex items-center justify-center md:justify-start gap-3">
@@ -131,7 +131,7 @@ const Dashboard: React.FC = () => {
                   {deployments.filter(d => d.status === 'active').length}
                 </p>
               </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-2xl flex items-center justify-center shadow-glow-md">
+              <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-2xl flex items-center justify-center shadow-glow-md">
                 <span className="text-3xl">🤖</span>
               </div>
             </div>
@@ -141,7 +141,7 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-300 text-sm font-inter mb-2">Total Deployments</p>
-                <p className="text-4xl font-bold font-inter text-gradient-cyber">
+                <p className="text-4xl font-bold font-inter text-gradient-intelligence">
                   {deployments.length}
                 </p>
               </div>
@@ -155,7 +155,7 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-300 text-sm font-inter mb-2">Subscription</p>
-                <p className="text-2xl font-bold font-inter text-gradient-electric capitalize">
+                <p className="text-2xl font-bold font-inter text-gradient-quantum capitalize">
                   {user.subscription}
                 </p>
               </div>
@@ -184,15 +184,15 @@ const Dashboard: React.FC = () => {
 
           {loadingData ? (
             <Card variant="premium" className="p-8 text-center">
-              <div className="w-12 h-12 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-12 h-12 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-300 font-inter">Loading your agents...</p>
             </Card>
           ) : deployments.length === 0 ? (
             <Card variant="premium" className="p-12 text-center hover-glow">
-              <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
+              <div className="w-24 h-24 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                 <span className="text-5xl">🚀</span>
               </div>
-              <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
+              <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-intelligence">
                 No Agents Deployed Yet
               </h3>
               <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
@@ -207,14 +207,14 @@ const Dashboard: React.FC = () => {
               {deployments.map((deployment) => (
                 <Card key={deployment.id} variant="premium" className="p-6 hover-glow">
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-xl flex items-center justify-center">
                       <span className="text-2xl">🤖</span>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${getStatusBadge(deployment.status).color}`}>
                       {getStatusBadge(deployment.status).text}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold font-inter mb-2 text-gradient-cyber">
+                  <h3 className="text-xl font-bold font-inter mb-2 text-gradient-intelligence">
                     {deployment.agent_name}
                   </h3>
                   <p className="text-gray-400 text-sm font-inter mb-4">
@@ -243,10 +243,10 @@ const Dashboard: React.FC = () => {
                 <div className="absolute top-2 right-2">
                   <span className="px-3 py-1 bg-neon-green/20 text-neon-green rounded-full text-xs font-bold">NEW</span>
                 </div>
-                <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-md animate-float">
+                <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-md animate-float">
                   <span className="text-4xl">🤖</span>
                 </div>
-                <h3 className="text-xl font-bold font-inter text-center mb-2 text-gradient-cyber">AI Playground</h3>
+                <h3 className="text-xl font-bold font-inter text-center mb-2 text-gradient-intelligence">AI Playground</h3>
                 <p className="text-gray-300 text-sm text-center font-inter">Chat with AI agents using natural language</p>
               </Card>
             </div>
@@ -268,7 +268,7 @@ const Dashboard: React.FC = () => {
             {/* Deploy Agent */}
             <div onClick={() => navigate('/agents')} className="cursor-pointer">
               <Card variant="premium" className="p-6 hover-glow">
-                <div className="w-14 h-14 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-md">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-md">
                   <span className="text-3xl">🚀</span>
                 </div>
                 <h3 className="text-lg font-bold font-inter text-center mb-2">Deploy Agent</h3>
@@ -312,4 +312,5 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
 

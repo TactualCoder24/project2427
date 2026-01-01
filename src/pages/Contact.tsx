@@ -80,7 +80,7 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <Card variant="premium" className="p-10 hover-glow">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 font-inter text-gradient-cyber">Send us a message</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 font-inter text-gradient-intelligence">Send us a message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200"
                     placeholder="Your full name"
                   />
                 </div>
@@ -109,7 +109,7 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200"
                   placeholder="Your company name"
                 />
               </div>
@@ -140,15 +140,19 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 bg-dark-gray"
+                  style={{
+                    backgroundColor: '#1A1A1A',
+                    color: '#FFFFFF'
+                  }}
                 >
-                  <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="demo">Request Demo</option>
-                  <option value="pricing">Pricing Information</option>
-                  <option value="partnership">Partnership</option>
-                  <option value="support">Technical Support</option>
-                  <option value="other">Other</option>
+                  <option value="" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>Select a subject</option>
+                  <option value="general" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>General Inquiry</option>
+                  <option value="demo" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>Request Demo</option>
+                  <option value="pricing" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>Pricing Information</option>
+                  <option value="partnership" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>Partnership</option>
+                  <option value="support" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>Technical Support</option>
+                  <option value="other" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>Other</option>
                 </select>
               </div>
 
@@ -163,7 +167,7 @@ const Contact: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 resize-none"
                   placeholder="Tell us about your project and how we can help..."
                 />
               </div>
@@ -206,7 +210,7 @@ const Contact: React.FC = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-8 font-inter text-gradient">Contact Information</h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-md">
+                  <div className="w-14 h-14 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-md">
                     <span className="text-2xl">📧</span>
                   </div>
                   <div>
@@ -226,14 +230,14 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-purple">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-coral-accent/20 to-alert-amber/20 flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl">📞</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2 font-inter">Phone</h3>
-                    <p className="text-gray-300 font-inter">+1 (555) 123-4567</p>
-                    <p className="text-gray-400 text-sm font-inter">Mon-Fri, 9AM-6PM PST</p>
+                    <h3 className="text-lg font-semibold text-white mb-1 font-inter">Phone</h3>
+                    <p className="text-gray-300 font-inter">+91 98765 43210</p>
+                    <p className="text-sm text-gray-400 font-inter">Mon-Fri, 9AM-6PM IST</p>
                   </div>
                 </div>
               </div>
@@ -242,22 +246,22 @@ const Contact: React.FC = () => {
             <Card className="p-8" glassmorphism>
               <h2 className="text-2xl font-bold mb-6">Quick Links</h2>
               <div className="space-y-4">
-                <Button variant="outline" className="w-full justify-start">
+                <a href="/demo" className="w-full flex items-center justify-start px-4 py-3 glass-premium border border-white/10 rounded-xl text-white hover:border-intelligence-blue/50 transition-all">
                   <span className="mr-3">📅</span>
                   Schedule a Demo
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
+                </a>
+                <a href="/support" className="w-full flex items-center justify-start px-4 py-3 glass-premium border border-white/10 rounded-xl text-white hover:border-intelligence-blue/50 transition-all">
                   <span className="mr-3">💬</span>
                   Live Chat Support
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
+                </a>
+                <a href="/docs" className="w-full flex items-center justify-start px-4 py-3 glass-premium border border-white/10 rounded-xl text-white hover:border-intelligence-blue/50 transition-all">
                   <span className="mr-3">📚</span>
                   Documentation
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
+                </a>
+                <a href="/faq" className="w-full flex items-center justify-start px-4 py-3 glass-premium border border-white/10 rounded-xl text-white hover:border-intelligence-blue/50 transition-all">
                   <span className="mr-3">❓</span>
                   FAQ
-                </Button>
+                </a>
               </div>
             </Card>
 
@@ -286,4 +290,5 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+
 

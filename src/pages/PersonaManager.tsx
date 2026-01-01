@@ -111,7 +111,7 @@ const PersonaManager: React.FC = () => {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
@@ -137,9 +137,9 @@ const PersonaManager: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Total Personas</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-cyber">{personas.length}</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-intelligence">{personas.length}</p>
                             </div>
-                            <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
+                            <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
                                 <span className="text-3xl">🎭</span>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ const PersonaManager: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Connected Apps</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-electric">
+                                <p className="text-4xl font-bold font-inter text-gradient-quantum">
                                     {new Set(personas.flatMap(p => p.connectedApps)).size}
                                 </p>
                             </div>
@@ -186,7 +186,7 @@ const PersonaManager: React.FC = () => {
                     {personas.map((persona) => (
                         <Card key={persona.id} variant="premium" className="p-6 hover-glow">
                             <div className="flex items-start justify-between mb-4">
-                                <div className="w-16 h-16 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center shadow-glow-purple">
+                                <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center shadow-glow-purple">
                                     <span className="text-4xl">{persona.icon}</span>
                                 </div>
                                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${persona.behaviorPatterns.proactive
@@ -197,7 +197,7 @@ const PersonaManager: React.FC = () => {
                                 </span>
                             </div>
 
-                            <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-cyber">
+                            <h3 className="text-2xl font-bold font-inter mb-2 text-gradient-intelligence">
                                 {persona.name}
                             </h3>
 
@@ -247,10 +247,10 @@ const PersonaManager: React.FC = () => {
                 {/* Empty State */}
                 {personas.length === 0 && (
                     <Card variant="premium" className="p-12 text-center hover-glow">
-                        <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
+                        <div className="w-24 h-24 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                             <span className="text-5xl">🎭</span>
                         </div>
-                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
+                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-intelligence">
                             No Personas Yet
                         </h3>
                         <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
@@ -274,7 +274,7 @@ const PersonaManager: React.FC = () => {
                             ×
                         </button>
 
-                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-cyber">
+                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-intelligence">
                             Create New Persona
                         </h2>
 
@@ -288,7 +288,7 @@ const PersonaManager: React.FC = () => {
                                             key={icon}
                                             onClick={() => setNewPersona({ ...newPersona, icon })}
                                             className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-all ${newPersona.icon === icon
-                                                    ? 'bg-gradient-to-br from-electric-blue to-vivid-purple shadow-glow-md scale-110'
+                                                    ? 'bg-gradient-to-br from-cyber-aqua to-vivid-purple shadow-glow-md scale-110'
                                                     : 'bg-white/5 hover:bg-white/10'
                                                 }`}
                                         >
@@ -306,7 +306,7 @@ const PersonaManager: React.FC = () => {
                                     value={newPersona.name}
                                     onChange={(e) => setNewPersona({ ...newPersona, name: e.target.value })}
                                     placeholder="e.g., Marketing Assistant"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-inter"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent font-inter"
                                 />
                             </div>
 
@@ -318,7 +318,7 @@ const PersonaManager: React.FC = () => {
                                     value={newPersona.description}
                                     onChange={(e) => setNewPersona({ ...newPersona, description: e.target.value })}
                                     placeholder="Brief description of what this persona does"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent font-inter"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent font-inter"
                                 />
                             </div>
 
@@ -330,7 +330,7 @@ const PersonaManager: React.FC = () => {
                                     onChange={(e) => setNewPersona({ ...newPersona, instructions: e.target.value })}
                                     placeholder="Detailed instructions for how this persona should behave..."
                                     rows={4}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none font-inter"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent resize-none font-inter"
                                 />
                             </div>
 
@@ -346,7 +346,7 @@ const PersonaManager: React.FC = () => {
                                                 ...newPersona,
                                                 behaviorPatterns: { ...newPersona.behaviorPatterns, proactive: e.target.checked }
                                             })}
-                                            className="w-5 h-5 rounded bg-white/5 border-white/10 text-electric-blue focus:ring-electric-blue"
+                                            className="w-5 h-5 rounded bg-white/5 border-white/10 text-cyber-aqua focus:ring-cyber-aqua"
                                         />
                                         <span className="text-gray-300 font-inter">Proactive (sends notifications)</span>
                                     </label>
@@ -359,7 +359,7 @@ const PersonaManager: React.FC = () => {
                                                 ...newPersona,
                                                 behaviorPatterns: { ...newPersona.behaviorPatterns, autoExecute: e.target.checked }
                                             })}
-                                            className="w-5 h-5 rounded bg-white/5 border-white/10 text-electric-blue focus:ring-electric-blue"
+                                            className="w-5 h-5 rounded bg-white/5 border-white/10 text-cyber-aqua focus:ring-cyber-aqua"
                                         />
                                         <span className="text-gray-300 font-inter">Auto-execute tasks</span>
                                     </label>
@@ -393,4 +393,5 @@ const PersonaManager: React.FC = () => {
 };
 
 export default PersonaManager;
+
 

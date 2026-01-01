@@ -99,7 +99,7 @@ const ExecutionDashboard: React.FC = () => {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-300 font-inter">Loading...</p>
                 </div>
             </div>
@@ -125,9 +125,9 @@ const ExecutionDashboard: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Total Executions</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-cyber">{totalExecutions}</p>
+                                <p className="text-4xl font-bold font-inter text-gradient-intelligence">{totalExecutions}</p>
                             </div>
-                            <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
+                            <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center shadow-glow-md">
                                 <span className="text-3xl">📊</span>
                             </div>
                         </div>
@@ -151,7 +151,7 @@ const ExecutionDashboard: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-300 text-sm font-inter mb-2">Failed</p>
-                                <p className="text-4xl font-bold font-inter text-gradient-electric">
+                                <p className="text-4xl font-bold font-inter text-gradient-quantum">
                                     {failedExecutions}
                                 </p>
                             </div>
@@ -183,8 +183,8 @@ const ExecutionDashboard: React.FC = () => {
                             key={status}
                             onClick={() => setFilterStatus(status)}
                             className={`px-6 py-3 rounded-full transition-all duration-300 font-sora font-semibold text-base capitalize ${filterStatus === status
-                                    ? 'bg-gradient-to-r from-electric-blue to-vivid-purple text-white shadow-glow-md scale-105'
-                                    : 'glass-premium text-gray-300 hover:text-white hover:border-electric-blue/50'
+                                    ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white shadow-glow-md scale-105'
+                                    : 'glass-premium text-gray-300 hover:text-white hover:border-cyber-aqua/50'
                                 }`}
                         >
                             {status}
@@ -199,7 +199,7 @@ const ExecutionDashboard: React.FC = () => {
                             <div className="flex items-start justify-between mb-4">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <h3 className="text-2xl font-bold font-inter text-gradient-cyber">
+                                        <h3 className="text-2xl font-bold font-inter text-gradient-intelligence">
                                             {execution.workflowName}
                                         </h3>
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${execution.status === 'completed'
@@ -238,7 +238,7 @@ const ExecutionDashboard: React.FC = () => {
                                                 ? 'bg-gradient-to-r from-neon-green to-lime-green'
                                                 : execution.status === 'failed'
                                                     ? 'bg-gradient-to-r from-red-500 to-orange-500'
-                                                    : 'bg-gradient-to-r from-electric-blue to-vivid-purple'
+                                                    : 'bg-gradient-to-r from-cyber-aqua to-vivid-purple'
                                             }`}
                                         style={{ width: `${execution.successRate}%` }}
                                     ></div>
@@ -273,10 +273,10 @@ const ExecutionDashboard: React.FC = () => {
                 {/* Empty State */}
                 {filteredExecutions.length === 0 && (
                     <Card variant="premium" className="p-12 text-center hover-glow">
-                        <div className="w-24 h-24 bg-gradient-to-br from-electric-blue via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
+                        <div className="w-24 h-24 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
                             <span className="text-5xl">📊</span>
                         </div>
-                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-cyber">
+                        <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-intelligence">
                             No Executions Found
                         </h3>
                         <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
@@ -302,7 +302,7 @@ const ExecutionDashboard: React.FC = () => {
                             ×
                         </button>
 
-                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-cyber">
+                        <h2 className="text-3xl font-bold font-inter mb-6 text-gradient-intelligence">
                             Execution Details
                         </h2>
 
@@ -383,4 +383,5 @@ const ExecutionDashboard: React.FC = () => {
 };
 
 export default ExecutionDashboard;
+
 

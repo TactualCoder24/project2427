@@ -24,10 +24,10 @@ const Button: React.FC<ButtonProps> = ({
   const baseClasses = 'font-sora font-semibold rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2';
 
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-neon-blue to-cyber-cyan text-black hover:shadow-glow-md hover:scale-105 transform',
+    primary: 'bg-gradient-to-r from-neon-blue to-cyber-aqua text-black hover:shadow-glow-md hover:scale-105 transform',
     secondary: 'bg-gradient-to-r from-neon-green to-lime-green text-black hover:shadow-[0_0_30px_rgba(0,255,136,0.6)] hover:scale-105 transform',
     outline: 'border-2 border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-black hover:shadow-glow-md hover:scale-105 transform bg-black/20 backdrop-blur-sm',
-    gradient: 'bg-gradient-to-r from-electric-blue via-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform animate-gradient-shift bg-[length:200%_200%]',
+    gradient: 'bg-gradient-to-r from-cyber-aqua via-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform animate-gradient-shift bg-[length:200%_200%]',
     'gradient-purple': 'bg-gradient-to-r from-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform',
     'gradient-pink': 'bg-gradient-to-r from-hot-pink to-amber-glow text-white hover:shadow-glow-pink hover:scale-105 transform',
   };
@@ -53,4 +53,5 @@ const Button: React.FC<ButtonProps> = ({
 };
 
 export default Button;
+
 

@@ -12,7 +12,7 @@ const About: React.FC = () => {
           </h1>
           <div className="mb-8 animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
             <p className="text-xl md:text-2xl text-gray-400 font-inter italic max-w-3xl mx-auto">
-              <span className="text-gradient-cyber font-semibold">विद्वस्</span> (VIDVAS) - Derived from Sanskrit, meaning <span className="text-gradient font-semibold">"Intelligence"</span> or <span className="text-gradient-electric font-semibold">"The Wise One"</span>
+              <span className="text-gradient-intelligence font-semibold">विद्वस्</span> (VIDVAS) - Derived from Sanskrit, meaning <span className="text-gradient font-semibold">"Intelligence"</span> or <span className="text-gradient-quantum font-semibold">"The Wise One"</span>
             </p>
           </div>
           <p className="text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
@@ -26,10 +26,10 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <Card variant="gradient" className="p-10 hover-glow animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
               <div className="flex items-center mb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-2xl flex items-center justify-center mr-6 animate-float shadow-glow-md">
+                <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-2xl flex items-center justify-center mr-6 animate-float shadow-glow-md">
                   <span className="text-3xl">🎯</span>
                 </div>
-                <h2 className="text-4xl font-bold font-inter text-gradient-cyber">Our Mission</h2>
+                <h2 className="text-4xl font-bold font-inter text-gradient-intelligence">Our Mission</h2>
               </div>
               <p className="text-gray-300 text-xl font-inter leading-relaxed">
                 To democratize access to advanced AI technology by creating intelligent agents
@@ -57,7 +57,7 @@ const About: React.FC = () => {
         {/* Approach Section */}
         <section className="mb-24">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold font-inter mb-6 text-gradient-electric">Our Approach</h2>
+            <h2 className="text-5xl md:text-6xl font-bold font-inter mb-6 text-gradient-quantum">Our Approach</h2>
             <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter">
               We combine cutting-edge research with practical implementation to deliver AI solutions that work in the real world.
             </p>
@@ -65,10 +65,10 @@ const About: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card variant="premium" className="p-10 text-center hover-glow">
-              <div className="w-20 h-20 bg-gradient-to-br from-electric-blue to-cyber-cyan rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-glow-md">
+              <div className="w-20 h-20 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-glow-md">
                 <span className="text-4xl">🔬</span>
               </div>
-              <h3 className="text-2xl font-bold mb-6 font-inter text-gradient-cyber">Research-Driven</h3>
+              <h3 className="text-2xl font-bold mb-6 font-inter text-gradient-intelligence">Research-Driven</h3>
               <p className="text-gray-300 text-lg font-inter leading-relaxed">
                 Our solutions are built on the latest breakthroughs in AI research and machine learning.
               </p>
@@ -88,7 +88,7 @@ const About: React.FC = () => {
               <div className="w-20 h-20 bg-gradient-to-br from-neon-green to-lime-green rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(0,255,136,0.6)]">
                 <span className="text-4xl">🤝</span>
               </div>
-              <h3 className="text-2xl font-bold mb-6 font-inter text-gradient-electric">Human-Centric</h3>
+              <h3 className="text-2xl font-bold mb-6 font-inter text-gradient-quantum">Human-Centric</h3>
               <p className="text-gray-300 text-lg font-inter leading-relaxed">
                 Our AI is designed to augment human capabilities, not replace them.
               </p>
@@ -106,7 +106,7 @@ const About: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card variant="gradient" className="p-8 text-center hover-glow">
-              <h3 className="text-2xl font-bold mb-4 text-gradient-cyber font-inter">Transparency</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gradient-intelligence font-inter">Transparency</h3>
               <p className="text-base text-gray-300 font-inter leading-relaxed">
                 Open and honest communication in all our interactions.
               </p>
@@ -120,14 +120,14 @@ const About: React.FC = () => {
             </Card>
 
             <Card variant="gradient" className="p-8 text-center hover-glow">
-              <h3 className="text-2xl font-bold mb-4 text-gradient-electric font-inter">Excellence</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gradient-quantum font-inter">Excellence</h3>
               <p className="text-base text-gray-300 font-inter leading-relaxed">
                 Delivering the highest quality solutions and service.
               </p>
             </Card>
 
             <Card variant="gradient" className="p-8 text-center hover-glow">
-              <h3 className="text-2xl font-bold mb-4 text-gradient-cyber font-inter">Responsibility</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gradient-intelligence font-inter">Responsibility</h3>
               <p className="text-base text-gray-300 font-inter leading-relaxed">
                 Building AI that benefits society and respects privacy.
               </p>
@@ -140,4 +140,5 @@ const About: React.FC = () => {
 };
 
 export default About;
+
 

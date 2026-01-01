@@ -6,33 +6,35 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Original neon colors (kept for compatibility)
-        'neon-blue': '#00D4FF',
-        'neon-green': '#00FF88',
-        'dark-gray': '#1A1A1A',
-        'medium-gray': '#2D2D2D',
-        'light-gray': '#404040',
+        // Professional AI Platform Palette (Balanced & Sophisticated)
+        // Primary Colors - More Restrained
+        'intelligence-blue': '#0066FF',
+        'deep-slate': '#0F1419',
+        'quantum-teal': '#00D4AA',
 
-        // Professional AI platform palette (Vercel/Linear/Stripe inspired)
-        'vercel-blue': '#0070F3',
-        'electric-blue': '#0EA5E9',
-        'cyber-cyan': '#06B6D4',
-        'deep-ocean': '#0284C7',
-        'sky-blue': '#38BDF8',
-        'emerald-green': '#10B981',
-        'mint-green': '#34D399',
-        'lime-green': '#84CC16',
+        // Secondary Colors - Neutral Focus
+        'cyber-aqua': '#00B8D4',
+        'neural-gray': '#6B7280',
+        'arctic-white': '#F9FAFB',
+        'slate-gray': '#475569',
+        'warm-gray': '#78716C',
 
-        // Warm accent colors
-        'vibrant-orange': '#FF6B35',
-        'coral-orange': '#FF8B5A',
-        'sunset-orange': '#FF9E7A',
-        'peach': '#FFB088',
+        // Accent Colors
+        'signal-green': '#10B981',
+        'alert-amber': '#F59E0B',
+        'soft-purple': '#8B5CF6',
+        'coral-accent': '#F97316',
 
-        // Gradient stops (blue/teal/emerald theme)
-        'gradient-start': '#0070F3',
-        'gradient-middle': '#06B6D4',
-        'gradient-end': '#10B981',
+        // Legacy compatibility (mapped to new colors)
+        'neon-blue': '#0066FF',
+        'dark-gray': '#0F1419',
+        'medium-gray': '#1A1F2E',
+        'light-gray': '#6B7280',
+
+        // Gradient stops - More Balanced
+        'gradient-start': '#475569',
+        'gradient-middle': '#0066FF',
+        'gradient-end': '#00D4AA',
       },
       fontFamily: {
         'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
@@ -40,10 +42,10 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-cyber': 'linear-gradient(135deg, #0070F3, #06B6D4, #10B981)',
-        'gradient-electric': 'linear-gradient(135deg, #0070F3, #38BDF8, #10B981)',
-        'gradient-ocean': 'linear-gradient(135deg, #0284C7, #38BDF8, #06B6D4)',
-        'gradient-emerald': 'linear-gradient(135deg, #06B6D4, #10B981, #34D399)',
+        'gradient-intelligence': 'linear-gradient(135deg, #475569, #0066FF, #00D4AA)',
+        'gradient-quantum': 'linear-gradient(135deg, #00D4AA, #8B5CF6)',
+        'gradient-deep-space': 'linear-gradient(180deg, #0F1419, #1A1F2E)',
+        'gradient-cyber': 'linear-gradient(135deg, #475569, #00B8D4)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -90,13 +92,13 @@ module.exports = {
         },
       },
       boxShadow: {
-        'glow-sm': '0 0 10px rgba(0, 112, 243, 0.5)',
-        'glow-md': '0 0 20px rgba(0, 112, 243, 0.6)',
-        'glow-lg': '0 0 30px rgba(0, 112, 243, 0.7)',
-        'glow-blue': '0 0 30px rgba(0, 112, 243, 0.6)',
-        'glow-cyan': '0 0 30px rgba(6, 182, 212, 0.6)',
-        'glow-emerald': '0 0 30px rgba(16, 185, 129, 0.6)',
-        'glow-orange': '0 0 30px rgba(255, 107, 53, 0.6)',
+        'glow-sm': '0 0 10px rgba(0, 102, 255, 0.5)',
+        'glow-md': '0 0 20px rgba(0, 102, 255, 0.6)',
+        'glow-lg': '0 0 30px rgba(0, 102, 255, 0.7)',
+        'glow-blue': '0 0 30px rgba(0, 102, 255, 0.6)',
+        'glow-teal': '0 0 30px rgba(0, 212, 170, 0.6)',
+        'glow-aqua': '0 0 30px rgba(0, 184, 212, 0.6)',
+        'glow-green': '0 0 30px rgba(16, 185, 129, 0.6)',
       },
     },
   },
