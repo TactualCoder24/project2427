@@ -74,9 +74,11 @@ const Login: React.FC = () => {
       <div className="max-w-md w-full mx-auto px-4">
         <Card variant="premium" className="p-10 hover-glow">
           <div className="text-center mb-10">
-            <div className="w-20 h-20 bg-gradient-to-br from-electric-blue via-vercel-blue to-emerald-green rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-glow-orange animate-float">
-              <span className="text-white font-bold text-3xl font-inter">V</span>
-            </div>
+            <img
+              src="/logo1111.jpg"
+              alt="Vidvas AI"
+              className="w-20 h-20 rounded-2xl mx-auto mb-6 shadow-glow-orange animate-float object-cover"
+            />
             <h1 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-animate">
               {isLogin ? 'Welcome Back' : 'Join VIDVAS AI'}
             </h1>

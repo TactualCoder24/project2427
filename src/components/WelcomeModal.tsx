@@ -17,8 +17,8 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  // Launch date: January 1, 2026 00:00:00
-  const launchDate = new Date('2026-01-01T00:00:00').getTime();
+  // Launch date: January 13, 2026 00:00:00
+  const launchDate = new Date('2026-01-13T00:00:00').getTime();
 
   useEffect(() => {
     if (isOpen) {
@@ -105,7 +105,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
           {/* Countdown Timer */}
           <div className="mb-6 sm:mb-8 p-3 sm:p-4 md:p-6 glass-premium rounded-xl sm:rounded-2xl border border-electric-blue/20">
             <div className="text-electric-blue text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-3 sm:mb-4 font-inter flex items-center justify-center gap-2 px-2">
-              🚀 <span className="text-gradient-cyber">Launching Jan 1, 2026</span>
+              🚀 <span className="text-gradient-cyber">Launching Jan 13, 2026</span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
