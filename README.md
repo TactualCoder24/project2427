@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# VIDVAS AI - Intelligent Workflow Automation Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Transform your business with **VIDVAS AI** (विद्वस् — Sanskrit for "Intelligence"), a powerful no-code/low-code automation platform that combines AI agents with workflow automation, similar to n8n but powered by intelligent AI agents.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 🤖 AI Agents
+Deploy specialized AI agents for various automation tasks:
+- **RAG Pipeline & Chatbot** - Document retrieval and intelligent conversation
+- **Product Videos Generator** - AI-powered video creation for marketing
+- **RAG Workflow Agent** - Intelligent document processing and knowledge extraction
+- **Technical Analyst Agent** - Market data, code review, and performance analytics
+- And many more specialized agents
 
-### `npm start`
+### 🔄 Workflow Builder
+Create powerful automation workflows with n8n-like functionality:
+- **Drag-and-drop workflow editor** - Build complex automations visually
+- **Multiple trigger types** - Manual, scheduled, webhook, and event-based triggers
+- **Execution dashboard** - Monitor workflow runs and performance
+- **Workflow versioning** - Track changes and manage workflow history
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🔗 Integration Hub
+Connect with popular platforms:
+- **Communication**: Gmail, Slack
+- **Development**: GitHub
+- **Productivity**: Notion, Google Calendar
+- **And more** coming soon
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 📊 Execution Monitoring
+- Real-time execution tracking
+- Performance metrics and analytics
+- Error handling and retry logic
+- Detailed execution history
 
-### `npm test`
+### 👤 Persona Management
+- Create and manage AI personas
+- Customize agent behavior
+- Save custom configurations
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+- **Frontend**: React 19 + TypeScript
+- **Styling**: Tailwind CSS + Framer Motion
+- **Backend**: Supabase (PostgreSQL)
+- **APIs**: Google OAuth, REST integrations
+- **Build Tool**: React Scripts / Webpack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+- Node.js 16+ and npm
+- Google OAuth credentials (for authentication)
+- Supabase project (for backend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Environment Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a `.env` file in the root directory:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```env
+REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_KEY=your_supabase_key
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Development
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The page reloads on changes. Console will show lint errors.
 
-### Code Splitting
+### Build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+```
 
-### Analyzing the Bundle Size
+Builds the app for production to the `build` folder. The build is optimized and minified for deployment.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Testing
 
-### Making a Progressive Web App
+```bash
+npm test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Launches the test runner in interactive watch mode.
 
-### Advanced Configuration
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+src/
+├── pages/              # Route pages (Home, Dashboard, WorkflowBuilder, etc.)
+├── components/         # Reusable UI components
+├── contexts/           # React contexts (Auth, etc.)
+├── hooks/              # Custom React hooks
+├── lib/                # Utilities and services
+└── App.tsx             # Main app component
+```
 
-### Deployment
+## Key Pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `/` - Home/landing page
+- `/agents` - Browse available AI agents
+- `/workflows` - Workflow builder interface
+- `/executions` - Monitor workflow executions
+- `/integrations` - Connect external services
+- `/personas` - Manage AI personas
+- `/playground` - AI playground for testing
+- `/dashboard` - User dashboard
+- `/docs` - Documentation
+- `/contact` - Contact us
 
-### `npm run build` fails to minify
+## Authentication
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+VIDVAS AI uses Google OAuth for authentication. Users can sign in with their Google account and authorize integrations with connected services.
+
+## Contributing
+
+Coming soon.
+
+## License
+
+Coming soon.

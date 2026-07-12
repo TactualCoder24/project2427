@@ -15,6 +15,8 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login, loginWithEmail, register, isAuthenticated } = useAuth();
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -24,39 +26,51 @@ const Login: React.FC = () => {
   }, [isAuthenticated, navigate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError(''); // Clear error when user types
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
+    setSuccessMessage('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
+    setIsLoading(true);
 
     try {
       if (isLogin) {
-        // Login
         const success = await loginWithEmail(formData.email, formData.password);
         if (success) {
-          navigate('/dashboard');
+          navigate('/dashboard', { replace: true });
         } else {
-          setError('Invalid email or password');
+          setError('Invalid email or password. Please try again.');
         }
       } else {
-        // Signup - AuthContext will show specific error via alert
-        const success = await register(formData.email, formData.password, formData.name);
-        if (success) {
-          setError('');
-          alert('Registration successful! Please check your email to verify your account, then log in.');
-          setIsLogin(true);
-          setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+        if (formData.password !== formData.confirmPassword) {
+          setError('Passwords do not match.');
+          return;
         }
-        // Don't show generic error - AuthContext shows specific error
+        if (formData.password.length < 6) {
+          setError('Password must be at least 6 characters.');
+          return;
+        }
+        const result = await register(formData.email, formData.password, formData.name);
+        if (result.success) {
+          if (result.emailConfirmationRequired) {
+            setSuccessMessage('Account created! Check your email to verify your account, then sign in.');
+            setIsLogin(true);
+            setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+          } else {
+            navigate('/dashboard', { replace: true });
+          }
+        } else {
+          setError(result.error || 'Registration failed. Please try again.');
+        }
       }
-    } catch (error) {
+    } catch {
       setError('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -70,39 +84,39 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-24">
+    <div className="min-h-screen flex items-center justify-center py-24 bg-atmospheric-mesh">
       <div className="max-w-md w-full mx-auto px-4">
-        <Card variant="premium" className="p-10 hover-glow">
-          <div className="text-center mb-10">
+        <Card variant="premium" className="p-12 hover-lift shadow-dramatic glass-editorial">
+          <div className="text-center mb-12">
             <img
               src="/logo1111.jpg"
               alt="Vidvas AI"
-              className="w-20 h-20 rounded-2xl mx-auto mb-6 shadow-glow-teal animate-float object-cover"
+              className="w-24 h-24 rounded-3xl mx-auto mb-8 shadow-atmospheric animate-float object-cover"
             />
-            <h1 className="text-4xl md:text-5xl font-bold font-inter mb-4 text-gradient-animate">
+            <h1 className="text-5xl md:text-6xl font-display font-black mb-6 text-gradient-editorial">
               {isLogin ? 'Welcome Back' : 'Join VIDVAS AI'}
             </h1>
-            <p className="text-gray-300 text-lg font-inter">
+            <p className="text-ink/80 text-lg font-body">
               {isLogin ? 'Sign in to your account' : 'Create your account to get started'}
             </p>
           </div>
 
-          {/* Tab Switcher */}
-          <div className="flex gap-2 mb-8 p-1 glass-premium rounded-xl">
+          {/* Tab Switcher - Editorial */}
+          <div className="flex gap-3 mb-10 p-2 glass-editorial rounded-2xl border-2 border-electric-amber/20">
             <button
-              onClick={() => setIsLogin(true)}
-              className={`flex-1 py-3 px-4 rounded-lg font-semibold font-inter transition-all duration-200 ${isLogin
-                ? 'bg-gradient-to-r from-cyber-aqua to-cyber-aqua text-white shadow-glow-md'
-                : 'text-gray-400 hover:text-white'
+              onClick={() => { setIsLogin(true); setError(''); setSuccessMessage(''); }}
+              className={`flex-1 py-4 px-6 rounded-xl font-bold font-body transition-all duration-300 ${isLogin
+                ? 'bg-gradient-to-r from-electric-amber to-retro-orange text-deep-black shadow-atmospheric'
+                : 'text-ink/60 hover:text-ink'
                 }`}
             >
               Sign In
             </button>
             <button
-              onClick={() => setIsLogin(false)}
-              className={`flex-1 py-3 px-4 rounded-lg font-semibold font-inter transition-all duration-200 ${!isLogin
-                ? 'bg-gradient-to-r from-cyber-aqua to-cyber-aqua text-white shadow-glow-md'
-                : 'text-gray-400 hover:text-white'
+              onClick={() => { setIsLogin(false); setError(''); setSuccessMessage(''); }}
+              className={`flex-1 py-4 px-6 rounded-xl font-bold font-body transition-all duration-300 ${!isLogin
+                ? 'bg-gradient-to-r from-deep-cyan to-vintage-magenta text-white shadow-atmospheric'
+                : 'text-ink/60 hover:text-ink'
                 }`}
             >
               Sign Up
@@ -110,11 +124,11 @@ const Login: React.FC = () => {
           </div>
 
           {/* Google Auth Button */}
-          <div className="w-full mb-6">
+          <div className="w-full mb-8">
             <Button
               variant="outline"
               size="lg"
-              className="w-full flex items-center justify-center gap-3"
+              className="w-full flex items-center justify-center gap-3 hover-lift border-2 border-electric-amber/30"
               onClick={handleGoogleLogin}
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -127,20 +141,20 @@ const Login: React.FC = () => {
             </Button>
           </div>
 
-          <div className="relative mb-6">
+          <div className="relative mb-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-medium-gray"></div>
+              <div className="w-full border-t-2 border-electric-amber/20"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 glass-premium text-gray-400 font-inter">Or continue with email</span>
+              <span className="px-4 glass-editorial text-ink/60 font-body font-semibold">Or continue with email</span>
             </div>
           </div>
 
-          {/* Email/Password Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Email/Password Form - Brutalist */}
+          <form onSubmit={handleSubmit} className="space-y-8">
             {!isLogin && (
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
+                <label htmlFor="name" className="block text-sm font-semibold text-ink/90 mb-3 font-body uppercase tracking-wide">
                   Full Name
                 </label>
                 <input
@@ -150,14 +164,14 @@ const Login: React.FC = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required={!isLogin}
-                  className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter"
+                  className="w-full px-5 py-4 glass-editorial border-2 border-electric-amber/30 rounded-2xl text-ink placeholder-ink-3/40 focus:outline-none focus:ring-2 focus:ring-electric-amber focus:border-electric-amber transition-all duration-300 font-body"
                   placeholder="Enter your full name"
                 />
               </div>
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
+              <label htmlFor="email" className="block text-sm font-semibold text-ink/90 mb-3 font-body uppercase tracking-wide">
                 Email Address
               </label>
               <input
@@ -167,13 +181,13 @@ const Login: React.FC = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter"
+                className="w-full px-5 py-4 glass-editorial border-2 border-deep-cyan/30 rounded-2xl text-ink placeholder-ink-3/40 focus:outline-none focus:ring-2 focus:ring-deep-cyan focus:border-deep-cyan transition-all duration-300 font-body"
                 placeholder="your@email.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2 font-inter">
+              <label htmlFor="password" className="block text-sm font-semibold text-ink/90 mb-3 font-body uppercase tracking-wide">
                 Password
               </label>
               <input
@@ -183,10 +197,16 @@ const Login: React.FC = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 glass-premium border border-light-gray/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent transition-all duration-200 font-inter"
+                className="w-full px-5 py-4 glass-editorial border-2 border-vintage-magenta/30 rounded-2xl text-ink placeholder-ink-3/40 focus:outline-none focus:ring-2 focus:ring-vintage-magenta focus:border-vintage-magenta transition-all duration-300 font-body"
                 placeholder="Enter your password"
               />
             </div>
+
+            {successMessage && (
+              <div className="p-4 glass-premium border border-neon-green/30 rounded-xl">
+                <p className="text-neon-green text-sm font-inter">✓ {successMessage}</p>
+              </div>
+            )}
 
             {error && (
               <div className="p-4 glass-premium border border-red-500/30 rounded-xl">
@@ -198,21 +218,22 @@ const Login: React.FC = () => {
               type="submit"
               variant="gradient"
               size="lg"
-              className="w-full shadow-glow-teal"
+              className="w-full shadow-atmospheric hover-lift"
+              disabled={isLoading}
             >
-              {isLogin ? 'Sign In 🚀' : 'Create Account 🚀'}
+              {isLoading ? '⏳ Please wait...' : isLogin ? 'Sign In 🚀' : 'Create Account 🚀'}
             </Button>
           </form>
 
           {!isLogin && (
-            <div className="mt-6 text-center">
-              <p className="text-xs text-gray-400 font-inter">
+            <div className="mt-8 text-center">
+              <p className="text-xs text-ink/60 font-body">
                 By creating an account, you agree to our{' '}
-                <a href="/terms" className="text-cyber-aqua hover:text-cyber-aqua transition-colors">
+                <a href="/terms" className="text-electric-amber hover:text-deep-cyan transition-colors font-semibold">
                   Terms & Conditions
                 </a>{' '}
                 and{' '}
-                <a href="/privacy" className="text-cyber-aqua hover:text-cyber-aqua transition-colors">
+                <a href="/privacy" className="text-electric-amber hover:text-deep-cyan transition-colors font-semibold">
                   Privacy Policy
                 </a>
               </p>

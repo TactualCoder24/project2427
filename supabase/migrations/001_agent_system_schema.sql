@@ -156,6 +156,24 @@ ALTER TABLE agent_integrations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE backroom_messages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE background_jobs ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies before recreating (safe to re-run)
+DROP POLICY IF EXISTS "Users can view their own personas" ON agent_personas;
+DROP POLICY IF EXISTS "Users can create their own personas" ON agent_personas;
+DROP POLICY IF EXISTS "Users can update their own personas" ON agent_personas;
+DROP POLICY IF EXISTS "Users can delete their own personas" ON agent_personas;
+DROP POLICY IF EXISTS "Users can view their own workflows" ON agent_workflows;
+DROP POLICY IF EXISTS "Users can create their own workflows" ON agent_workflows;
+DROP POLICY IF EXISTS "Users can update their own workflows" ON agent_workflows;
+DROP POLICY IF EXISTS "Users can delete their own workflows" ON agent_workflows;
+DROP POLICY IF EXISTS "Users can view their own executions" ON agent_executions;
+DROP POLICY IF EXISTS "Users can create their own executions" ON agent_executions;
+DROP POLICY IF EXISTS "Users can update their own executions" ON agent_executions;
+DROP POLICY IF EXISTS "Users can view their own integrations" ON agent_integrations;
+DROP POLICY IF EXISTS "Users can manage their own integrations" ON agent_integrations;
+DROP POLICY IF EXISTS "Users can view backroom messages for their executions" ON backroom_messages;
+DROP POLICY IF EXISTS "Users can view their own background jobs" ON background_jobs;
+DROP POLICY IF EXISTS "Users can manage their own background jobs" ON background_jobs;
+
 -- Personas policies
 CREATE POLICY "Users can view their own personas"
     ON agent_personas FOR SELECT
@@ -208,6 +226,11 @@ CREATE POLICY "Users can create their own executions"
     ON agent_executions FOR INSERT
     TO authenticated
     WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own executions"
+    ON agent_executions FOR UPDATE
+    TO authenticated
+    USING (auth.uid() = user_id);
 
 -- Integrations policies
 CREATE POLICY "Users can view their own integrations"
@@ -326,3 +349,61 @@ COMMENT ON TABLE agent_executions IS 'Stores execution history and results for a
 COMMENT ON TABLE agent_integrations IS 'Stores OAuth tokens and credentials for third-party integrations';
 COMMENT ON TABLE backroom_messages IS 'Stores agent-to-agent communication for multi-agent coordination';
 COMMENT ON TABLE background_jobs IS 'Stores scheduled jobs and webhook configurations';
+
+-- =====================================================
+-- Table: contact_submissions
+-- Public contact form submissions (no auth required)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS contact_submissions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    company VARCHAR(255),
+    subject VARCHAR(255),
+    message TEXT NOT NULL,
+    status VARCHAR(20) DEFAULT 'new' CHECK (status IN ('new', 'read', 'replied', 'archived')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_contact_submissions_email ON contact_submissions(email);
+CREATE INDEX IF NOT EXISTS idx_contact_submissions_created_at ON contact_submissions(created_at DESC);
+
+ALTER TABLE contact_submissions ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can submit contact form" ON contact_submissions;
+CREATE POLICY "Anyone can submit contact form"
+    ON contact_submissions FOR INSERT
+    TO anon, authenticated
+    WITH CHECK (true);
+
+COMMENT ON TABLE contact_submissions IS 'Public contact form submissions from visitors and users';
+
+-- =====================================================
+-- Table: demo_requests
+-- Schedule Demo form submissions (no auth required)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS demo_requests (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    company VARCHAR(255),
+    phone VARCHAR(50),
+    employees VARCHAR(50),
+    message TEXT,
+    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'scheduled', 'completed', 'cancelled')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_demo_requests_email ON demo_requests(email);
+CREATE INDEX IF NOT EXISTS idx_demo_requests_status ON demo_requests(status);
+CREATE INDEX IF NOT EXISTS idx_demo_requests_created_at ON demo_requests(created_at DESC);
+
+ALTER TABLE demo_requests ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can submit demo request" ON demo_requests;
+CREATE POLICY "Anyone can submit demo request"
+    ON demo_requests FOR INSERT
+    TO anon, authenticated
+    WITH CHECK (true);
+
+COMMENT ON TABLE demo_requests IS 'Demo scheduling requests from prospective customers';

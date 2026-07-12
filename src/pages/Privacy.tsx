@@ -31,7 +31,7 @@ const Privacy: React.FC = () => {
     },
     {
       title: "Data Processing and AI Training",
-      content: "Our AI agents process your data to provide services. We implement several safeguards:",
+      content: "Our AI platform processes your data to provide services. We implement several safeguards:",
       list: [
         "Data is processed only for the specific services you request",
         "We use encryption and secure processing environments",
@@ -82,7 +82,7 @@ const Privacy: React.FC = () => {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
             Privacy <span className="text-gradient-animate">Policy</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-6 font-inter">
+          <p className="text-xl md:text-2xl text-ink-2 mb-6 font-inter">
             Last updated: December 2025
           </p>
           <div className="w-32 h-1 bg-gradient-to-r from-cyber-aqua via-vivid-purple to-hot-pink mx-auto rounded-full"></div>
@@ -94,12 +94,12 @@ const Privacy: React.FC = () => {
             <Card key={index} variant="premium" className="p-8 hover-glow">
               <div className="flex items-start space-x-4 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-purple">
-                  <span className="text-white font-bold text-xl font-inter">{index + 1}</span>
+                  <span className="text-ink font-bold text-xl font-inter">{index + 1}</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gradient font-inter">{section.title}</h2>
               </div>
 
-              <p className="text-gray-300 text-lg leading-relaxed mb-4 font-inter">
+              <p className="text-ink-2 text-lg leading-relaxed mb-4 font-inter">
                 {section.content}
               </p>
 
@@ -110,7 +110,7 @@ const Privacy: React.FC = () => {
                       <h3 className="text-xl font-semibold text-gradient-intelligence mb-3 font-inter">{subsection.subtitle}</h3>
                       <ul className="space-y-2">
                         {subsection.items.map((item, itemIndex) => (
-                          <li key={itemIndex} className="flex items-start text-gray-300">
+                          <li key={itemIndex} className="flex items-start text-ink-2">
                             <span className="text-neon-green text-lg mr-2 mt-1">•</span>
                             <span className="font-inter">{item}</span>
                           </li>
@@ -124,7 +124,7 @@ const Privacy: React.FC = () => {
               {section.list && (
                 <ul className="space-y-3">
                   {section.list.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start text-gray-300">
+                    <li key={itemIndex} className="flex items-start text-ink-2">
                       <span className="text-neon-green text-xl mr-3 mt-1">•</span>
                       <span className="font-inter text-base">{item}</span>
                     </li>
@@ -139,7 +139,7 @@ const Privacy: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <Card variant="gradient" className="p-8 hover-glow">
             <h2 className="text-3xl font-bold mb-6 text-gradient-intelligence font-inter">Data Retention</h2>
-            <p className="text-gray-300 text-lg leading-relaxed font-inter">
+            <p className="text-ink-2 text-lg leading-relaxed font-inter">
               We retain your information for as long as necessary to provide services and fulfill legal obligations.
               When you delete your account, we will delete your personal information within 30 days,
               except where retention is required by law.
@@ -148,7 +148,7 @@ const Privacy: React.FC = () => {
 
           <Card variant="gradient" className="p-8 hover-glow">
             <h2 className="text-3xl font-bold mb-6 text-gradient-quantum font-inter">Children's Privacy</h2>
-            <p className="text-gray-300 text-lg leading-relaxed font-inter">
+            <p className="text-ink-2 text-lg leading-relaxed font-inter">
               Our services are not intended for children under 13. We do not knowingly collect personal information
               from children under 13. If we become aware of such collection, we will delete the information immediately.
             </p>
@@ -161,21 +161,21 @@ const Privacy: React.FC = () => {
             <span className="text-4xl">🔒</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-inter text-gradient-quantum">Privacy Questions?</h2>
-          <p className="text-gray-300 text-lg mb-8 font-inter">
+          <p className="text-ink-2 text-lg mb-8 font-inter">
             If you have any questions about this Privacy Policy, please contact us:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="p-6 glass-premium rounded-2xl border border-cyber-aqua/20">
               <p className="text-gradient-intelligence font-semibold text-lg mb-2 font-inter">Email</p>
-              <p className="text-gray-300 font-inter">privacy@vidvasai.com</p>
+              <p className="text-ink-2 font-inter">privacy@vidvasai.com</p>
             </div>
             <div className="p-6 glass-premium rounded-2xl border border-vivid-purple/20">
               <p className="text-gradient font-semibold text-lg mb-2 font-inter">Data Protection Officer</p>
-              <p className="text-gray-300 font-inter">dpo@vidvasai.com</p>
+              <p className="text-ink-2 font-inter">dpo@vidvasai.com</p>
             </div>
             <div className="p-6 glass-premium rounded-2xl border border-hot-pink/20">
               <p className="text-gradient-quantum font-semibold text-lg mb-2 font-inter">Address</p>
-              <p className="text-gray-300 font-inter">Delhi, India 🇮🇳</p>
+              <p className="text-ink-2 font-inter">Delhi, India 🇮🇳</p>
             </div>
           </div>
         </Card>

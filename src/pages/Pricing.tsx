@@ -11,11 +11,12 @@ const Pricing: React.FC = () => {
       price: '₹0',
       yearlyPrice: '₹0',
       period: '/forever',
-      description: 'Try VIDVAS AI with limited features',
+      description: 'Explore VIDVAS AI services — no cost',
       features: [
-        '1 AI Agent (Choose Once)',
-        '10 Workflow Executions/month',
+        '1 AI Agent',
+        '10 Workflow Automations/month',
         'Basic Gmail Integration',
+        'AI Playground Access',
         'Community Support',
         '100 MB Storage',
         'No Credit Card Required'
@@ -30,11 +31,12 @@ const Pricing: React.FC = () => {
       price: '₹99',
       yearlyPrice: '₹990',
       period: isYearly ? '/year' : '/month',
-      description: 'Perfect for individuals and small projects',
+      description: 'Perfect for individuals and small teams',
       features: [
-        '5 AI Agents',
-        '100 Workflow Executions/month',
+        '5 AI Agents & Personas',
+        '100 Workflow Automations/month',
         'Basic Integrations (Gmail, Slack)',
+        'AI Playground + Workflow Builder',
         'Email Support',
         '1 GB Storage',
         'Community Access'
@@ -51,13 +53,14 @@ const Pricing: React.FC = () => {
       period: isYearly ? '/year' : '/month',
       description: 'Ideal for growing teams and businesses',
       features: [
-        '25 AI Agents',
-        '1,000 Workflow Executions/month',
+        '25 AI Agents & Custom Personas',
+        '1,000 Workflow Automations/month',
         'All Integrations (Gmail, Slack, GitHub, Notion)',
+        'Custom AI Development (Basic)',
+        'RAG Knowledge Base',
         'Priority Support',
         '10 GB Storage',
         'Advanced Analytics',
-        'Custom Workflows',
         'API Access'
       ],
       cta: 'Get Started',
@@ -71,15 +74,15 @@ const Pricing: React.FC = () => {
       price: '₹2,999',
       yearlyPrice: '₹14,990',
       period: isYearly ? '/year' : '/month',
-      description: 'For large teams with advanced needs',
+      description: 'Full AI services suite for large teams',
       features: [
-        'Unlimited AI Agents',
-        'Unlimited Workflow Executions',
-        'All Integrations + Custom',
+        'Unlimited AI Agents & Personas',
+        'Unlimited Workflow Automations',
+        'All Integrations + Custom Build',
+        'Custom AI Development & Consulting',
+        'Fine-tuned Models & RAG Pipelines',
         '24/7 Dedicated Support',
         '100 GB Storage',
-        'Advanced Analytics & Reporting',
-        'Custom AI Training',
         'White-label Options',
         'SLA Guarantee',
         'Dedicated Account Manager'
@@ -102,22 +105,22 @@ const Pricing: React.FC = () => {
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
           <span className="text-gradient-intelligence">Affordable AI</span>
           <br />
-          <span className="text-white">For Everyone</span>
+          <span className="text-ink">For Everyone</span>
         </h1>
 
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto font-inter">
-          Start automating your workflows with AI at prices designed for the Indian market.
+        <p className="text-xl text-ink-2 max-w-3xl mx-auto font-inter">
+          Access India's most comprehensive AI services platform — automation, custom AI, consulting, and integrations — at prices built for every scale.
           No hidden fees, cancel anytime.
         </p>
 
         {/* Billing Toggle */}
         <div className="flex items-center justify-center gap-4 mt-8">
-          <span className={`text-lg font-inter ${!isYearly ? 'text-white font-bold' : 'text-gray-400'}`}>
+          <span className={`text-lg font-inter ${!isYearly ? 'text-ink font-bold' : 'text-ink-2'}`}>
             Monthly
           </span>
           <button
             onClick={() => setIsYearly(!isYearly)}
-            className={`relative w-16 h-8 rounded-full transition-all ${isYearly ? 'bg-gradient-intelligence' : 'bg-white/20'
+            className={`relative w-16 h-8 rounded-full transition-all ${isYearly ? 'bg-gradient-intelligence' : 'bg-ink/[0.12]'
               }`}
           >
             <div
@@ -125,7 +128,7 @@ const Pricing: React.FC = () => {
                 }`}
             />
           </button>
-          <span className={`text-lg font-inter ${isYearly ? 'text-white font-bold' : 'text-gray-400'}`}>
+          <span className={`text-lg font-inter ${isYearly ? 'text-ink font-bold' : 'text-ink-2'}`}>
             Yearly
           </span>
           {isYearly && (
@@ -144,7 +147,7 @@ const Pricing: React.FC = () => {
               key={index}
               className={`relative glass-premium rounded-2xl p-6 border-2 transition-all duration-300 hover:scale-105 ${plan.popular
                 ? 'border-intelligence-blue shadow-glow-blue'
-                : 'border-white/10 hover:border-intelligence-blue/50'
+                : 'border-edge hover:border-intelligence-blue/50'
                 }`}
             >
               {/* Popular/Free Badge */}
@@ -159,14 +162,14 @@ const Pricing: React.FC = () => {
 
               {/* Plan Header */}
               <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-white mb-2 font-inter">{plan.name}</h3>
-                <p className="text-gray-400 text-xs mb-4 font-inter">{plan.description}</p>
+                <h3 className="text-xl font-bold text-ink mb-2 font-inter">{plan.name}</h3>
+                <p className="text-ink-2 text-xs mb-4 font-inter">{plan.description}</p>
 
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-gradient-intelligence">
                     {isYearly && plan.yearlyPrice !== plan.price ? plan.yearlyPrice : plan.price}
                   </span>
-                  <span className="text-gray-400 text-sm font-inter">{plan.period}</span>
+                  <span className="text-ink-2 text-sm font-inter">{plan.period}</span>
                   {plan.savings && (
                     <p className="text-signal-green text-xs mt-1 font-inter">{plan.savings}</p>
                   )}
@@ -176,7 +179,7 @@ const Pricing: React.FC = () => {
                   onClick={() => navigate('/login')}
                   className={`w-full py-3 rounded-xl font-bold font-inter transition-all duration-300 text-sm ${plan.popular
                     ? 'bg-gradient-intelligence text-white shadow-glow-blue hover:shadow-glow-teal'
-                    : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+                    : 'bg-ink/[0.06] text-ink hover:bg-ink/[0.12] border border-edge-2'
                     }`}
                 >
                   {plan.cta}
@@ -192,7 +195,7 @@ const Pricing: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-gray-300 text-xs font-inter">{feature}</span>
+                    <span className="text-ink-2 text-xs font-inter">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -205,7 +208,7 @@ const Pricing: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
         <h2 className="text-4xl font-bold text-center mb-12 font-inter">
           <span className="text-gradient-intelligence">Frequently Asked</span>{' '}
-          <span className="text-white">Questions</span>
+          <span className="text-ink">Questions</span>
         </h2>
 
         <div className="space-y-6">
@@ -227,9 +230,9 @@ const Pricing: React.FC = () => {
               a: 'Yes, we offer a 30-day money-back guarantee if you\'re not satisfied with our service.'
             }
           ].map((faq, index) => (
-            <div key={index} className="glass-premium rounded-xl p-6 border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-3 font-inter">{faq.q}</h3>
-              <p className="text-gray-400 font-inter">{faq.a}</p>
+            <div key={index} className="glass-premium rounded-xl p-6 border border-edge">
+              <h3 className="text-xl font-bold text-ink mb-3 font-inter">{faq.q}</h3>
+              <p className="text-ink-2 font-inter">{faq.a}</p>
             </div>
           ))}
         </div>
@@ -240,14 +243,14 @@ const Pricing: React.FC = () => {
         <div className="glass-premium rounded-2xl p-12 border border-intelligence-blue/30">
           <h2 className="text-4xl font-bold mb-6 font-inter">
             <span className="text-gradient-intelligence">Ready to Transform</span>{' '}
-            <span className="text-white">Your Workflow?</span>
+            <span className="text-ink">Your Workflow?</span>
           </h2>
-          <p className="text-xl text-gray-400 mb-8 font-inter">
+          <p className="text-xl text-ink-2 mb-8 font-inter">
             Join thousands of users automating their work with AI
           </p>
           <button
             onClick={() => navigate('/login')}
-            className="bg-gradient-intelligence text-white px-12 py-4 rounded-xl font-bold text-lg shadow-glow-blue hover:shadow-glow-teal transition-all duration-300 font-inter"
+            className="bg-gradient-intelligence text-ink px-12 py-4 rounded-xl font-bold text-lg shadow-glow-blue hover:shadow-glow-teal transition-all duration-300 font-inter"
           >
             Start Your Free Trial
           </button>

@@ -1,5 +1,23 @@
-// Core Agent Orchestration System
-// This is the brain of the agentic AI system that coordinates multiple agents
+import type { AgentPersona } from '../supabaseAgentService';
+import { WorkflowLogger } from './WorkflowLogger';
+import { supabase } from '../supabase';
+
+const AGENT_EXECUTOR_URL = 'https://xiulwqliqlfsnwdkuqdr.supabase.co/functions/v1/agent-executor';
+
+async function callAgentExecutor(agent: string, action: string, input: any): Promise<any> {
+  const { data: { session } } = await supabase.auth.getSession();
+  const token = session?.access_token;
+  if (!token) throw new Error('Not authenticated');
+
+  const res = await fetch(AGENT_EXECUTOR_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ agent, action, input }),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Agent execution failed');
+  return data.result;
+}
 
 export interface AgentTask {
   id: string;
@@ -27,15 +45,26 @@ export interface ExecutionPlan {
 export class AgentOrchestrator {
   private agents: Map<string, any> = new Map();
   private executionQueue: AgentTask[] = [];
+  private activePersona: AgentPersona | null = null;
 
   constructor() {
     this.initializeAgents();
   }
 
   private initializeAgents() {
-    // Register available agents
-    // TODO: Dynamically load agents from integrations
     console.log('Initializing agent registry...');
+  }
+
+  setPersona(persona: AgentPersona | null) {
+    this.activePersona = persona;
+  }
+
+  getActivePersona(): AgentPersona | null {
+    return this.activePersona;
+  }
+
+  getSystemInstructions(): string {
+    return this.activePersona?.instructions || '';
   }
 
   /**
@@ -43,20 +72,19 @@ export class AgentOrchestrator {
    */
   async executeTask(userInput: string, userId: string): Promise<any> {
     try {
-      // Step 1: Recognize intent
       const intent = await this.recognizeIntent(userInput);
-      
-      // Step 2: Create execution plan
       const plan = await this.createExecutionPlan(intent);
-      
-      // Step 3: Execute plan with agent coordination
       const result = await this.executePlan(plan, userId);
-      
+
       return {
         success: true,
         intent,
         plan,
-        result
+        result,
+        persona: this.activePersona ? {
+          name: this.activePersona.name,
+          instructions: this.activePersona.instructions,
+        } : null,
       };
     } catch (error) {
       console.error('Task execution failed:', error);
@@ -282,41 +310,63 @@ export class AgentOrchestrator {
   /**
    * Execute Single Step: Run a specific agent action
    */
-  private async executeStep(step: AgentStep, userId: string): Promise<any> {
-    // Simulate agent execution
-    // TODO: Replace with actual agent implementations
-    
-    await new Promise(resolve => setTimeout(resolve, 500)); // Simulate processing
-    
-    switch (step.agent) {
-      case 'GmailAgent':
-        if (step.action === 'check_connection') {
-          return { connected: false, message: 'Gmail not connected. Please connect in Integration Hub.' };
+  async executeStep(step: AgentStep, userId: string): Promise<any> {
+    const stepStart = Date.now();
+    WorkflowLogger.log({
+      level: 'info',
+      agent: step.agent,
+      action: step.action,
+      message: `Starting ${step.agent} → ${step.action}`,
+    });
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 300));
+
+      let result: any;
+      const REAL_AGENTS = ['GmailAgent', 'SlackAgent', 'GitHubAgent', 'NotionAgent', 'GoogleCalendarAgent'];
+
+      if (REAL_AGENTS.includes(step.agent)) {
+        result = await callAgentExecutor(step.agent, step.action, step.input || {});
+      } else {
+        switch (step.agent) {
+          case 'SearchAgent':
+            result = { results: [{ title: 'Sample Result', snippet: 'Connect a real search API for live results.' }] };
+            break;
+          case 'SummarizerAgent':
+            result = { summary: 'Summarizer stub — wire an LLM Edge Function for real summaries.' };
+            break;
+          case 'DataCollector':
+            result = { metrics: { placeholder: true } };
+            break;
+          case 'ReportGenerator':
+            result = { report: 'Report stub — wire an LLM Edge Function for real reports.' };
+            break;
+          default:
+            result = { success: true, message: `${step.agent} → ${step.action} executed.` };
         }
-        if (step.action === 'send_email') {
-          return { sent: false, message: 'Gmail integration required' };
-        }
-        break;
-        
-      case 'GoogleCalendarAgent':
-        return { message: 'Google Calendar integration required' };
-        
-      case 'SearchAgent':
-        return { 
-          results: [
-            { title: 'Sample Result 1', snippet: 'This is a sample search result' },
-            { title: 'Sample Result 2', snippet: 'Another sample result' }
-          ]
-        };
-        
-      case 'SummarizerAgent':
-        return { summary: 'This is a summary of the search results.' };
-        
-      default:
-        return { message: `Agent ${step.agent} executed successfully` };
+      }
+
+      const duration = Date.now() - stepStart;
+      WorkflowLogger.log({
+        level: 'success',
+        agent: step.agent,
+        action: step.action,
+        message: `${step.agent} → ${step.action} completed in ${duration}ms`,
+        duration,
+      });
+      return result;
+    } catch (err) {
+      const duration = Date.now() - stepStart;
+      const msg = err instanceof Error ? err.message : 'Unknown error';
+      WorkflowLogger.log({
+        level: 'error',
+        agent: step.agent,
+        action: step.action,
+        message: `${step.agent} → ${step.action} failed after ${duration}ms: ${msg}`,
+        duration,
+      });
+      throw err;
     }
-    
-    return { success: true };
   }
 
   /**

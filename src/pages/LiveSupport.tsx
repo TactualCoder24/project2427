@@ -1,11 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+
+interface Message { role: 'user' | 'assistant'; content: string; }
 
 const LiveSupport: React.FC = () => {
-    const [message, setMessage] = useState('');
-    const [chatStarted, setChatStarted] = useState(false);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [input, setInput] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [started, setStarted] = useState(false);
+    const [error, setError] = useState('');
+    const bottomRef = useRef<HTMLDivElement>(null);
 
-    const handleStartChat = () => {
-        setChatStarted(true);
+    useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, loading]);
+
+    const startChat = () => {
+        setStarted(true);
+        setMessages([{ role: 'assistant', content: 'Hi! I\'m the VIDVAS AI support assistant. How can I help you today?' }]);
+    };
+
+    const send = async () => {
+        const text = input.trim();
+        if (!text || loading) return;
+        setInput('');
+        setError('');
+        const updated: Message[] = [...messages, { role: 'user', content: text }];
+        setMessages(updated);
+        setLoading(true);
+        try {
+            const { data, error } = await supabase.functions.invoke('chat-support', {
+                body: { message: text, history: updated.slice(-10) },
+            });
+            if (error) throw new Error(error.message || 'Request failed');
+            setMessages([...updated, { role: 'assistant', content: data.reply }]);
+        } catch (err: any) {
+            setError(err.message || 'Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -13,127 +44,114 @@ const LiveSupport: React.FC = () => {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <div className="inline-block px-6 py-3 glass-premium rounded-full text-sm font-bold mb-8 border border-intelligence-blue/30">
-                        <span className="text-gradient-intelligence">💬 Live Chat Support</span>
-                    </div>
-
-                    <h1 className="text-5xl md:text-6xl font-bold font-inter mb-6">
-                        <span className="text-gradient-intelligence">Get Help</span>
-                        <br />
-                        <span className="text-white">Instantly</span>
+                    <p className="text-gradient-cyber text-sm font-inter font-bold tracking-widest uppercase mb-5">Live Support</p>
+                    <h1 className="text-5xl md:text-6xl font-bold font-inter text-ink mb-4">
+                        Get Help <span className="text-gradient">Instantly</span>
                     </h1>
-
-                    <p className="text-xl text-gray-400 font-inter">
-                        Our support team is available 24/7 to assist you
-                    </p>
+                    <p className="text-xl text-ink-2 font-inter">AI-powered support, available 24/7</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Chat Window */}
-                    <div className="lg:col-span-2">
-                        <div className="glass-premium rounded-2xl border border-white/10 overflow-hidden">
-                            {/* Chat Header */}
-                            <div className="bg-gradient-intelligence p-4 flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                                    <span className="text-2xl">🤖</span>
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-white font-inter">VIDVAS Support</h3>
-                                    <p className="text-xs text-white/80 font-inter">Online • Avg response: 2 min</p>
+                    <div className="lg:col-span-2 flex flex-col bg-gray-900/60 border border-edge rounded-2xl overflow-hidden">
+                        {/* Chat Header */}
+                        <div className="bg-gradient-to-r from-electric-blue/20 to-cyber-cyan/20 border-b border-edge p-4 flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-electric-blue/20 flex items-center justify-center">
+                                <span className="text-xl">🤖</span>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-ink font-inter">VIDVAS AI Support</h3>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-neon-green"></span>
+                                    <p className="text-xs text-ink-2 font-inter">Online • Powered by Gemini</p>
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Chat Messages */}
-                            <div className="h-96 p-6 overflow-y-auto bg-dark-gray/50">
-                                {!chatStarted ? (
-                                    <div className="flex flex-col items-center justify-center h-full text-center">
-                                        <div className="text-6xl mb-4">👋</div>
-                                        <h3 className="text-2xl font-bold text-white mb-2 font-inter">Welcome to VIDVAS Support!</h3>
-                                        <p className="text-gray-400 mb-6 font-inter">How can we help you today?</p>
-                                        <button
-                                            onClick={handleStartChat}
-                                            className="bg-gradient-intelligence text-white px-8 py-3 rounded-xl font-bold shadow-glow-blue hover:shadow-glow-teal transition-all font-inter"
-                                        >
-                                            Start Chat
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-4">
-                                        <div className="flex gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-intelligence-blue/20 flex items-center justify-center flex-shrink-0">
-                                                <span className="text-sm">🤖</span>
-                                            </div>
-                                            <div className="glass-premium p-4 rounded-xl border border-white/10 max-w-md">
-                                                <p className="text-white font-inter">Hi! I'm here to help. What can I assist you with today?</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Chat Input */}
-                            <div className="p-4 border-t border-white/10">
-                                <div className="flex gap-3">
-                                    <input
-                                        type="text"
-                                        value={message}
-                                        onChange={(e) => setMessage(e.target.value)}
-                                        placeholder="Type your message..."
-                                        className="flex-1 px-4 py-3 glass-premium border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-intelligence-blue font-inter"
-                                        disabled={!chatStarted}
-                                    />
-                                    <button
-                                        disabled={!chatStarted || !message.trim()}
-                                        className="bg-gradient-intelligence text-white px-6 py-3 rounded-xl font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-glow-blue transition-all font-inter"
-                                    >
-                                        Send
+                        {/* Messages */}
+                        <div className="flex-1 h-96 p-5 overflow-y-auto space-y-4">
+                            {!started ? (
+                                <div className="flex flex-col items-center justify-center h-full text-center">
+                                    <div className="text-5xl mb-4 animate-bounce-subtle">👋</div>
+                                    <h3 className="text-xl font-bold text-ink mb-2 font-inter">Welcome to VIDVAS Support!</h3>
+                                    <p className="text-ink-2 mb-6 font-inter text-sm">Ask anything about our AI services, pricing, or integrations.</p>
+                                    <button onClick={startChat} className="bg-gradient-to-r from-electric-blue to-cyber-cyan text-white px-8 py-3 rounded-xl font-bold hover:shadow-glow-md transition-all font-inter btn-shimmer overflow-hidden">
+                                        Start Chat
                                     </button>
                                 </div>
+                            ) : (
+                                <>
+                                    {messages.map((m, i) => (
+                                        <div key={i} className={`flex gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                                            <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-sm bg-ink/10">
+                                                {m.role === 'assistant' ? '🤖' : '👤'}
+                                            </div>
+                                            <div className={`max-w-sm px-4 py-3 rounded-2xl text-sm font-inter leading-relaxed ${m.role === 'assistant' ? 'bg-ink/5 border border-edge text-ink-2' : 'bg-electric-blue/20 border border-electric-blue/30 text-ink'}`}>
+                                                {m.content}
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {loading && (
+                                        <div className="flex gap-3">
+                                            <div className="w-7 h-7 rounded-full bg-ink/10 flex items-center justify-center text-sm">🤖</div>
+                                            <div className="px-4 py-3 rounded-2xl bg-ink/5 border border-edge">
+                                                <div className="flex gap-1 items-center h-4">
+                                                    {[0, 1, 2].map(i => <span key={i} className="w-1.5 h-1.5 rounded-full bg-electric-blue animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />)}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {error && <p className="text-red-400 text-xs font-inter text-center">⚠️ {error}</p>}
+                                    <div ref={bottomRef} />
+                                </>
+                            )}
+                        </div>
+
+                        {/* Input */}
+                        <div className="p-4 border-t border-edge">
+                            <div className="flex gap-3">
+                                <input
+                                    type="text"
+                                    value={input}
+                                    onChange={e => setInput(e.target.value)}
+                                    onKeyDown={e => e.key === 'Enter' && send()}
+                                    placeholder={started ? 'Type your message...' : 'Start the chat first'}
+                                    disabled={!started || loading}
+                                    className="flex-1 px-4 py-3 bg-ink/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue transition-colors font-inter text-sm disabled:opacity-40"
+                                />
+                                <button
+                                    onClick={send}
+                                    disabled={!started || !input.trim() || loading}
+                                    className="bg-gradient-to-r from-electric-blue to-cyber-cyan text-white px-5 py-3 rounded-xl font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-glow-md transition-all font-inter text-sm"
+                                >
+                                    {loading ? '...' : 'Send →'}
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    {/* Support Info */}
-                    <div className="space-y-6">
-                        <div className="glass-premium rounded-xl p-6 border border-white/10">
-                            <h3 className="text-xl font-bold text-white mb-4 font-inter">Support Hours</h3>
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-signal-green"></span>
-                                    <span className="text-gray-300 font-inter">24/7 Live Chat</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-signal-green"></span>
-                                    <span className="text-gray-300 font-inter">Email Support</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-cyber-aqua"></span>
-                                    <span className="text-gray-300 font-inter">Phone (Mon-Fri, 9AM-6PM IST)</span>
-                                </div>
+                    {/* Sidebar */}
+                    <div className="space-y-5">
+                        {[
+                            { title: 'Support Hours', items: ['✅ 24/7 AI Chat', '✅ Email Support', '🕐 Phone: Mon–Fri 9AM–6PM IST'] },
+                        ].map(s => (
+                            <div key={s.title} className="bg-gray-900/60 border border-edge rounded-xl p-5">
+                                <h3 className="text-sm font-bold text-ink mb-3 font-inter">{s.title}</h3>
+                                <div className="space-y-2">{s.items.map(item => <p key={item} className="text-ink-2 text-sm font-inter">{item}</p>)}</div>
                             </div>
+                        ))}
+                        <div className="bg-gray-900/60 border border-edge rounded-xl p-5 space-y-2">
+                            <h3 className="text-sm font-bold text-ink mb-3 font-inter">Quick Links</h3>
+                            {[['📖 FAQ', '/faq'], ['📚 Docs', '/docs'], ['📅 Book Demo', '/demo']].map(([label, href]) => (
+                                <a key={href} href={href} className="block p-2.5 rounded-lg bg-white/[0.03] border border-edge hover:border-electric-blue/30 text-ink-2 hover:text-ink text-sm font-inter transition-all">{label}</a>
+                            ))}
                         </div>
-
-                        <div className="glass-premium rounded-xl p-6 border border-white/10">
-                            <h3 className="text-xl font-bold text-white mb-4 font-inter">Quick Actions</h3>
-                            <div className="space-y-3">
-                                <a href="/faq" className="block p-3 glass-premium rounded-lg border border-white/5 hover:border-intelligence-blue/30 transition-all">
-                                    <p className="text-white font-semibold font-inter">📖 View FAQ</p>
-                                </a>
-                                <a href="/docs" className="block p-3 glass-premium rounded-lg border border-white/5 hover:border-intelligence-blue/30 transition-all">
-                                    <p className="text-white font-semibold font-inter">📚 Documentation</p>
-                                </a>
-                                <a href="/demo" className="block p-3 glass-premium rounded-lg border border-white/5 hover:border-intelligence-blue/30 transition-all">
-                                    <p className="text-white font-semibold font-inter">📅 Schedule Demo</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="glass-premium rounded-xl p-6 border border-white/10">
-                            <h3 className="text-xl font-bold text-white mb-4 font-inter">Contact Info</h3>
-                            <div className="space-y-3 text-sm">
-                                <p className="text-gray-300 font-inter">📧 support@vidvasai.com</p>
-                                <p className="text-gray-300 font-inter">📞 +91 98765 43210</p>
-                                <p className="text-gray-300 font-inter">📍 Delhi, India 🇮🇳</p>
+                        <div className="bg-gray-900/60 border border-edge rounded-xl p-5">
+                            <h3 className="text-sm font-bold text-ink mb-3 font-inter">Contact</h3>
+                            <div className="space-y-1.5 text-sm text-ink-2 font-inter">
+                                <p>📧 support@vidvasai.com</p>
+                                <p>📞 +91 98765 43210</p>
+                                <p>📍 Delhi, India 🇮🇳</p>
                             </div>
                         </div>
                     </div>

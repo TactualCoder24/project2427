@@ -76,7 +76,7 @@ const OAuthCallback: React.FC = () => {
                 {status === 'success' && (
                     <div className="mb-6">
                         <div className="w-20 h-20 bg-gradient-to-br from-neon-green to-lime-green rounded-full flex items-center justify-center mx-auto shadow-glow-md animate-scaleIn">
-                            <span className="text-5xl text-white">✓</span>
+                            <span className="text-5xl text-ink">✓</span>
                         </div>
                     </div>
                 )}
@@ -85,7 +85,7 @@ const OAuthCallback: React.FC = () => {
                 {status === 'error' && (
                     <div className="mb-6">
                         <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto animate-scaleIn">
-                            <span className="text-5xl text-white">✗</span>
+                            <span className="text-5xl text-ink">✗</span>
                         </div>
                     </div>
                 )}
@@ -93,7 +93,7 @@ const OAuthCallback: React.FC = () => {
                 {/* Message */}
                 <h2 className={`text-2xl font-bold font-inter mb-3 ${status === 'success' ? 'text-gradient' :
                         status === 'error' ? 'text-red-400' :
-                            'text-white'
+                            'text-ink'
                     }`}>
                     {status === 'processing' && 'Connecting...'}
                     {status === 'success' && 'Connected!'}
@@ -102,20 +102,20 @@ const OAuthCallback: React.FC = () => {
 
                 <p className={`text-lg font-inter ${status === 'success' ? 'text-neon-green' :
                         status === 'error' ? 'text-red-400' :
-                            'text-gray-300'
+                            'text-ink-2'
                     }`}>
                     {message}
                 </p>
 
                 {/* Additional info */}
                 {status === 'success' && (
-                    <p className="text-sm text-gray-400 mt-4 font-inter">
+                    <p className="text-sm text-ink-2 mt-4 font-inter">
                         Redirecting to Integration Hub...
                     </p>
                 )}
 
                 {status === 'error' && (
-                    <p className="text-sm text-gray-400 mt-4 font-inter">
+                    <p className="text-sm text-ink-2 mt-4 font-inter">
                         Redirecting back to Integration Hub...
                     </p>
                 )}

@@ -3,314 +3,413 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import {
+  agentPersonaService,
+  agentWorkflowService,
+  AgentPersona,
+  AgentWorkflow,
+} from '../lib/supabaseAgentService';
 import { supabase } from '../lib/supabase';
 
-interface AgentDeployment {
-  id: string;
-  agent_name: string;
-  status: 'pending' | 'active' | 'inactive';
-  created_at: string;
+interface DashboardStats {
+  totalWorkflows: number;
+  activeWorkflows: number;
+  totalExecutions: number;
+  successfulExecutions: number;
+  totalPersonas: number;
+  activePersonas: number;
 }
 
 const Dashboard: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-  const [deployments, setDeployments] = useState<AgentDeployment[]>([]);
+
+  const [stats, setStats] = useState<DashboardStats>({
+    totalWorkflows: 0,
+    activeWorkflows: 0,
+    totalExecutions: 0,
+    successfulExecutions: 0,
+    totalPersonas: 0,
+    activePersonas: 0,
+  });
+  const [recentPersonas, setRecentPersonas] = useState<AgentPersona[]>([]);
+  const [recentWorkflows, setRecentWorkflows] = useState<AgentWorkflow[]>([]);
   const [loadingData, setLoadingData] = useState(true);
+  const [activePersonaId, setActivePersonaId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-    }
+    if (!isAuthenticated) navigate('/login');
   }, [isAuthenticated, navigate]);
 
   useEffect(() => {
-    const fetchDeployments = async () => {
-      if (!user) return;
-
-      try {
-        const { data, error } = await supabase
-          .from('agent_deployments')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        setDeployments(data || []);
-      } catch (error) {
-        console.error('Error fetching deployments:', error);
-      } finally {
-        setLoadingData(false);
-      }
-    };
-
-    if (user) {
-      fetchDeployments();
-    }
+    if (!user) return;
+    fetchDashboardData();
+    import('../lib/agents/AgentOrchestrator').then(({ orchestrator }) => {
+      const active = orchestrator.getActivePersona();
+      if (active) setActivePersonaId(active.id);
+    });
   }, [user]);
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoadingData(true);
+
+      const [workflows, personas, executionsResult] = await Promise.allSettled([
+        agentWorkflowService.getAll(),
+        agentPersonaService.getAll(),
+        supabase
+          .from('agent_executions')
+          .select('id, status')
+          .order('started_at', { ascending: false })
+          .limit(100),
+      ]);
+
+      const wfData = workflows.status === 'fulfilled' ? workflows.value : [];
+      const pData = personas.status === 'fulfilled' ? personas.value : [];
+      const execData =
+        executionsResult.status === 'fulfilled' && !executionsResult.value.error
+          ? executionsResult.value.data || []
+          : [];
+
+      setStats({
+        totalWorkflows: wfData.length,
+        activeWorkflows: wfData.filter(w => w.status === 'active').length,
+        totalExecutions: execData.length,
+        successfulExecutions: execData.filter((e: any) => e.status === 'completed').length,
+        totalPersonas: pData.length,
+        activePersonas: pData.filter(p => p.status === 'active').length,
+      });
+
+      setRecentPersonas(pData.slice(0, 3));
+      setRecentWorkflows(wfData.slice(0, 3));
+    } catch (err) {
+      console.error('Dashboard fetch error:', err);
+    } finally {
+      setLoadingData(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
+
+  const handleUsePersona = async (persona: AgentPersona) => {
+    const { orchestrator } = await import('../lib/agents/AgentOrchestrator');
+    orchestrator.setPersona(persona);
+    await agentPersonaService.updateLastUsed(persona.id);
+    setActivePersonaId(persona.id);
+    navigate('/playground');
+  };
 
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-300 font-inter">Loading...</p>
+          <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-ink-2 font-inter">Loading your dashboard...</p>
         </div>
       </div>
     );
   }
 
-  const getSubscriptionBadge = (subscription: string) => {
-    const badges = {
-      free: { color: 'bg-gradient-to-r from-gray-500 to-gray-600', text: 'Free' },
-      pro: { color: 'bg-gradient-to-r from-cyber-aqua to-cyber-aqua', text: 'Pro' },
-      enterprise: { color: 'bg-gradient-to-r from-neon-green to-lime-green', text: 'Enterprise' }
+  const getSubscriptionColor = (sub: string) => {
+    const map: Record<string, string> = {
+      free:       'bg-gradient-to-r from-gray-500 to-gray-600',
+      pro:        'bg-gradient-to-r from-electric-blue to-cyber-cyan',
+      enterprise: 'bg-gradient-to-r from-neon-green to-lime-green',
     };
-    return badges[subscription as keyof typeof badges] || badges.free;
+    return map[sub] || map.free;
   };
 
-  const getStatusBadge = (status: string) => {
-    const badges = {
-      active: { color: 'bg-neon-green', text: 'Active' },
-      inactive: { color: 'bg-gray-500', text: 'Inactive' },
-      pending: { color: 'bg-yellow-500', text: 'Pending' }
+  const getWorkflowStatusColor = (status: string) => {
+    const map: Record<string, string> = {
+      active:   'bg-neon-green/20 text-neon-green',
+      inactive: 'bg-gray-500/20 text-ink-2',
+      draft:    'bg-yellow-500/20 text-yellow-400',
     };
-    return badges[status as keyof typeof badges] || badges.pending;
-  };
-
-  const handleLogout = async () => {
-    console.log('Logout button clicked');
-    try {
-      await logout();
-      console.log('Logout successful, navigating to home');
-      navigate('/');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
+    return map[status] || map.draft;
   };
 
   return (
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen py-20 bg-gradient-to-b from-surface via-surface-2/50 to-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* User Profile Header */}
-        <div className="mb-12">
+
+        {/* ── Profile Header ─────────────────────────────────── */}
+        <div className="mb-10">
           <Card variant="premium" className="p-8 hover-glow">
             <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
                 <img
                   src={user.picture}
                   alt={user.name}
-                  className="w-24 h-24 rounded-2xl border-4 border-cyber-aqua/30 shadow-glow-md"
+                  className="w-24 h-24 rounded-2xl border-4 border-electric-blue/30 shadow-glow-md object-cover"
                 />
                 <div className="text-center md:text-left">
-                  <h1 className="text-4xl md:text-5xl font-bold font-inter mb-3">
-                    Welcome back, <span className="text-gradient-intelligence">{user.name.split(' ')[0]}</span>
+                  <h1 className="text-4xl md:text-5xl font-bold font-outfit mb-2">
+                    Welcome back, <span className="text-gradient-cyber">{user.name.split(' ')[0]}</span>
                   </h1>
-                  <p className="text-gray-300 text-lg font-inter mb-3">{user.email}</p>
-                  <div className="flex items-center justify-center md:justify-start gap-3">
-                    <span className={`px-4 py-2 rounded-full text-sm font-semibold text-white ${getSubscriptionBadge(user.subscription).color} shadow-glow-sm`}>
-                      {getSubscriptionBadge(user.subscription).text} Plan
-                    </span>
-                  </div>
+                  <p className="text-ink-2 font-inter mb-3">{user.email}</p>
+                  <span className={`px-4 py-1.5 rounded-full text-sm font-semibold text-white ${getSubscriptionColor(user.subscription)} shadow-glow-sm`}>
+                    {user.subscription.charAt(0).toUpperCase() + user.subscription.slice(1)} Plan
+                  </span>
                 </div>
               </div>
-              <Button type="button" variant="outline" onClick={handleLogout}>
-                Logout
+              <Button variant="outline" onClick={handleLogout}>
+                Sign Out
               </Button>
             </div>
           </Card>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <Card variant="gradient" className="p-6 hover-glow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-inter mb-2">Active Agents</p>
-                <p className="text-4xl font-bold font-inter text-gradient-animate">
-                  {deployments.filter(d => d.status === 'active').length}
-                </p>
-              </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-2xl flex items-center justify-center shadow-glow-md">
-                <span className="text-3xl">🤖</span>
-              </div>
-            </div>
-          </Card>
-
-          <Card variant="gradient" className="p-6 hover-glow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-inter mb-2">Total Deployments</p>
-                <p className="text-4xl font-bold font-inter text-gradient-intelligence">
-                  {deployments.length}
-                </p>
-              </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center shadow-glow-purple">
-                <span className="text-3xl">📊</span>
-              </div>
-            </div>
-          </Card>
-
-          <Card variant="gradient" className="p-6 hover-glow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-inter mb-2">Subscription</p>
-                <p className="text-2xl font-bold font-inter text-gradient-quantum capitalize">
-                  {user.subscription}
-                </p>
-              </div>
-              <div className="w-16 h-16 bg-gradient-to-br from-neon-green to-lime-green rounded-2xl flex items-center justify-center shadow-glow-sm">
-                <span className="text-3xl">⭐</span>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Agent Deployments */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl md:text-4xl font-bold font-inter text-gradient-animate">
-              Your AI Agents
-            </h2>
-            <div className="flex gap-3">
-              <Button variant="gradient-purple" onClick={() => navigate('/playground')}>
-                🚀 AI Playground
-              </Button>
-              <Button variant="gradient" onClick={() => navigate('/agents')}>
-                Deploy New Agent
-              </Button>
-            </div>
+        {/* Active persona banner */}
+        {activePersonaId && (
+          <div className="mb-6 p-4 bg-neon-green/10 border border-neon-green/30 rounded-xl flex items-center gap-3 font-inter">
+            <span className="text-neon-green">✓</span>
+            <span className="text-ink-2 text-sm">
+              Active persona:{' '}
+              <strong className="text-ink">{recentPersonas.find(p => p.id === activePersonaId)?.name ?? 'Selected Persona'}</strong>
+              {' '}— currently used in AI Playground
+            </span>
+            <button
+              className="ml-auto text-ink-2 hover:text-ink text-lg"
+              onClick={async () => {
+                const { orchestrator } = await import('../lib/agents/AgentOrchestrator');
+                orchestrator.setPersona(null);
+                setActivePersonaId(null);
+              }}
+            >
+              ×
+            </button>
           </div>
+        )}
 
+        {/* ── Stats Grid ─────────────────────────────────────── */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
           {loadingData ? (
-            <Card variant="premium" className="p-8 text-center">
-              <div className="w-12 h-12 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-gray-300 font-inter">Loading your agents...</p>
-            </Card>
-          ) : deployments.length === 0 ? (
-            <Card variant="premium" className="p-12 text-center hover-glow">
-              <div className="w-24 h-24 bg-gradient-to-br from-cyber-aqua via-vivid-purple to-hot-pink rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-glow-purple">
-                <span className="text-5xl">🚀</span>
-              </div>
-              <h3 className="text-2xl font-bold font-inter mb-4 text-gradient-intelligence">
-                No Agents Deployed Yet
-              </h3>
-              <p className="text-gray-300 mb-6 font-inter max-w-md mx-auto">
-                Get started by deploying your first AI agent to automate your workflows.
-              </p>
-              <Button variant="gradient" size="lg" onClick={() => navigate('/agents')}>
-                Browse Available Agents
-              </Button>
-            </Card>
+            Array.from({ length: 6 }).map((_, i) => (
+              <Card key={i} variant="premium" className="p-4 text-center">
+                <div className="h-8 bg-ink/5 rounded animate-pulse mb-2" />
+                <div className="h-3 bg-ink/5 rounded animate-pulse" />
+              </Card>
+            ))
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {deployments.map((deployment) => (
-                <Card key={deployment.id} variant="premium" className="p-6 hover-glow">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-xl flex items-center justify-center">
-                      <span className="text-2xl">🤖</span>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${getStatusBadge(deployment.status).color}`}>
-                      {getStatusBadge(deployment.status).text}
-                    </span>
+            <>
+              {[
+                { value: stats.totalWorkflows,      label: 'Workflows',    gradient: 'text-gradient-cyber',        icon: '⚙️', iconBg: 'from-electric-blue to-cyber-cyan' },
+                { value: stats.activeWorkflows,     label: 'Active',       gradient: 'text-neon-green',            icon: '▶️', iconBg: 'from-neon-green to-lime-green' },
+                { value: stats.totalExecutions,     label: 'Executions',   gradient: 'text-gradient',              icon: '📊', iconBg: 'from-vivid-purple to-hot-pink' },
+                { value: stats.successfulExecutions,label: 'Successful',   gradient: 'text-gradient-intelligence', icon: '✓',  iconBg: 'from-electric-blue to-vivid-purple' },
+                { value: stats.totalPersonas,       label: 'Personas',     gradient: 'text-gradient-electric',     icon: '🎭', iconBg: 'from-hot-pink to-amber-glow' },
+                { value: stats.activePersonas,      label: 'Active',       gradient: 'text-gradient-quantum',      icon: '⚡', iconBg: 'from-vivid-purple to-electric-blue' },
+              ].map((s, idx) => (
+                <Card key={idx} variant="gradient" className="p-4 text-center hover-glow">
+                  <div className={`w-10 h-10 bg-gradient-to-br ${s.iconBg} rounded-xl flex items-center justify-center mx-auto mb-2 shadow-glow-sm`}>
+                    <span className="text-lg">{s.icon}</span>
                   </div>
-                  <h3 className="text-xl font-bold font-inter mb-2 text-gradient-intelligence">
-                    {deployment.agent_name}
-                  </h3>
-                  <p className="text-gray-400 text-sm font-inter mb-4">
-                    Deployed {new Date(deployment.created_at).toLocaleDateString()}
-                  </p>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      View Details
-                    </Button>
-                  </div>
+                  <p className={`text-2xl font-bold font-outfit ${s.gradient}`}>{s.value}</p>
+                  <p className="text-ink-2 font-inter text-xs mt-0.5">{s.label}</p>
                 </Card>
               ))}
-            </div>
+            </>
           )}
         </div>
 
-        {/* Quick Actions */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold font-inter mb-6 text-gradient-animate">
-            Quick Actions
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* AI Playground - Featured */}
-            <div onClick={() => navigate('/playground')} className="cursor-pointer">
-              <Card variant="gradient" className="p-8 hover-glow relative overflow-hidden">
-                <div className="absolute top-2 right-2">
-                  <span className="px-3 py-1 bg-neon-green/20 text-neon-green rounded-full text-xs font-bold">NEW</span>
-                </div>
-                <div className="w-16 h-16 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-md animate-float">
-                  <span className="text-4xl">🤖</span>
-                </div>
-                <h3 className="text-xl font-bold font-inter text-center mb-2 text-gradient-intelligence">AI Playground</h3>
-                <p className="text-gray-300 text-sm text-center font-inter">Chat with AI agents using natural language</p>
-              </Card>
+        {/* ── Two-column: Personas + Workflows ───────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+
+          {/* Personas */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold font-outfit text-gradient-animate">Your Personas</h2>
+              <Button variant="gradient-purple" size="sm" onClick={() => navigate('/personas')}>
+                Manage All →
+              </Button>
             </div>
 
-            {/* Integration Hub - Featured */}
-            <div onClick={() => navigate('/integrations')} className="cursor-pointer">
-              <Card variant="gradient" className="p-8 hover-glow relative overflow-hidden">
-                <div className="absolute top-2 right-2">
-                  <span className="px-3 py-1 bg-neon-green/20 text-neon-green rounded-full text-xs font-bold">NEW</span>
-                </div>
-                <div className="w-16 h-16 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-glow-purple animate-float" style={{ animationDelay: '1s' }}>
-                  <span className="text-4xl">🔌</span>
-                </div>
-                <h3 className="text-xl font-bold font-inter text-center mb-2 text-gradient">Integration Hub</h3>
-                <p className="text-gray-300 text-sm text-center font-inter">Connect 12+ apps and services</p>
-              </Card>
-            </div>
-
-            {/* Deploy Agent */}
-            <div onClick={() => navigate('/agents')} className="cursor-pointer">
-              <Card variant="premium" className="p-6 hover-glow">
-                <div className="w-14 h-14 bg-gradient-to-br from-cyber-aqua to-cyber-aqua rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-md">
-                  <span className="text-3xl">🚀</span>
-                </div>
-                <h3 className="text-lg font-bold font-inter text-center mb-2">Deploy Agent</h3>
-                <p className="text-gray-400 text-sm text-center font-inter">Launch a new AI agent</p>
-              </Card>
-            </div>
-
-            {/* Get Support */}
-            <div onClick={() => navigate('/contact')} className="cursor-pointer">
-              <Card variant="premium" className="p-6 hover-glow">
-                <div className="w-14 h-14 bg-gradient-to-br from-vivid-purple to-hot-pink rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-purple">
-                  <span className="text-3xl">💬</span>
-                </div>
-                <h3 className="text-lg font-bold font-inter text-center mb-2">Get Support</h3>
-                <p className="text-gray-400 text-sm text-center font-inter">Contact our team</p>
-              </Card>
-            </div>
-
-            {/* Settings */}
-            <Card variant="premium" className="p-6 hover-glow cursor-pointer">
-              <div className="w-14 h-14 bg-gradient-to-br from-neon-green to-lime-green rounded-xl flex items-center justify-center mb-4 mx-auto shadow-glow-sm">
-                <span className="text-3xl">⚙️</span>
+            {loadingData ? (
+              <div className="space-y-3">
+                {[1,2,3].map(i => (
+                  <Card key={i} variant="premium" className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-ink/5 animate-pulse" />
+                      <div className="flex-1">
+                        <div className="h-4 bg-ink/5 rounded animate-pulse mb-2 w-1/2" />
+                        <div className="h-3 bg-ink/5 rounded animate-pulse w-3/4" />
+                      </div>
+                    </div>
+                  </Card>
+                ))}
               </div>
-              <h3 className="text-lg font-bold font-inter text-center mb-2">Settings</h3>
-              <p className="text-gray-400 text-sm text-center font-inter">Manage your account</p>
-            </Card>
-
-            {/* Upgrade Plan */}
-            <Card variant="premium" className="p-6 hover-glow cursor-pointer">
-              <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                <span className="text-3xl">📈</span>
+            ) : recentPersonas.length === 0 ? (
+              <Card variant="premium" className="p-8 text-center hover-glow">
+                <div className="w-16 h-16 bg-gradient-to-br from-hot-pink to-vivid-purple rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-glow-purple animate-bounce-subtle">
+                  <span className="text-3xl">🎭</span>
+                </div>
+                <h3 className="text-lg font-bold font-outfit mb-2 text-gradient-intelligence">Your AI cast is empty</h3>
+                <p className="text-ink-2 font-inter text-sm mb-4">
+                  Give your AI a name, a voice, and a personality — build your first persona in under 2 minutes.
+                </p>
+                <Button variant="gradient" size="sm" onClick={() => navigate('/personas')}>
+                  ✨ Create First Persona
+                </Button>
+              </Card>
+            ) : (
+              <div className="space-y-3">
+                {recentPersonas.map(persona => (
+                  <Card
+                    key={persona.id}
+                    variant="premium"
+                    className={`p-4 hover-glow ${activePersonaId === persona.id ? 'ring-2 ring-neon-green/40' : ''}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-cyber-cyan via-vivid-purple to-hot-pink rounded-xl flex items-center justify-center shadow-glow-sm flex-shrink-0">
+                        <span className="text-2xl">{persona.icon}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <h3 className="font-bold font-inter text-ink text-sm truncate">{persona.name}</h3>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold flex-shrink-0 ${
+                            persona.status === 'active' ? 'bg-neon-green/20 text-neon-green' : 'bg-gray-500/20 text-ink-2'
+                          }`}>{persona.status}</span>
+                          {activePersonaId === persona.id && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-electric-blue/20 text-electric-blue flex-shrink-0">active</span>
+                          )}
+                        </div>
+                        <p className="text-ink-2 font-inter text-xs truncate">{persona.description}</p>
+                      </div>
+                      <Button
+                        variant="gradient"
+                        size="sm"
+                        className="flex-shrink-0"
+                        onClick={() => handleUsePersona(persona)}
+                      >
+                        Use
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+                {stats.totalPersonas > 3 && (
+                  <button
+                    onClick={() => navigate('/personas')}
+                    className="w-full text-center text-sm font-inter text-ink-2 hover:text-ink py-2 transition-colors"
+                  >
+                    + {stats.totalPersonas - 3} more personas →
+                  </button>
+                )}
               </div>
-              <h3 className="text-lg font-bold font-inter text-center mb-2">Upgrade Plan</h3>
-              <p className="text-gray-400 text-sm text-center font-inter">Unlock more features</p>
-            </Card>
+            )}
+          </div>
+
+          {/* Workflows */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold font-outfit text-gradient-animate">Your Workflows</h2>
+              <Button variant="gradient" size="sm" onClick={() => navigate('/workflows')}>
+                Manage All →
+              </Button>
+            </div>
+
+            {loadingData ? (
+              <div className="space-y-3">
+                {[1,2,3].map(i => (
+                  <Card key={i} variant="premium" className="p-4">
+                    <div className="h-4 bg-ink/5 rounded animate-pulse mb-2 w-1/2" />
+                    <div className="h-3 bg-ink/5 rounded animate-pulse w-3/4" />
+                  </Card>
+                ))}
+              </div>
+            ) : recentWorkflows.length === 0 ? (
+              <Card variant="premium" className="p-8 text-center hover-glow">
+                <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-glow-md animate-bounce-subtle" style={{ animationDelay: '0.5s' }}>
+                  <span className="text-3xl">⚙️</span>
+                </div>
+                <h3 className="text-lg font-bold font-outfit mb-2 text-gradient-intelligence">No automations running yet</h3>
+                <p className="text-ink-2 font-inter text-sm mb-4">
+                  Build your first AI workflow in under 10 minutes using one of our ready-made templates.
+                </p>
+                <Button variant="gradient" size="sm" onClick={() => navigate('/workflows')}>
+                  ⚙️ Create First Workflow
+                </Button>
+              </Card>
+            ) : (
+              <div className="space-y-3">
+                {recentWorkflows.map(wf => (
+                  <Card key={wf.id} variant="premium" className="p-4 hover-glow">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-electric-blue to-vivid-purple rounded-xl flex items-center justify-center shadow-glow-sm flex-shrink-0">
+                        <span className="text-2xl">⚙️</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <h3 className="font-bold font-inter text-ink text-sm truncate">{wf.name}</h3>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold flex-shrink-0 ${getWorkflowStatusColor(wf.status)}`}>
+                            {wf.status}
+                          </span>
+                        </div>
+                        <p className="text-ink-2 font-inter text-xs">
+                          {wf.steps?.length ?? 0} steps · {wf.run_count ?? 0} runs · {wf.trigger?.type}
+                        </p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-shrink-0"
+                        onClick={() => navigate('/workflows')}
+                      >
+                        Open
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+                {stats.totalWorkflows > 3 && (
+                  <button
+                    onClick={() => navigate('/workflows')}
+                    className="w-full text-center text-sm font-inter text-ink-2 hover:text-ink py-2 transition-colors"
+                  >
+                    + {stats.totalWorkflows - 3} more workflows →
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
+
+        {/* ── Quick Actions ──────────────────────────────────── */}
+        <div>
+          <h2 className="text-2xl font-bold font-outfit mb-6 text-gradient-animate">Quick Actions</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { icon: '🤖', label: 'AI Playground',     sub: 'Chat with agents',         path: '/playground',  gradient: 'from-cyber-cyan to-vivid-purple',  shadow: 'shadow-glow-md',     badge: 'HOT' },
+              { icon: '🎭', label: 'Persona Manager',   sub: 'Manage AI personalities',  path: '/personas',    gradient: 'from-hot-pink to-vivid-purple',    shadow: 'shadow-glow-purple', badge: null },
+              { icon: '⚙️', label: 'Workflow Builder',  sub: 'Build automations',        path: '/workflows',   gradient: 'from-electric-blue to-cyber-cyan', shadow: 'shadow-glow-md',     badge: null },
+              { icon: '📊', label: 'Execution Logs',    sub: 'Track all runs',           path: '/executions',  gradient: 'from-vivid-purple to-electric-blue',shadow: 'shadow-glow-purple', badge: null },
+              { icon: '🔌', label: 'Integrations',      sub: 'Connect 12+ apps',         path: '/integrations',gradient: 'from-neon-green to-electric-blue',  shadow: 'shadow-glow-sm',     badge: null },
+              { icon: '🚀', label: 'Agents Catalog',    sub: 'Browse AI agents',         path: '/agents',      gradient: 'from-amber-glow to-hot-pink',       shadow: 'shadow-glow-pink',   badge: null },
+              { icon: '💬', label: 'Live Support',      sub: 'Chat with our team',       path: '/support',     gradient: 'from-electric-blue to-vivid-purple',shadow: 'shadow-glow-md',     badge: null },
+              { icon: '📅', label: 'Schedule Demo',     sub: 'Book a walkthrough',       path: '/demo',        gradient: 'from-neon-green to-cyber-cyan',     shadow: 'shadow-glow-sm',     badge: null },
+            ].map(action => (
+              <div key={action.path} onClick={() => navigate(action.path)} className="cursor-pointer">
+                <Card variant="premium" className="p-5 hover-glow relative overflow-hidden h-full">
+                  {action.badge && (
+                    <div className="absolute top-2 right-2">
+                      <span className="px-2 py-0.5 bg-neon-green/20 text-neon-green rounded-full text-[10px] font-bold">{action.badge}</span>
+                    </div>
+                  )}
+                  <div className={`w-12 h-12 bg-gradient-to-br ${action.gradient} rounded-xl flex items-center justify-center mb-3 mx-auto ${action.shadow}`}>
+                    <span className="text-2xl">{action.icon}</span>
+                  </div>
+                  <h3 className="text-sm font-bold font-inter text-center text-ink mb-1">{action.label}</h3>
+                  <p className="text-ink-3 text-xs text-center font-inter">{action.sub}</p>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
 };
 
 export default Dashboard;
-
-

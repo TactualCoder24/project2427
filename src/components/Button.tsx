@@ -21,15 +21,15 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   icon,
 }) => {
-  const baseClasses = 'font-sora font-semibold rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-neon-blue focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2';
+  const baseClasses = 'font-sora font-semibold rounded-2xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-neon-blue focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2';
 
   const variantClasses = {
     primary: 'bg-gradient-to-r from-neon-blue to-cyber-aqua text-black hover:shadow-glow-md hover:scale-105 transform',
     secondary: 'bg-gradient-to-r from-neon-green to-lime-green text-black hover:shadow-[0_0_30px_rgba(0,255,136,0.6)] hover:scale-105 transform',
-    outline: 'border-2 border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-black hover:shadow-glow-md hover:scale-105 transform bg-black/20 backdrop-blur-sm',
-    gradient: 'bg-gradient-to-r from-cyber-aqua via-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform animate-gradient-shift bg-[length:200%_200%]',
-    'gradient-purple': 'bg-gradient-to-r from-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform',
-    'gradient-pink': 'bg-gradient-to-r from-hot-pink to-amber-glow text-white hover:shadow-glow-pink hover:scale-105 transform',
+    outline: 'border-2 border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-black hover:shadow-glow-md hover:scale-105 transform bg-surface/20 backdrop-blur-sm',
+    gradient: 'bg-gradient-to-r from-cyber-aqua via-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform animate-gradient-shift bg-[length:200%_200%] btn-shimmer overflow-hidden',
+    'gradient-purple': 'bg-gradient-to-r from-vivid-purple to-hot-pink text-white hover:shadow-glow-purple hover:scale-105 transform btn-shimmer overflow-hidden',
+    'gradient-pink': 'bg-gradient-to-r from-hot-pink to-amber-glow text-white hover:shadow-glow-pink hover:scale-105 transform btn-shimmer overflow-hidden',
   };
 
   const sizeClasses = {

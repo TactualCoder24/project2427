@@ -23,13 +23,19 @@ interface User {
   }[];
 }
 
+export interface RegisterResult {
+  success: boolean;
+  emailConfirmationRequired: boolean;
+  error?: string;
+}
+
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
   login: (credential: any) => Promise<void>;
   loginWithEmail: (email: string, password: string) => Promise<boolean>;
-  register: (email: string, password: string, name: string) => Promise<boolean>;
+  register: (email: string, password: string, name: string) => Promise<RegisterResult>;
   logout: () => Promise<void>;
   updateUser: (userData: Partial<User>) => void;
 }
@@ -154,54 +160,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // Email/Password registration
-  const register = async (email: string, password: string, name: string): Promise<boolean> => {
+  const register = async (email: string, password: string, name: string): Promise<RegisterResult> => {
     try {
-      console.log('Starting registration for:', email);
-
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            name: name,
-          }
-        }
+        options: { data: { name } }
       });
 
       if (error) {
-        console.error('Supabase signup error:', error);
-        alert(`Signup error: ${error.message}`);
-        return false;
+        return { success: false, emailConfirmationRequired: false, error: error.message };
       }
-
-      console.log('Signup successful, user:', data.user?.id);
 
       if (data.user) {
-        // Create user profile
-        console.log('Creating user profile...');
-        const { error: profileError } = await supabase
-          .from('users_profile')
-          .insert({
-            id: data.user.id,
-            full_name: name,
-            updated_at: new Date().toISOString()
-          });
-
-        if (profileError) {
-          console.error('Profile creation error:', profileError);
-          alert(`Profile error: ${profileError.message}. User created but profile failed.`);
-          // Still return true because user was created
-          return true;
-        }
-
-        console.log('Profile created successfully');
+        await supabase.from('users_profile').insert({
+          id: data.user.id,
+          full_name: name,
+          updated_at: new Date().toISOString()
+        });
       }
 
-      return true;
+      // If session is null, Supabase requires email confirmation
+      const emailConfirmationRequired = !data.session;
+      return { success: true, emailConfirmationRequired };
     } catch (error: any) {
-      console.error('Registration exception:', error);
-      alert(`Registration failed: ${error.message || 'Unknown error'}`);
-      return false;
+      return { success: false, emailConfirmationRequired: false, error: error.message || 'Registration failed' };
     }
   };
 

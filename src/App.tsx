@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import AnimatedPage from './components/animations/AnimatedPage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WelcomeModal from './components/WelcomeModal';
@@ -27,6 +28,13 @@ import ScheduleDemo from './pages/ScheduleDemo';
 import FAQ from './pages/FAQ';
 import Documentation from './pages/Documentation';
 import LiveSupport from './pages/LiveSupport';
+import NotFound from './pages/NotFound';
+import { useTriggerListener } from './hooks/useTriggerListener';
+
+function TriggerListener() {
+  useTriggerListener();
+  return null;
+}
 
 function AppContent() {
   const location = useLocation();
@@ -49,7 +57,8 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-surface text-ink flex flex-col">
+      <TriggerListener />
       <Navbar />
       <main className="flex-grow pt-16 page-transition">
         <AnimatePresence mode="wait">
@@ -76,6 +85,7 @@ function AppContent() {
             <Route path="/faq" element={<AnimatedPage><FAQ /></AnimatedPage>} />
             <Route path="/docs" element={<AnimatedPage><Documentation /></AnimatedPage>} />
             <Route path="/support" element={<AnimatedPage><LiveSupport /></AnimatedPage>} />
+            <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
           </Routes>
         </AnimatePresence>
       </main>
@@ -94,11 +104,13 @@ const App: React.FC = () => {
 
   return (
     <GoogleOAuthProvider clientId={googleClientId}>
-      <AuthProvider>
-        <Router>
-          <AppContent />
-        </Router>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Router>
+            <AppContent />
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
     </GoogleOAuthProvider>
   );
 };

@@ -11,7 +11,7 @@ const Terms: React.FC = () => {
       title: "Service Description",
       content: "VIDVAS AI provides artificial intelligence solutions including but not limited to:",
       list: [
-        "AI agent deployment and management",
+        "AI services, automation, and custom AI development",
         "Data analysis and processing services",
         "Automated workflow solutions",
         "Customer support automation",
@@ -31,7 +31,7 @@ const Terms: React.FC = () => {
     },
     {
       title: "Data Usage and Privacy",
-      content: "We are committed to protecting your privacy and data. Our AI agents process data to provide services, but we implement strict security measures and do not sell personal information to third parties. Please refer to our Privacy Policy for detailed information about data handling."
+      content: "We are committed to protecting your privacy and data. Our AI platform processes data to provide services, but we implement strict security measures and do not sell personal information to third parties. Please refer to our Privacy Policy for detailed information about data handling."
     },
     {
       title: "Service Availability",
@@ -63,7 +63,7 @@ const Terms: React.FC = () => {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
             Terms and <span className="text-gradient-intelligence">Conditions</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-6 font-inter">
+          <p className="text-xl md:text-2xl text-ink-2 mb-6 font-inter">
             Last updated: December 2025
           </p>
           <div className="w-32 h-1 bg-gradient-to-r from-cyber-aqua via-vivid-purple to-hot-pink mx-auto rounded-full"></div>
@@ -75,19 +75,19 @@ const Terms: React.FC = () => {
             <Card key={index} variant="premium" className="p-8 hover-glow">
               <div className="flex items-start space-x-4 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-cyber-aqua to-vivid-purple rounded-2xl flex items-center justify-center flex-shrink-0 shadow-glow-md">
-                  <span className="text-white font-bold text-xl font-inter">{index + 1}</span>
+                  <span className="text-ink font-bold text-xl font-inter">{index + 1}</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gradient-intelligence font-inter">{section.title}</h2>
               </div>
 
-              <p className="text-gray-300 text-lg leading-relaxed mb-4 font-inter">
+              <p className="text-ink-2 text-lg leading-relaxed mb-4 font-inter">
                 {section.content}
               </p>
 
               {section.list && (
                 <ul className="space-y-3">
                   {section.list.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start text-gray-300">
+                    <li key={itemIndex} className="flex items-start text-ink-2">
                       <span className="text-neon-green text-xl mr-3 mt-1">•</span>
                       <span className="font-inter text-base">{item}</span>
                     </li>
@@ -104,17 +104,17 @@ const Terms: React.FC = () => {
             <span className="text-4xl">📧</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-inter text-gradient">Questions About These Terms?</h2>
-          <p className="text-gray-300 text-lg mb-8 font-inter">
+          <p className="text-ink-2 text-lg mb-8 font-inter">
             For questions about these Terms and Conditions, please contact us:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             <div className="p-6 glass-premium rounded-2xl border border-cyber-aqua/20">
               <p className="text-gradient-intelligence font-semibold text-lg mb-2 font-inter">Email</p>
-              <p className="text-gray-300 font-inter">legal@vidvasai.com</p>
+              <p className="text-ink-2 font-inter">legal@vidvasai.com</p>
             </div>
             <div className="p-6 glass-premium rounded-2xl border border-vivid-purple/20">
               <p className="text-gradient font-semibold text-lg mb-2 font-inter">Address</p>
-              <p className="text-gray-300 font-inter">Delhi, India 🇮🇳</p>
+              <p className="text-ink-2 font-inter">Delhi, India 🇮🇳</p>
             </div>
           </div>
         </Card>

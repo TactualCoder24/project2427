@@ -96,6 +96,12 @@ export interface AgentIntegration {
 // Database Operations
 // =====================================================
 
+async function getCurrentUserId(): Promise<string> {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) throw new Error('Not authenticated');
+    return user.id;
+}
+
 export const agentPersonaService = {
     // Get all personas for current user
     async getAll() {
@@ -110,9 +116,10 @@ export const agentPersonaService = {
 
     // Create new persona
     async create(persona: Omit<AgentPersona, 'id' | 'user_id' | 'created_at' | 'updated_at'>) {
+        const user_id = await getCurrentUserId();
         const { data, error } = await supabase
             .from('agent_personas')
-            .insert([persona])
+            .insert([{ ...persona, user_id }])
             .select()
             .single();
 
@@ -168,9 +175,10 @@ export const agentWorkflowService = {
 
     // Create workflow
     async create(workflow: Omit<AgentWorkflow, 'id' | 'user_id' | 'created_at' | 'updated_at' | 'run_count' | 'success_count' | 'failure_count'>) {
+        const user_id = await getCurrentUserId();
         const { data, error } = await supabase
             .from('agent_workflows')
-            .insert([workflow])
+            .insert([{ ...workflow, user_id, run_count: 0, success_count: 0, failure_count: 0 }])
             .select()
             .single();
 
@@ -252,9 +260,10 @@ export const agentExecutionService = {
 
     // Create execution
     async create(execution: Omit<AgentExecution, 'id' | 'user_id' | 'started_at'>) {
+        const user_id = await getCurrentUserId();
         const { data, error } = await supabase
             .from('agent_executions')
-            .insert([execution])
+            .insert([{ ...execution, user_id }])
             .select()
             .single();
 

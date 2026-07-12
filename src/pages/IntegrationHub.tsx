@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import Button from '../components/Button';
-import { initiateOAuth, isConnected } from '../lib/oauthService';
+import { initiateOAuth, disconnectIntegration } from '../lib/oauthService';
 import { agentIntegrationService } from '../lib/supabaseAgentService';
 
 interface Integration {
@@ -128,31 +128,35 @@ const IntegrationHub: React.FC = () => {
     );
 
     // Load connection status from database
-    useEffect(() => {
-        const loadConnectionStatus = async () => {
-            if (!user) return;
-
-            try {
-                const allIntegrations = await agentIntegrationService.getAll();
-
-                setIntegrations(prev => prev.map(integration => {
-                    const dbIntegration = allIntegrations.find(
-                        i => i.integration_name === integration.id
-                    );
-
-                    return {
-                        ...integration,
-                        status: dbIntegration?.status === 'connected' ? 'connected' : 'disconnected',
-                        connectedAt: dbIntegration?.connected_at ? new Date(dbIntegration.connected_at) : undefined
-                    };
-                }));
-            } catch (error) {
-                console.error('Failed to load integration status:', error);
-            }
-        };
-
-        loadConnectionStatus();
+    const loadConnectionStatus = React.useCallback(async () => {
+        if (!user) return;
+        try {
+            const allIntegrations = await agentIntegrationService.getAll();
+            setIntegrations(prev => prev.map(integration => {
+                const dbIntegration = allIntegrations.find(
+                    i => i.integration_name === integration.id
+                );
+                return {
+                    ...integration,
+                    status: dbIntegration?.status === 'connected' ? 'connected' : 'disconnected',
+                    connectedAt: dbIntegration?.connected_at ? new Date(dbIntegration.connected_at) : undefined
+                };
+            }));
+        } catch (error) {
+            console.error('Failed to load integration status:', error);
+        }
     }, [user]);
+
+    useEffect(() => {
+        loadConnectionStatus();
+    }, [loadConnectionStatus]);
+
+    // Re-sync UI after a disconnect event (fired by disconnectIntegration())
+    useEffect(() => {
+        const handler = () => loadConnectionStatus();
+        window.addEventListener('integration:disconnected', handler);
+        return () => window.removeEventListener('integration:disconnected', handler);
+    }, [loadConnectionStatus]);
 
     const handleConnect = async (integrationId: string) => {
         try {
@@ -187,7 +191,7 @@ const IntegrationHub: React.FC = () => {
 
             // For OAuth providers (Gmail, Slack, GitHub)
             if (['gmail', 'slack', 'github'].includes(integrationId)) {
-                initiateOAuth(integrationId);
+                await initiateOAuth(integrationId);
             } else {
                 alert(`${integrationId} integration coming soon!`);
             }
@@ -197,12 +201,19 @@ const IntegrationHub: React.FC = () => {
         }
     };
 
-    const handleDisconnect = (integrationId: string) => {
+    const handleDisconnect = async (integrationId: string) => {
+        // Optimistic UI update first
         setIntegrations(prev =>
             prev.map(i =>
                 i.id === integrationId ? { ...i, status: 'disconnected' as const, connectedAt: undefined } : i
             )
         );
+        // Persist to DB (fires integration:disconnected event which re-syncs from DB)
+        try {
+            await disconnectIntegration(integrationId);
+        } catch (error) {
+            console.error('Failed to disconnect:', error);
+        }
     };
 
     React.useEffect(() => {
@@ -216,7 +227,7 @@ const IntegrationHub: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-cyber-aqua border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-300 font-inter">Loading...</p>
+                    <p className="text-ink-2 font-inter">Loading...</p>
                 </div>
             </div>
         );
@@ -232,8 +243,8 @@ const IntegrationHub: React.FC = () => {
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
                         Integration <span className="text-gradient-animate">Hub</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-inter leading-relaxed">
-                        Connect your favorite apps and services to unlock the full power of agentic AI automation.
+                    <p className="text-xl md:text-2xl text-ink-2 max-w-4xl mx-auto font-inter leading-relaxed">
+                        Connect your favorite apps and services to unlock the full power of AI automation and intelligent workflows.
                     </p>
                 </div>
 
@@ -242,7 +253,7 @@ const IntegrationHub: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-inter mb-2">Connected Apps</p>
+                                <p className="text-ink-2 text-sm font-inter mb-2">Connected Apps</p>
                                 <p className="text-4xl font-bold font-inter text-gradient-intelligence">
                                     {connectedCount}
                                 </p>
@@ -256,7 +267,7 @@ const IntegrationHub: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-inter mb-2">Available Integrations</p>
+                                <p className="text-ink-2 text-sm font-inter mb-2">Available Integrations</p>
                                 <p className="text-4xl font-bold font-inter text-gradient">
                                     {integrations.length}
                                 </p>
@@ -270,7 +281,7 @@ const IntegrationHub: React.FC = () => {
                     <Card variant="gradient" className="p-6 hover-glow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-gray-300 text-sm font-inter mb-2">Categories</p>
+                                <p className="text-ink-2 text-sm font-inter mb-2">Categories</p>
                                 <p className="text-4xl font-bold font-inter text-gradient-quantum">
                                     {categories.length - 1}
                                 </p>
@@ -290,7 +301,7 @@ const IntegrationHub: React.FC = () => {
                             onClick={() => setSelectedCategory(category)}
                             className={`px-6 py-3 rounded-full transition-all duration-300 font-sora font-semibold text-base ${selectedCategory === category
                                 ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white shadow-glow-md scale-105'
-                                : 'glass-premium text-gray-300 hover:text-white hover:border-cyber-aqua/50'
+                                : 'glass-premium text-ink-2 hover:text-ink hover:border-cyber-aqua/50'
                                 }`}
                         >
                             {category}
@@ -309,7 +320,7 @@ const IntegrationHub: React.FC = () => {
                                 <span
                                     className={`px-3 py-1 rounded-full text-xs font-semibold ${integration.status === 'connected'
                                         ? 'bg-neon-green/20 text-neon-green'
-                                        : 'bg-gray-500/20 text-gray-400'
+                                        : 'bg-gray-500/20 text-ink-2'
                                         }`}
                                 >
                                     {integration.status === 'connected' ? '✓ Connected' : 'Not Connected'}
@@ -320,17 +331,17 @@ const IntegrationHub: React.FC = () => {
                                 {integration.name}
                             </h3>
 
-                            <p className="text-sm text-gray-400 mb-1 font-inter">
+                            <p className="text-sm text-ink-2 mb-1 font-inter">
                                 {integration.category}
                             </p>
 
-                            <p className="text-gray-300 mb-4 font-inter leading-relaxed">
+                            <p className="text-ink-2 mb-4 font-inter leading-relaxed">
                                 {integration.description}
                             </p>
 
                             {integration.status === 'connected' ? (
                                 <div className="space-y-2">
-                                    <p className="text-xs text-gray-400 font-inter">
+                                    <p className="text-xs text-ink-2 font-inter">
                                         Connected {integration.connectedAt?.toLocaleDateString() || 'recently'}
                                     </p>
                                     <div className="flex gap-2">
@@ -365,7 +376,7 @@ const IntegrationHub: React.FC = () => {
                     <h2 className="text-4xl md:text-5xl font-bold font-inter mb-6 text-gradient-quantum">
                         Need a Custom Integration?
                     </h2>
-                    <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto font-inter leading-relaxed">
+                    <p className="text-xl text-ink-2 mb-8 max-w-3xl mx-auto font-inter leading-relaxed">
                         We can build custom integrations for your specific needs. Contact our team to discuss your requirements.
                     </p>
                     <Button variant="gradient-purple" size="xl" onClick={() => navigate('/contact')}>

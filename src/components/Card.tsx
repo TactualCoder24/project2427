@@ -5,7 +5,7 @@ interface CardProps {
   className?: string;
   hover?: boolean;
   glassmorphism?: boolean;
-  variant?: 'default' | 'gradient' | 'premium' | 'bordered';
+  variant?: 'default' | 'gradient' | 'premium' | 'bordered' | 'dark';
   style?: React.CSSProperties;
 }
 
@@ -25,11 +25,12 @@ const Card: React.FC<CardProps> = ({
 
   const variantClasses = {
     default: glassmorphism
-      ? 'bg-white/5 backdrop-blur-sm border border-white/10'
-      : 'bg-dark-gray border border-medium-gray',
+      ? 'bg-ink/5 backdrop-blur-sm border border-edge'
+      : 'bg-surface-3 border border-edge',
     gradient: 'glass-gradient border-gradient',
     premium: 'glass-premium shadow-glow-sm',
-    bordered: 'bg-dark-gray border-2 border-gradient-animate',
+    bordered: 'bg-surface-3 border-2 border-gradient-animate',
+    dark: 'bg-surface-3/60 border border-edge hover:border-edge-2 hover:bg-surface-3/90 transition-all duration-300',
   };
 
   return (
