@@ -28,6 +28,8 @@ import ScheduleDemo from './pages/ScheduleDemo';
 import FAQ from './pages/FAQ';
 import Documentation from './pages/Documentation';
 import LiveSupport from './pages/LiveSupport';
+import Learn from './pages/Learn';
+import CourseDetail from './pages/CourseDetail';
 import NotFound from './pages/NotFound';
 import { useTriggerListener } from './hooks/useTriggerListener';
 
@@ -85,6 +87,8 @@ function AppContent() {
             <Route path="/faq" element={<AnimatedPage><FAQ /></AnimatedPage>} />
             <Route path="/docs" element={<AnimatedPage><Documentation /></AnimatedPage>} />
             <Route path="/support" element={<AnimatedPage><LiveSupport /></AnimatedPage>} />
+            <Route path="/learn" element={<AnimatedPage><Learn /></AnimatedPage>} />
+            <Route path="/learn/:courseId" element={<AnimatedPage><CourseDetail /></AnimatedPage>} />
             <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
           </Routes>
         </AnimatePresence>
