@@ -284,6 +284,26 @@ html.dark .text-gradient-cosmic {
   background-clip: text;
 }
 
+/* ── Raw bright-color text overrides ──────────────────────────────────
+   Several pages use Tailwind's raw neon/cyan/blue color utilities
+   (text-neon-blue, text-electric-blue, etc.) directly as text color —
+   these are vivid enough to read fine on the near-black dark surface,
+   but fail contrast against the light surface. Darken them in light
+   mode only; html.dark below restores the original vividness. */
+.text-neon-blue         { color: #0B6FE0; }
+.text-electric-blue     { color: #1863B0; }
+.text-cyber-cyan        { color: #0E7490; }
+.text-cyber-aqua        { color: #0C7B82; }
+.text-intelligence-blue { color: #1D4ED8; }
+.text-neon-green        { color: #0F9D6B; }
+
+html.dark .text-neon-blue         { color: #00D4FF; }
+html.dark .text-electric-blue     { color: #0EA5E9; }
+html.dark .text-cyber-cyan        { color: #06B6D4; }
+html.dark .text-cyber-aqua        { color: #00CED1; }
+html.dark .text-intelligence-blue { color: #3B82F6; }
+html.dark .text-neon-green        { color: #00FF88; }
+
 /* ── Glassmorphism ─────────────────────────────────────────────────── */
 
 .glass-premium {
