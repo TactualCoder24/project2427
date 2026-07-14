@@ -63,7 +63,7 @@ const OAuthCallback: React.FC = () => {
     }, [searchParams, navigate]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-surface via-surface-2 to-surface">
             <div className="text-center max-w-md px-6">
                 {/* Loading Spinner */}
                 {status === 'processing' && (

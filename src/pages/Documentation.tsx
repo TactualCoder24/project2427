@@ -4,7 +4,7 @@ type Tab = 'api' | 'workflows' | 'integrations';
 
 const CodeBlock: React.FC<{ code: string; language?: string }> = ({ code, language = 'typescript' }) => (
     <div className="relative my-4">
-        <div className="flex items-center justify-between px-4 py-2 bg-white/5 border border-edge rounded-t-xl">
+        <div className="flex items-center justify-between px-4 py-2 bg-ink/5 border border-edge rounded-t-xl">
             <span className="text-xs text-ink-2 font-mono">{language}</span>
         </div>
         <pre className="bg-black/40 border border-edge border-t-0 rounded-b-xl p-4 overflow-x-auto">
@@ -53,7 +53,7 @@ const APIDocsTab: React.FC = () => (
                 Custom agents extend the AgentOrchestrator with real integrations. Each agent handles a specific platform or action type.
             </p>
             <Callout type="info">
-                Agents currently return stub responses. Connect real APIs by replacing the stub return values in <code className="font-mono text-xs bg-white/10 px-1 rounded">AgentOrchestrator.ts → executeStep()</code>.
+                Agents currently return stub responses. Connect real APIs by replacing the stub return values in <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">AgentOrchestrator.ts → executeStep()</code>.
             </Callout>
         </Section>
 
@@ -72,7 +72,7 @@ const APIDocsTab: React.FC = () => (
 
             <SubSection title="Adding a Custom Agent">
                 <p className="text-ink-2 font-inter text-sm mb-2">
-                    Add a new case inside <code className="font-mono text-xs bg-white/10 px-1 rounded">executeStep()</code> in <code className="font-mono text-xs bg-white/10 px-1 rounded">src/lib/agents/AgentOrchestrator.ts</code>:
+                    Add a new case inside <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">executeStep()</code> in <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">src/lib/agents/AgentOrchestrator.ts</code>:
                 </p>
                 <CodeBlock language="typescript" code={`case 'MyCustomAgent':
   if (step.action === 'do_something') {
@@ -90,7 +90,7 @@ const APIDocsTab: React.FC = () => (
 
             <SubSection title="Registering the Agent in the Workflow Builder">
                 <p className="text-ink-2 font-inter text-sm mb-2">
-                    Add your agent to the <code className="font-mono text-xs bg-white/10 px-1 rounded">availableAgents</code> array in <code className="font-mono text-xs bg-white/10 px-1 rounded">src/pages/WorkflowBuilder.tsx</code>:
+                    Add your agent to the <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">availableAgents</code> array in <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">src/pages/WorkflowBuilder.tsx</code>:
                 </p>
                 <CodeBlock language="typescript" code={`const availableAgents = [
   // ... existing agents
@@ -206,7 +206,7 @@ const WorkflowGuideTab: React.FC = () => (
                     <span className="text-2xl">1.</span>
                     <div>
                         <p className="font-semibold text-ink mb-1">Go to Workflow Builder</p>
-                        <p className="text-ink-2">Navigate to <code className="font-mono text-xs bg-white/10 px-1 rounded">/workflows</code> and click <strong>Create New Workflow</strong>.</p>
+                        <p className="text-ink-2">Navigate to <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">/workflows</code> and click <strong>Create New Workflow</strong>.</p>
                     </div>
                 </div>
                 <div className="flex gap-4 p-4 glass-premium rounded-xl">
@@ -254,7 +254,7 @@ const WorkflowGuideTab: React.FC = () => (
 
         <Section title="Step 2 — Monitor Executions">
             <p className="text-ink-2 font-inter text-sm mb-4">
-                Every run creates a record in the Execution Dashboard at <code className="font-mono text-xs bg-white/10 px-1 rounded">/executions</code>. You can see per-step status, duration, output, and error messages in real-time.
+                Every run creates a record in the Execution Dashboard at <code className="font-mono text-xs bg-ink/[0.06] px-1 rounded">/executions</code>. You can see per-step status, duration, output, and error messages in real-time.
             </p>
             <Callout type="info">
                 The dashboard subscribes to Supabase realtime — step statuses update live as the workflow runs without needing a page refresh.
@@ -280,7 +280,7 @@ const WorkflowGuideTab: React.FC = () => (
                         </div>
                         <div className="flex flex-wrap gap-1 mb-2">
                             {actions.map(a => (
-                                <span key={a} className="text-xs bg-white/5 text-ink-2 px-2 py-0.5 rounded">{a}</span>
+                                <span key={a} className="text-xs bg-ink/5 text-ink-2 px-2 py-0.5 rounded">{a}</span>
                             ))}
                         </div>
                         <p className="text-xs text-ink-3 font-inter">{note}</p>
@@ -438,11 +438,11 @@ const IntegrationGuideTab: React.FC = () => (
                 </SubSection>
 
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="p-3 bg-white/[0.03] border border-edge rounded-lg">
+                    <div className="p-3 bg-ink/[0.03] border border-edge rounded-lg">
                         <p className="text-xs text-ink-3 font-inter mb-1">Permission requested</p>
                         <p className="text-xs text-ink-2 font-inter">{permission}</p>
                     </div>
-                    <div className="p-3 bg-white/[0.03] border border-edge rounded-lg">
+                    <div className="p-3 bg-ink/[0.03] border border-edge rounded-lg">
                         <p className="text-xs text-ink-3 font-inter mb-1">Used by</p>
                         <p className="font-mono text-xs text-yellow-400">{usedBy}</p>
                     </div>
@@ -502,9 +502,9 @@ const Documentation: React.FC = () => {
                     </div>
                     <h1 className="text-6xl md:text-7xl font-display font-black mb-6">
                         <span>Learn</span>{' '}
-                        <span className="text-soft-cream">VIDVAS AI</span>
+                        <span className="text-ink">VIDVAS AI</span>
                     </h1>
-                    <p className="text-xl text-soft-cream/70 font-body max-w-2xl mx-auto">
+                    <p className="text-xl text-ink-2 font-body max-w-2xl mx-auto">
                         Guides, API reference, and integration docs to build and extend your automation workflows.
                     </p>
                 </div>
@@ -517,7 +517,7 @@ const Documentation: React.FC = () => {
                             onClick={() => setActiveTab(tab.id)}
                             className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-inter font-semibold text-sm transition-all duration-300 ${activeTab === tab.id
                                 ? 'bg-gradient-to-r from-electric-amber to-retro-orange text-deep-black shadow-atmospheric'
-                                : 'text-soft-cream/60 hover:text-soft-cream hover:bg-white/5'
+                                : 'text-ink-2 hover:text-ink hover:bg-ink/5'
                                 }`}
                         >
                             <span>{tab.icon}</span>

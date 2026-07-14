@@ -122,7 +122,7 @@ const PersonaManager: React.FC = () => {
     const totalApps = new Set(personas.flatMap(p => p.connected_apps || [])).size;
 
     return (
-        <div className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="min-h-screen py-20 bg-gradient-to-b from-surface via-surface-2 to-surface">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
@@ -228,7 +228,7 @@ const PersonaManager: React.FC = () => {
                                 <p className="text-ink-2 mb-3 font-inter leading-relaxed text-sm">{persona.description}</p>
 
                                 {persona.instructions && (
-                                    <div className="mb-3 p-3 bg-white/5 rounded-xl">
+                                    <div className="mb-3 p-3 bg-ink/5 rounded-xl">
                                         <p className="text-xs text-ink-2 mb-1 font-inter">Instructions:</p>
                                         <p className="text-xs text-ink-2 font-inter line-clamp-2">{persona.instructions}</p>
                                     </div>
@@ -239,7 +239,7 @@ const PersonaManager: React.FC = () => {
                                         <p className="text-sm text-ink-2 mb-2 font-inter">Connected Apps:</p>
                                         <div className="flex flex-wrap gap-2">
                                             {persona.connected_apps.map((app, idx) => (
-                                                <span key={idx} className="px-2 py-1 bg-white/5 rounded-lg text-xs text-ink-2">{app}</span>
+                                                <span key={idx} className="px-2 py-1 bg-ink/5 rounded-lg text-xs text-ink-2">{app}</span>
                                             ))}
                                         </div>
                                     </div>
@@ -316,7 +316,7 @@ const PersonaManager: React.FC = () => {
                                             onClick={() => setNewPersona({ ...newPersona, icon })}
                                             className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-all ${newPersona.icon === icon
                                                 ? 'bg-gradient-to-br from-cyber-aqua to-vivid-purple shadow-glow-md scale-110'
-                                                : 'bg-white/5 hover:bg-white/10'}`}
+                                                : 'bg-ink/5 hover:bg-ink/[0.06]'}`}
                                         >{icon}</button>
                                     ))}
                                 </div>
@@ -329,7 +329,7 @@ const PersonaManager: React.FC = () => {
                                     value={newPersona.name}
                                     onChange={(e) => setNewPersona({ ...newPersona, name: e.target.value })}
                                     placeholder="e.g., Marketing Assistant"
-                                    className="w-full bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
+                                    className="w-full bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
                                 />
                             </div>
 
@@ -340,7 +340,7 @@ const PersonaManager: React.FC = () => {
                                     value={newPersona.description}
                                     onChange={(e) => setNewPersona({ ...newPersona, description: e.target.value })}
                                     placeholder="Brief description of what this persona does"
-                                    className="w-full bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
+                                    className="w-full bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
                                 />
                             </div>
 
@@ -351,7 +351,7 @@ const PersonaManager: React.FC = () => {
                                     onChange={(e) => setNewPersona({ ...newPersona, instructions: e.target.value })}
                                     placeholder="How should this persona behave? e.g., 'You are a marketing expert. Always respond with data-driven insights and suggest actionable next steps.'"
                                     rows={4}
-                                    className="w-full bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua resize-none font-inter"
+                                    className="w-full bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua resize-none font-inter"
                                 />
                                 <p className="text-xs text-ink-3 mt-1 font-inter">These instructions will be used as the system prompt when this persona is active in the AI Playground.</p>
                             </div>
@@ -365,7 +365,7 @@ const PersonaManager: React.FC = () => {
                                             onClick={() => toggleApp(app)}
                                             className={`px-3 py-2 rounded-lg text-sm font-inter transition-all ${newPersona.connected_apps.includes(app)
                                                 ? 'bg-cyber-aqua/20 text-cyber-aqua border border-cyber-aqua/40'
-                                                : 'bg-white/5 text-ink-2 border border-edge hover:border-edge-2'}`}
+                                                : 'bg-ink/5 text-ink-2 border border-edge hover:border-edge-2'}`}
                                         >{app}</button>
                                     ))}
                                 </div>

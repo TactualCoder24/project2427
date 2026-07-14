@@ -486,7 +486,7 @@ const WorkflowBuilder: React.FC = () => {
 
     // ─────────────────────────────────────────
     return (
-        <div className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="min-h-screen py-20 bg-gradient-to-b from-surface via-surface-2 to-surface">
             {/* Fail alert banner */}
             {failAlert && (
                 <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 max-w-lg w-full mx-4 bg-red-500/20 border border-red-500/40 rounded-xl px-5 py-4 font-inter text-sm text-red-300 flex items-start gap-3">
@@ -548,7 +548,7 @@ const WorkflowBuilder: React.FC = () => {
                             key={tab}
                             onClick={() => setActiveTab(tab)}
                             className={`px-6 py-2.5 rounded-xl font-inter font-semibold text-sm capitalize transition-all duration-200 ${activeTab === tab
-                                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-ink shadow-glow-md'
+                                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white shadow-glow-md'
                                 : 'text-ink-2 hover:text-ink'
                             }`}
                         >
@@ -667,13 +667,13 @@ const WorkflowBuilder: React.FC = () => {
                                                 <button
                                                     title={`Version history (${versionCount} saved)`}
                                                     onClick={() => setHistoryWorkflowId(workflow.id)}
-                                                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-edge text-ink-2 hover:text-cyber-aqua hover:border-cyber-aqua/30 text-xs font-inter transition-all"
+                                                    className="px-3 py-1.5 rounded-lg bg-ink/5 border border-edge text-ink-2 hover:text-cyber-aqua hover:border-cyber-aqua/30 text-xs font-inter transition-all"
                                                 >
                                                     🕐 {versionCount > 0 ? versionCount : '—'}
                                                 </button>
                                                 <button
                                                     onClick={() => handleDeleteWorkflow(workflow)}
-                                                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-edge text-ink-2 hover:text-red-400 hover:border-red-400/30 text-xs font-inter transition-all"
+                                                    className="px-3 py-1.5 rounded-lg bg-ink/5 border border-edge text-ink-2 hover:text-red-400 hover:border-red-400/30 text-xs font-inter transition-all"
                                                 >
                                                     ✕
                                                 </button>
@@ -757,7 +757,7 @@ const WorkflowBuilder: React.FC = () => {
                                     value={formData.name}
                                     onChange={e => setFormData(f => ({ ...f, name: e.target.value }))}
                                     placeholder="e.g., Daily Report Generator"
-                                    className="w-full bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
+                                    className="w-full bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
                                 />
                             </div>
 
@@ -768,7 +768,7 @@ const WorkflowBuilder: React.FC = () => {
                                     onChange={e => setFormData(f => ({ ...f, description: e.target.value }))}
                                     placeholder="What does this workflow do?"
                                     rows={2}
-                                    className="w-full bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua resize-none font-inter"
+                                    className="w-full bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua resize-none font-inter"
                                 />
                             </div>
 
@@ -777,7 +777,7 @@ const WorkflowBuilder: React.FC = () => {
                                 <select
                                     value={formData.trigger.type}
                                     onChange={e => setFormData(f => ({ ...f, trigger: { type: e.target.value as any, config: {} } }))}
-                                    className="w-full bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
+                                    className="w-full bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink focus:outline-none focus:ring-2 focus:ring-cyber-aqua font-inter"
                                 >
                                     <option value="manual">👆 Manual</option>
                                     <option value="scheduled">⏰ Scheduled</option>
@@ -825,7 +825,7 @@ const WorkflowBuilder: React.FC = () => {
                                                         const agent = AVAILABLE_AGENTS.find(a => a.name === e.target.value)!;
                                                         updateStep(step.id, { agent: e.target.value, action: agent.actions[0], config: {} });
                                                     }}
-                                                    className="flex-1 bg-white/5 border border-edge rounded-lg px-3 py-1.5 text-ink text-sm focus:outline-none focus:ring-1 focus:ring-cyber-aqua font-inter"
+                                                    className="flex-1 bg-ink/5 border border-edge rounded-lg px-3 py-1.5 text-ink text-sm focus:outline-none focus:ring-1 focus:ring-cyber-aqua font-inter"
                                                 >
                                                     {AVAILABLE_AGENTS.map(a => (
                                                         <option key={a.name} value={a.name}>{a.icon} {a.name}</option>
@@ -834,7 +834,7 @@ const WorkflowBuilder: React.FC = () => {
                                                 <select
                                                     value={step.action}
                                                     onChange={e => updateStep(step.id, { action: e.target.value, config: {} })}
-                                                    className="flex-1 bg-white/5 border border-edge rounded-lg px-3 py-1.5 text-ink text-sm focus:outline-none focus:ring-1 focus:ring-cyber-aqua font-inter"
+                                                    className="flex-1 bg-ink/5 border border-edge rounded-lg px-3 py-1.5 text-ink text-sm focus:outline-none focus:ring-1 focus:ring-cyber-aqua font-inter"
                                                 >
                                                     {AVAILABLE_AGENTS.find(a => a.name === step.agent)?.actions.map(action => (
                                                         <option key={action} value={action}>{action}</option>
@@ -869,7 +869,7 @@ const WorkflowBuilder: React.FC = () => {
                                                                     onChange={e => updateStep(step.id, { config: { ...step.config, [field.key]: e.target.value } })}
                                                                     placeholder={field.placeholder}
                                                                     rows={2}
-                                                                    className="w-full bg-black/30 border border-edge rounded-lg px-2.5 py-1.5 text-ink text-xs placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-cyber-aqua resize-none font-inter"
+                                                                    className="w-full bg-ink/5 border border-edge rounded-lg px-2.5 py-1.5 text-ink text-xs placeholder-ink-3 focus:outline-none focus:ring-1 focus:ring-cyber-aqua resize-none font-inter"
                                                                 />
                                                             ) : (
                                                                 <input
@@ -877,7 +877,7 @@ const WorkflowBuilder: React.FC = () => {
                                                                     value={(step.config?.[field.key] as string) || ''}
                                                                     onChange={e => updateStep(step.id, { config: { ...step.config, [field.key]: e.target.value } })}
                                                                     placeholder={field.placeholder}
-                                                                    className="w-full bg-black/30 border border-edge rounded-lg px-2.5 py-1.5 text-ink text-xs placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-cyber-aqua font-inter"
+                                                                    className="w-full bg-ink/5 border border-edge rounded-lg px-2.5 py-1.5 text-ink text-xs placeholder-ink-3 focus:outline-none focus:ring-1 focus:ring-cyber-aqua font-inter"
                                                                 />
                                                             )}
                                                         </div>
@@ -930,7 +930,7 @@ const WorkflowBuilder: React.FC = () => {
                             <div className="text-center py-10 text-ink-3 font-inter">
                                 <p className="text-3xl mb-3">🕐</p>
                                 <p>No versions saved yet.</p>
-                                <p className="text-xs mt-2 text-gray-600">Versions are saved when you create or edit a workflow.</p>
+                                <p className="text-xs mt-2 text-ink-3">Versions are saved when you create or edit a workflow.</p>
                             </div>
                         ) : (
                             <div className="space-y-3">
@@ -948,7 +948,7 @@ const WorkflowBuilder: React.FC = () => {
                                                         {version.changeType}
                                                     </span>
                                                     {i === 0 && (
-                                                        <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-ink-2">current</span>
+                                                        <span className="text-xs px-2 py-0.5 rounded-full bg-ink/[0.06] text-ink-2">current</span>
                                                     )}
                                                 </div>
                                                 <p className="text-ink-2 text-xs font-inter">
@@ -966,7 +966,7 @@ const WorkflowBuilder: React.FC = () => {
                                         </div>
                                         <div className="flex flex-wrap gap-1.5">
                                             {version.steps.map((s, si) => (
-                                                <span key={si} className="text-xs bg-white/5 text-ink-2 px-2 py-0.5 rounded font-mono">
+                                                <span key={si} className="text-xs bg-ink/5 text-ink-2 px-2 py-0.5 rounded font-mono">
                                                     {AGENT_ICON[s.agent] || '🔧'} {s.agent} → {s.action}
                                                 </span>
                                             ))}

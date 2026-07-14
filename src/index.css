@@ -8,16 +8,16 @@
 /* ── Theme tokens ──────────────────────────────────────────────────── */
 
 :root {
-  --surface:      #F6F8FC;
-  --surface-2:    #FFFFFF;
-  --surface-3:    #EBF0F8;
-  --ink:          #0B1220;
-  --ink-2:        #45506B;
-  --ink-3:        #6B7690;
-  --edge:         rgba(11, 18, 32, 0.09);
-  --edge-2:       rgba(11, 18, 32, 0.16);
-  --accent:       #0B6FE0;
-  --accent-2:     #0EA5E9;
+  --surface:      #F3F4F8;
+  --surface-2:    #FAFAFC;
+  --surface-3:    #EAECF2;
+  --ink:          #171B26;
+  --ink-2:        #4B5468;
+  --ink-3:        #6E7690;
+  --edge:         rgba(23, 27, 38, 0.09);
+  --edge-2:       rgba(23, 27, 38, 0.16);
+  --accent:       #2461C7;
+  --accent-2:     #1D7A9C;
 
   --glass-bg:      rgba(11, 18, 32, 0.035);
   --glass-border:  rgba(11, 18, 32, 0.09);
@@ -165,8 +165,11 @@ code {
 
 /* ── Gradient text utilities ───────────────────────────────────────── */
 
+/* Light mode (default): deeper, less-saturated tones — vivid neon on a
+   near-white background reads as harsh/bright. Dark mode overrides below
+   restore the full neon vividness against the near-black surface. */
 .text-gradient {
-  background: linear-gradient(135deg, #00D4FF 0%, #0EA5E9 50%, #00FF88 100%);
+  background: linear-gradient(135deg, #0B6FE0 0%, #0891B2 50%, #0F9D6B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -174,21 +177,21 @@ code {
 }
 
 .text-gradient-cyber {
-  background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 50%, #2563EB 100%);
+  background: linear-gradient(135deg, #0B6FE0 0%, #0891B2 50%, #1D4ED8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-electric {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E3A8A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-animate {
-  background: linear-gradient(135deg, #00D4FF 0%, #0EA5E9 50%, #00FF88 100%);
+  background: linear-gradient(135deg, #0B6FE0 0%, #0891B2 50%, #0F9D6B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -197,14 +200,14 @@ code {
 }
 
 .text-gradient-intelligence {
-  background: linear-gradient(135deg, #00CED1 0%, #1D4ED8 100%);
+  background: linear-gradient(135deg, #0891B2 0%, #1D4ED8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-quantum {
-  background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+  background: linear-gradient(135deg, #0B6FE0 0%, #1D4ED8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -212,23 +215,72 @@ code {
 
 /* Editorial gradient aliases (kept for Login.tsx) */
 .text-gradient-editorial {
-  background: linear-gradient(135deg, #FFB627 0%, #00CED1 100%);
+  background: linear-gradient(135deg, #C77A15 0%, #0891B2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-retro {
-  background: linear-gradient(135deg, #00D4FF 0%, #00FF88 100%);
+  background: linear-gradient(135deg, #0B6FE0 0%, #0F9D6B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-cosmic {
-  background: linear-gradient(135deg, #0C2461 0%, #2563EB 50%, #0EA5E9 100%);
+  background: linear-gradient(135deg, #0C2461 0%, #1D4ED8 50%, #0B6FE0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html.dark .text-gradient,
+html.dark .text-gradient-animate {
+  background: linear-gradient(135deg, #00D4FF 0%, #0EA5E9 50%, #00FF88 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-cyber {
+  background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 50%, #2563EB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-electric {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-intelligence {
+  background: linear-gradient(135deg, #00CED1 0%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-quantum {
+  background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-editorial {
+  background: linear-gradient(135deg, #FFB627 0%, #00CED1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-retro {
+  background: linear-gradient(135deg, #00D4FF 0%, #00FF88 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html.dark .text-gradient-cosmic {
+  background: linear-gradient(135deg, #0C2461 0%, #2563EB 50%, #0EA5E9 100%);
+  -webkit-background-clip: text;
   background-clip: text;
 }
 

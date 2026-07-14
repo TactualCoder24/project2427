@@ -29,7 +29,7 @@ const NotFound: React.FC = () => {
     }, [navigate]);
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden px-4">
+        <div className="min-h-screen bg-surface flex items-center justify-center relative overflow-hidden px-4">
             {/* Background glows */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(14,165,233,0.15),transparent_60%)]" />
@@ -37,7 +37,7 @@ const NotFound: React.FC = () => {
             </div>
 
             {/* Decorative floating ring */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/4 animate-spin-slow pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-edge animate-spin-slow pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full border border-electric-blue/10 animate-spin-slow pointer-events-none" style={{ animationDirection: 'reverse', animationDuration: '18s' }} />
 
             <div className="relative z-10 text-center max-w-lg mx-auto">

@@ -96,7 +96,7 @@ const ScheduleDemo: React.FC = () => {
                 )}
 
                 {/* Form */}
-                <div className="bg-gray-900/60 border border-edge rounded-2xl p-8">
+                <div className="bg-surface-3/60 border border-edge rounded-2xl p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -107,7 +107,7 @@ const ScheduleDemo: React.FC = () => {
                                     required
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-white/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
+                                    className="w-full px-4 py-3 bg-ink/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
                                     placeholder="Rajesh Kumar"
                                 />
                             </div>
@@ -120,7 +120,7 @@ const ScheduleDemo: React.FC = () => {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-white/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
+                                    className="w-full px-4 py-3 bg-ink/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
                                     placeholder="rajesh@company.com"
                                 />
                             </div>
@@ -133,7 +133,7 @@ const ScheduleDemo: React.FC = () => {
                                     required
                                     value={formData.company}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-white/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
+                                    className="w-full px-4 py-3 bg-ink/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
                                     placeholder="Your Company"
                                 />
                             </div>
@@ -145,7 +145,7 @@ const ScheduleDemo: React.FC = () => {
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-white/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
+                                    className="w-full px-4 py-3 bg-ink/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
                                     placeholder="+91 98765 43210"
                                 />
                             </div>
@@ -157,7 +157,7 @@ const ScheduleDemo: React.FC = () => {
                                 name="employees"
                                 value={formData.employees}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-gray-900 border border-edge rounded-xl text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
+                                className="w-full px-4 py-3 bg-surface-3 border border-edge rounded-xl text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors font-inter"
                             >
                                 <option value="">Select company size</option>
                                 <option value="1-10">1–10 employees</option>
@@ -175,7 +175,7 @@ const ScheduleDemo: React.FC = () => {
                                 rows={4}
                                 value={formData.message}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 bg-white/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors resize-none font-inter"
+                                className="w-full px-4 py-3 bg-ink/5 border border-edge rounded-xl text-ink placeholder-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue focus:border-electric-blue/50 transition-colors resize-none font-inter"
                                 placeholder="Tell us about your automation needs..."
                             />
                         </div>
@@ -183,7 +183,7 @@ const ScheduleDemo: React.FC = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-gradient-to-r from-electric-blue to-vivid-purple text-ink px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-glow-md disabled:opacity-50 disabled:cursor-not-allowed font-outfit btn-shimmer overflow-hidden"
+                            className="w-full bg-gradient-to-r from-electric-blue to-vivid-purple text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-glow-md disabled:opacity-50 disabled:cursor-not-allowed font-outfit btn-shimmer overflow-hidden"
                         >
                             {isSubmitting ? (
                                 <span className="flex items-center justify-center gap-2">
@@ -204,7 +204,7 @@ const ScheduleDemo: React.FC = () => {
                         { icon: '🎯', title: 'Personalized', desc: 'Tailored to your use case' },
                         { icon: '💡', title: 'Expert Guidance', desc: 'Direct from our team' }
                     ].map((item) => (
-                        <div key={item.title} className="bg-white/[0.03] border border-edge rounded-xl p-5 text-center">
+                        <div key={item.title} className="bg-ink/[0.03] border border-edge rounded-xl p-5 text-center">
                             <div className="text-2xl mb-2">{item.icon}</div>
                             <h3 className="text-sm font-bold text-ink mb-1 font-outfit">{item.title}</h3>
                             <p className="text-ink-3 text-xs font-jakarta">{item.desc}</p>

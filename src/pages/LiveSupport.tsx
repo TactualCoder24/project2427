@@ -53,7 +53,7 @@ const LiveSupport: React.FC = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Chat Window */}
-                    <div className="lg:col-span-2 flex flex-col bg-gray-900/60 border border-edge rounded-2xl overflow-hidden">
+                    <div className="lg:col-span-2 flex flex-col bg-surface-3/60 border border-edge rounded-2xl overflow-hidden">
                         {/* Chat Header */}
                         <div className="bg-gradient-to-r from-electric-blue/20 to-cyber-cyan/20 border-b border-edge p-4 flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-electric-blue/20 flex items-center justify-center">
@@ -135,18 +135,18 @@ const LiveSupport: React.FC = () => {
                         {[
                             { title: 'Support Hours', items: ['✅ 24/7 AI Chat', '✅ Email Support', '🕐 Phone: Mon–Fri 9AM–6PM IST'] },
                         ].map(s => (
-                            <div key={s.title} className="bg-gray-900/60 border border-edge rounded-xl p-5">
+                            <div key={s.title} className="bg-surface-3/60 border border-edge rounded-xl p-5">
                                 <h3 className="text-sm font-bold text-ink mb-3 font-inter">{s.title}</h3>
                                 <div className="space-y-2">{s.items.map(item => <p key={item} className="text-ink-2 text-sm font-inter">{item}</p>)}</div>
                             </div>
                         ))}
-                        <div className="bg-gray-900/60 border border-edge rounded-xl p-5 space-y-2">
+                        <div className="bg-surface-3/60 border border-edge rounded-xl p-5 space-y-2">
                             <h3 className="text-sm font-bold text-ink mb-3 font-inter">Quick Links</h3>
                             {[['📖 FAQ', '/faq'], ['📚 Docs', '/docs'], ['📅 Book Demo', '/demo']].map(([label, href]) => (
                                 <a key={href} href={href} className="block p-2.5 rounded-lg bg-white/[0.03] border border-edge hover:border-electric-blue/30 text-ink-2 hover:text-ink text-sm font-inter transition-all">{label}</a>
                             ))}
                         </div>
-                        <div className="bg-gray-900/60 border border-edge rounded-xl p-5">
+                        <div className="bg-surface-3/60 border border-edge rounded-xl p-5">
                             <h3 className="text-sm font-bold text-ink mb-3 font-inter">Contact</h3>
                             <div className="space-y-1.5 text-sm text-ink-2 font-inter">
                                 <p>📧 support@vidvasai.com</p>

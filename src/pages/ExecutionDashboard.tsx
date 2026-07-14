@@ -82,7 +82,7 @@ const ExecutionDashboard: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="min-h-screen py-20 bg-gradient-to-b from-surface via-surface-2 to-surface">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-inter mb-6">
@@ -211,7 +211,7 @@ const ExecutionDashboard: React.FC = () => {
                                             <span className="text-sm text-ink-2 font-inter">Progress</span>
                                             <span className="text-sm font-bold text-ink">{successRate}%</span>
                                         </div>
-                                        <div className="w-full bg-white/10 rounded-full h-2">
+                                        <div className="w-full bg-ink/[0.06] rounded-full h-2">
                                             <div
                                                 className={`h-2 rounded-full transition-all duration-500 ${execution.status === 'completed'
                                                     ? 'bg-gradient-to-r from-neon-green to-lime-green'
@@ -328,7 +328,7 @@ const ExecutionDashboard: React.FC = () => {
                                                             step.status === 'running' ? '⏳' : '○'}
                                                 </div>
                                                 {idx < selectedExecution.steps.length - 1 && (
-                                                    <div className="w-0.5 h-12 bg-white/10" />
+                                                    <div className="w-0.5 h-12 bg-ink/[0.06]" />
                                                 )}
                                             </div>
                                             <div className="flex-1 pb-4">
@@ -344,7 +344,7 @@ const ExecutionDashboard: React.FC = () => {
                                                         </div>
                                                     )}
                                                     {step.output && (
-                                                        <div className="mt-2 p-2 bg-white/5 rounded-lg">
+                                                        <div className="mt-2 p-2 bg-ink/5 rounded-lg">
                                                             <p className="text-xs text-ink-2 font-inter font-mono">
                                                                 {typeof step.output === 'string' ? step.output : JSON.stringify(step.output, null, 2)}
                                                             </p>

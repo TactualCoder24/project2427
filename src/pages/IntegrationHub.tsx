@@ -236,7 +236,7 @@ const IntegrationHub: React.FC = () => {
     const connectedCount = integrations.filter(i => i.status === 'connected').length;
 
     return (
-        <div className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="min-h-screen py-20 bg-gradient-to-b from-surface via-surface-2 to-surface">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">

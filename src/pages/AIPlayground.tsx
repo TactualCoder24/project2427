@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import { invisibleChainEngine, InvisibleChain } from '../lib/agents/InvisibleChains';
+import { agentIntegrationService, agentWorkflowService } from '../lib/supabaseAgentService';
 
 interface Message {
     id: string;
@@ -35,6 +36,14 @@ const AIPlayground: React.FC = () => {
     ]);
     const [input, setInput] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
+    const [agentStatus, setAgentStatus] = useState<{ name: string; status: 'active' | 'inactive' }[]>([
+        { name: 'Intent Recognizer', status: 'active' },
+        { name: 'Routing Agent', status: 'active' },
+        { name: 'Gmail Agent', status: 'inactive' },
+        { name: 'Slack Agent', status: 'inactive' },
+        { name: 'Notion Agent', status: 'inactive' },
+    ]);
+    const [stats, setStats] = useState({ totalRuns: 0, successRate: 0 });
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -48,6 +57,45 @@ const AIPlayground: React.FC = () => {
             }
         });
     }, [isAuthenticated, navigate]);
+
+    useEffect(() => {
+        const loadOverview = async () => {
+            if (!user) return;
+            try {
+                const [integrations, workflows] = await Promise.all([
+                    agentIntegrationService.getAll(),
+                    agentWorkflowService.getAll(),
+                ]);
+
+                const connectedNames = new Set(
+                    integrations.filter(i => i.status === 'connected').map(i => i.integration_name)
+                );
+                const integrationAgentMap: Record<string, string> = {
+                    'Gmail': 'Gmail Agent',
+                    'Slack': 'Slack Agent',
+                    'Notion': 'Notion Agent',
+                };
+                setAgentStatus(prev => prev.map(agent => {
+                    const integrationName = Object.keys(integrationAgentMap).find(
+                        key => integrationAgentMap[key] === agent.name
+                    );
+                    return integrationName && connectedNames.has(integrationName)
+                        ? { ...agent, status: 'active' as const }
+                        : agent;
+                }));
+
+                const totalRuns = workflows.reduce((sum, w) => sum + (w.run_count || 0), 0);
+                const totalSuccesses = workflows.reduce((sum, w) => sum + (w.success_count || 0), 0);
+                setStats({
+                    totalRuns,
+                    successRate: totalRuns > 0 ? Math.round((totalSuccesses / totalRuns) * 100) : 0,
+                });
+            } catch (error) {
+                console.error('Error loading playground overview:', error);
+            }
+        };
+        loadOverview();
+    }, [user]);
 
     useEffect(() => {
         scrollToBottom();
@@ -195,7 +243,7 @@ const AIPlayground: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="min-h-screen py-20 bg-gradient-to-b from-surface via-surface-2 to-surface">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
@@ -233,7 +281,7 @@ const AIPlayground: React.FC = () => {
                                     >
                                         <div
                                             className={`max-w-[80%] rounded-2xl p-4 ${message.role === 'user'
-                                                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-ink'
+                                                ? 'bg-gradient-to-r from-cyber-aqua to-vivid-purple text-white'
                                                 : message.role === 'system'
                                                     ? 'glass-premium border border-cyber-aqua/30'
                                                     : 'glass-premium border border-edge'
@@ -242,7 +290,7 @@ const AIPlayground: React.FC = () => {
                                             <div className="flex items-start gap-3">
                                                 <div className="flex-shrink-0">
                                                     {message.role === 'user' ? (
-                                                        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                                                        <div className="w-8 h-8 rounded-full bg-ink/[0.12] flex items-center justify-center">
                                                             <span className="text-sm">👤</span>
                                                         </div>
                                                     ) : (
@@ -318,7 +366,7 @@ const AIPlayground: React.FC = () => {
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyPress={handleKeyPress}
                                         placeholder="Type your command... (e.g., 'Send an email to team@example.com')"
-                                        className="flex-1 bg-white/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent resize-none font-inter"
+                                        className="flex-1 bg-ink/5 border border-edge rounded-xl px-4 py-3 text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-cyber-aqua focus:border-transparent resize-none font-inter"
                                         rows={2}
                                         disabled={isProcessing}
                                     />
@@ -366,13 +414,7 @@ const AIPlayground: React.FC = () => {
                                 🤖 Active Agents
                             </h3>
                             <div className="space-y-3">
-                                {[
-                                    { name: 'Intent Recognizer', status: 'active' },
-                                    { name: 'Routing Agent', status: 'active' },
-                                    { name: 'Gmail Agent', status: 'inactive' },
-                                    { name: 'Slack Agent', status: 'inactive' },
-                                    { name: 'Notion Agent', status: 'inactive' }
-                                ].map((agent, idx) => (
+                                {agentStatus.map((agent, idx) => (
                                     <div key={idx} className="flex items-center justify-between p-3 glass-premium rounded-xl">
                                         <span className="text-ink-2 font-inter">{agent.name}</span>
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${agent.status === 'active'
@@ -423,19 +465,19 @@ const AIPlayground: React.FC = () => {
                                 <div>
                                     <div className="flex justify-between mb-2">
                                         <span className="text-ink-2 font-inter">Tasks Executed</span>
-                                        <span className="text-ink font-bold">0</span>
+                                        <span className="text-ink font-bold">{stats.totalRuns}</span>
                                     </div>
-                                    <div className="w-full bg-white/10 rounded-full h-2">
-                                        <div className="bg-gradient-to-r from-cyber-aqua to-vivid-purple h-2 rounded-full" style={{ width: '0%' }}></div>
+                                    <div className="w-full bg-ink/[0.06] rounded-full h-2">
+                                        <div className="bg-gradient-to-r from-cyber-aqua to-vivid-purple h-2 rounded-full" style={{ width: `${Math.min(stats.totalRuns, 100)}%` }}></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div className="flex justify-between mb-2">
                                         <span className="text-ink-2 font-inter">Success Rate</span>
-                                        <span className="text-ink font-bold">--</span>
+                                        <span className="text-ink font-bold">{stats.totalRuns > 0 ? `${stats.successRate}%` : '--'}</span>
                                     </div>
-                                    <div className="w-full bg-white/10 rounded-full h-2">
-                                        <div className="bg-gradient-to-r from-neon-green to-lime-green h-2 rounded-full" style={{ width: '0%' }}></div>
+                                    <div className="w-full bg-ink/[0.06] rounded-full h-2">
+                                        <div className="bg-gradient-to-r from-neon-green to-lime-green h-2 rounded-full" style={{ width: `${stats.successRate}%` }}></div>
                                     </div>
                                 </div>
                             </div>

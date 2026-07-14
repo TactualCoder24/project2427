@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-black mb-10">
             Get in <span className="text-gradient-editorial">Touch</span>
           </h1>
-          <p className="text-2xl md:text-3xl text-soft-cream/80 max-w-4xl mx-auto font-body leading-relaxed">
+          <p className="text-2xl md:text-3xl text-ink-2 max-w-4xl mx-auto font-body leading-relaxed">
             Ready to transform your business with AI? Let's discuss how our full-stack AI services can help you achieve your goals.
           </p>
         </div>
@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-soft-cream/90 mb-3 font-body uppercase tracking-wide">
+                  <label htmlFor="name" className="block text-sm font-semibold text-ink-2 mb-3 font-body uppercase tracking-wide">
                     Full Name *
                   </label>
                   <input
@@ -94,12 +94,12 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-5 py-4 glass-editorial border-2 border-electric-amber/30 rounded-2xl text-soft-cream placeholder-soft-cream/40 focus:outline-none focus:ring-2 focus:ring-electric-amber focus:border-electric-amber transition-all duration-300 font-body"
+                    className="w-full px-5 py-4 glass-editorial border-2 border-electric-amber/30 rounded-2xl text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-electric-amber focus:border-electric-amber transition-all duration-300 font-body"
                     placeholder="Your full name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-soft-cream/90 mb-3 font-body uppercase tracking-wide">
+                  <label htmlFor="email" className="block text-sm font-semibold text-ink-2 mb-3 font-body uppercase tracking-wide">
                     Email Address *
                   </label>
                   <input
@@ -109,14 +109,14 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-5 py-4 glass-editorial border-2 border-deep-cyan/30 rounded-2xl text-soft-cream placeholder-soft-cream/40 focus:outline-none focus:ring-2 focus:ring-deep-cyan focus:border-deep-cyan transition-all duration-300 font-body"
+                    className="w-full px-5 py-4 glass-editorial border-2 border-deep-cyan/30 rounded-2xl text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-deep-cyan focus:border-deep-cyan transition-all duration-300 font-body"
                     placeholder="your@email.com"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="company" className="block text-sm font-semibold text-soft-cream/90 mb-3 font-body uppercase tracking-wide">
+                <label htmlFor="company" className="block text-sm font-semibold text-ink-2 mb-3 font-body uppercase tracking-wide">
                   Company
                 </label>
                 <input
@@ -125,13 +125,13 @@ const Contact: React.FC = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className="w-full px-5 py-4 glass-editorial border-2 border-vintage-magenta/30 rounded-2xl text-soft-cream placeholder-soft-cream/40 focus:outline-none focus:ring-2 focus:ring-vintage-magenta focus:border-vintage-magenta transition-all duration-300 font-body"
+                  className="w-full px-5 py-4 glass-editorial border-2 border-vintage-magenta/30 rounded-2xl text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-vintage-magenta focus:border-vintage-magenta transition-all duration-300 font-body"
                   placeholder="Your company name"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-semibold text-soft-cream/90 mb-3 font-body uppercase tracking-wide">
+                <label htmlFor="subject" className="block text-sm font-semibold text-ink-2 mb-3 font-body uppercase tracking-wide">
                   Subject *
                 </label>
                 <select
@@ -140,24 +140,20 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-5 py-4 glass-editorial border-2 border-retro-orange/30 rounded-2xl text-soft-cream focus:outline-none focus:ring-2 focus:ring-retro-orange focus:border-retro-orange transition-all duration-300 font-body bg-warm-black"
-                  style={{
-                    backgroundColor: '#1A1614',
-                    color: '#F5F1E8'
-                  }}
+                  className="w-full px-5 py-4 glass-editorial border-2 border-retro-orange/30 rounded-2xl text-ink focus:outline-none focus:ring-2 focus:ring-retro-orange focus:border-retro-orange transition-all duration-300 font-body bg-surface-2"
                 >
-                  <option value="" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>Select a subject</option>
-                  <option value="general" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>General Inquiry</option>
-                  <option value="demo" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>Request Demo</option>
-                  <option value="pricing" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>Pricing Information</option>
-                  <option value="partnership" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>Partnership</option>
-                  <option value="support" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>Technical Support</option>
-                  <option value="other" style={{ backgroundColor: '#1A1614', color: '#F5F1E8' }}>Other</option>
+                  <option value="">Select a subject</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="demo">Request Demo</option>
+                  <option value="pricing">Pricing Information</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="support">Technical Support</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-soft-cream/90 mb-3 font-body uppercase tracking-wide">
+                <label htmlFor="message" className="block text-sm font-semibold text-ink-2 mb-3 font-body uppercase tracking-wide">
                   Message *
                 </label>
                 <textarea
@@ -167,7 +163,7 @@ const Contact: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-5 py-4 glass-editorial border-2 border-electric-amber/30 rounded-2xl text-soft-cream placeholder-soft-cream/40 focus:outline-none focus:ring-2 focus:ring-electric-amber focus:border-electric-amber transition-all duration-300 resize-none font-body"
+                  className="w-full px-5 py-4 glass-editorial border-2 border-electric-amber/30 rounded-2xl text-ink placeholder-ink-3 focus:outline-none focus:ring-2 focus:ring-electric-amber focus:border-electric-amber transition-all duration-300 resize-none font-body"
                   placeholder="Tell us about your project and how we can help..."
                 />
               </div>
@@ -266,20 +262,20 @@ const Contact: React.FC = () => {
             </Card>
 
             <Card className="p-8" glassmorphism>
-              <h2 className="text-2xl font-bold mb-6">Follow Us</h2>
+              <h2 className="text-2xl font-bold mb-6 text-ink">Follow Us</h2>
               <div className="flex space-x-4">
-                <a href="#" className="w-12 h-12 bg-medium-gray rounded-full flex items-center justify-center hover:bg-neon-blue hover:text-black transition-all duration-200">
+                <button type="button" className="w-12 h-12 bg-surface-3 border border-edge rounded-full flex items-center justify-center text-ink hover:bg-neon-blue hover:text-black transition-all duration-200">
                   <span className="text-xl">𝕏</span>
-                </a>
-                <a href="#" className="w-12 h-12 bg-medium-gray rounded-full flex items-center justify-center hover:bg-neon-blue hover:text-black transition-all duration-200">
+                </button>
+                <button type="button" className="w-12 h-12 bg-surface-3 border border-edge rounded-full flex items-center justify-center text-ink hover:bg-neon-blue hover:text-black transition-all duration-200">
                   <span className="text-xl">💼</span>
-                </a>
-                <a href="#" className="w-12 h-12 bg-medium-gray rounded-full flex items-center justify-center hover:bg-neon-blue hover:text-black transition-all duration-200">
+                </button>
+                <button type="button" className="w-12 h-12 bg-surface-3 border border-edge rounded-full flex items-center justify-center text-ink hover:bg-neon-blue hover:text-black transition-all duration-200">
                   <span className="text-xl">⚡</span>
-                </a>
-                <a href="#" className="w-12 h-12 bg-medium-gray rounded-full flex items-center justify-center hover:bg-neon-blue hover:text-black transition-all duration-200">
+                </button>
+                <button type="button" className="w-12 h-12 bg-surface-3 border border-edge rounded-full flex items-center justify-center text-ink hover:bg-neon-blue hover:text-black transition-all duration-200">
                   <span className="text-xl">💬</span>
-                </a>
+                </button>
               </div>
             </Card>
           </div>

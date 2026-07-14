@@ -250,7 +250,7 @@ const Pricing: React.FC = () => {
           </p>
           <button
             onClick={() => navigate('/login')}
-            className="bg-gradient-intelligence text-ink px-12 py-4 rounded-xl font-bold text-lg shadow-glow-blue hover:shadow-glow-teal transition-all duration-300 font-inter"
+            className="bg-gradient-intelligence text-white px-12 py-4 rounded-xl font-bold text-lg shadow-glow-blue hover:shadow-glow-teal transition-all duration-300 font-inter"
           >
             Start Your Free Trial
           </button>

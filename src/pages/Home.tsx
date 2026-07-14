@@ -129,7 +129,7 @@ const Home: React.FC = () => {
                         {/* Badge */}
                         <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 glass-premium rounded-full text-xs sm:text-sm font-bold mb-7 animate-fadeInUp border border-electric-blue/30">
                             <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-smoothPulse" />
-                            <span className="text-gradient-cyber">India's Frontier AI Lab</span>
+                            <span className="text-gradient-cyber">India's AI Lab</span>
                         </div>
 
                         {/* Headline */}

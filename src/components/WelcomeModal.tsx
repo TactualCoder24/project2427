@@ -124,7 +124,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
 
           {/* Tagline */}
           <p className="text-sm sm:text-base text-ink-2 font-jakarta mb-6 max-w-md mx-auto leading-relaxed">
-            India's frontier <span className="text-gradient font-semibold">AI lab</span> — building
+            India's <span className="text-gradient font-semibold">AI lab</span> — building
             intelligent agents, custom AI systems, automation, and enterprise integrations, all in one place.
           </p>
 

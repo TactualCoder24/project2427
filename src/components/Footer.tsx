@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
               />
             </Link>
             <p className="text-ink-2 text-base max-w-md leading-relaxed font-inter">
-              India's frontier AI lab — building intelligent agents, custom AI systems,
+              India's AI lab — building intelligent agents, custom AI systems,
               automation, and enterprise integrations, all in one place.
             </p>
 
